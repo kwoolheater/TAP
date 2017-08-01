@@ -12,6 +12,7 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
     
     // initalize all outlets
     @IBOutlet weak var storeCollectionView: UICollectionView!
+    @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
     // initalize variables
     var storeItems = ["Beer", "Wine", "Liquor", "Extras"]
@@ -19,6 +20,14 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        // set up flow layout
+        let space:CGFloat = 12.0
+        let dimension = (view.frame.size.width - (2 * space)) / 3.0
+        // let heightDimension = (view.frame.size.height - (20 * space)) / 3.0
+        
+        flowLayout.minimumInteritemSpacing = space
+        flowLayout.minimumLineSpacing = space
+        flowLayout.itemSize = CGSize(width: dimension, height: dimension)
     }
 
     // TODO: initalize collection view
