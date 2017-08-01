@@ -7,15 +7,18 @@
 //
 
 import UIKit
+import youtube_ios_player_helper
 
 class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     // initalize all outlets
     @IBOutlet weak var storeCollectionView: UICollectionView!
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
+    @IBOutlet weak var YTPlayerView: YTPlayerView!
     
     // initalize variables
     var storeItems = ["Beer", "Wine", "Liquor", "Extras"]
+    var storePictures = [#imageLiteral(resourceName: "Beer"), #imageLiteral(resourceName: "Wine"), #imageLiteral(resourceName: "Liquor"), #imageLiteral(resourceName: "Extras")]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +31,8 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
         flowLayout.minimumInteritemSpacing = space
         flowLayout.minimumLineSpacing = space
         flowLayout.itemSize = CGSize(width: dimension, height: dimension)
+        
+        self.YTPlayerView.load(withVideoId: "M7lc1UVf-VE")
     }
 
     // TODO: initalize collection view
@@ -43,7 +48,7 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
         let cell = storeCollectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! StoreCollectionViewCell
         
         cell.label.text = storeItems[indexPath.row]
-        cell.picture.image = #imageLiteral(resourceName: "Beer")
+        cell.picture.image = storePictures[indexPath.row]
         
         return cell
     

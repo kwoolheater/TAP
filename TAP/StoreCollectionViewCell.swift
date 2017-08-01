@@ -17,7 +17,7 @@ class StoreCollectionViewCell: UICollectionViewCell {
         super.init(coder: aDecoder)
         contentView.layer.cornerRadius = 5
         contentView.layer.borderColor = UIColor.black.cgColor
-        contentView.layer.borderWidth = 1
+        contentView.layer.borderWidth = 1.5
         contentView.layer.shouldRasterize = true
         contentView.layer.rasterizationScale = UIScreen.main.scale
         contentView.clipsToBounds = true
