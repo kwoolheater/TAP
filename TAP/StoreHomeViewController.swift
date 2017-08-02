@@ -15,6 +15,7 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
     @IBOutlet weak var storeCollectionView: UICollectionView!
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var YTPlayerView: YTPlayerView!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     // initalize variables
     var storeItems = ["Beer", "Wine", "Liquor", "Extras"]
@@ -26,13 +27,16 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
         // set up flow layout
         let space:CGFloat = 12.0
         let dimension = (view.frame.size.width - (2 * space)) / 3.0
+        let dimensionWidth = (view.frame.size.width + (10 * space)) / 3.0
         // let heightDimension = (view.frame.size.height - (20 * space)) / 3.0
         
         flowLayout.minimumInteritemSpacing = space
         flowLayout.minimumLineSpacing = space
-        flowLayout.itemSize = CGSize(width: dimension, height: dimension)
+        flowLayout.itemSize = CGSize(width: dimensionWidth, height: dimension)
         
-        self.YTPlayerView.load(withVideoId: "M7lc1UVf-VE")
+        self.YTPlayerView.load(withVideoId: "IGE9qpICfSw")
+        
+        scrollView.contentSize.height = 750
     }
 
     // TODO: initalize collection view
