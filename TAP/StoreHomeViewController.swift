@@ -62,9 +62,22 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
         
         // handle tap events
         print("You selected cell \(indexPath.row)")
+        
+        if indexPath.row == 2 {
+            performSegue(withIdentifier: "liquorSegue", sender: self)
+        } else {
+            performSegue(withIdentifier: "storeSegue", sender: self)
+        }
+        
     }
     
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "liquorSegue" {
+            _ = segue.destination as! UIViewController
+        } else if segue.identifier == "storeSegue" {
+            _ = segue.destination as! UIViewController
+        }
+    }
     
 }
 
