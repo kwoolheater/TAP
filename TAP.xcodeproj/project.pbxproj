@@ -16,6 +16,7 @@
 		41C570481F2BAE7500B1D661 /* TAPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C570471F2BAE7500B1D661 /* TAPTests.swift */; };
 		41C570531F2BAE7500B1D661 /* TAPUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C570521F2BAE7500B1D661 /* TAPUITests.swift */; };
 		41C570631F2FA8CC00B1D661 /* StoreCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C570621F2FA8CC00B1D661 /* StoreCollectionViewCell.swift */; };
+		41C570651F32A21000B1D661 /* GoogleService-Info-2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 41C570641F32A21000B1D661 /* GoogleService-Info-2.plist */; };
 		B535F69390970BA0F62CD4F1 /* Pods_TAP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E7BE1414396BD2E7A303818 /* Pods_TAP.framework */; };
 		E87E4653DDB4F26413CCCC78 /* Pods_TAPUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DCA77EEEDF1899DD4D0E811 /* Pods_TAPUITests.framework */; };
 /* End PBXBuildFile section */
@@ -56,6 +57,7 @@
 		41C570521F2BAE7500B1D661 /* TAPUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TAPUITests.swift; sourceTree = "<group>"; };
 		41C570541F2BAE7500B1D661 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		41C570621F2FA8CC00B1D661 /* StoreCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreCollectionViewCell.swift; sourceTree = "<group>"; };
+		41C570641F32A21000B1D661 /* GoogleService-Info-2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info-2.plist"; path = "../../Downloads/GoogleService-Info-2.plist"; sourceTree = "<group>"; };
 		4E7BE1414396BD2E7A303818 /* Pods_TAP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TAP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		78DC7D5B91ED1DDBD1392A40 /* Pods_TAPTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TAPTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83F8561217423B58FCDE6C38 /* Pods-TAPTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TAPTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TAPTests/Pods-TAPTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 				41C570391F2BAE7500B1D661 /* Assets.xcassets */,
 				41C5703B1F2BAE7500B1D661 /* LaunchScreen.storyboard */,
 				41C5703E1F2BAE7500B1D661 /* Info.plist */,
+				41C570641F32A21000B1D661 /* GoogleService-Info-2.plist */,
 			);
 			path = TAP;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 			files = (
 				41C5703D1F2BAE7500B1D661 /* LaunchScreen.storyboard in Resources */,
 				41C5703A1F2BAE7500B1D661 /* Assets.xcassets in Resources */,
+				41C570651F32A21000B1D661 /* GoogleService-Info-2.plist in Resources */,
 				41C570381F2BAE7500B1D661 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -711,6 +715,7 @@
 				41C570591F2BAE7500B1D661 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		41C5705A1F2BAE7500B1D661 /* Build configuration list for PBXNativeTarget "TAPTests" */ = {
 			isa = XCConfigurationList;
@@ -719,6 +724,7 @@
 				41C5705C1F2BAE7500B1D661 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		41C5705D1F2BAE7500B1D661 /* Build configuration list for PBXNativeTarget "TAPUITests" */ = {
 			isa = XCConfigurationList;
@@ -727,6 +733,7 @@
 				41C5705F1F2BAE7500B1D661 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
