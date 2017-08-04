@@ -15,7 +15,7 @@ class LiquorStoreHomeViewController: UIViewController, UICollectionViewDelegate,
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
     // initalize variables
-    var storeItems = ["Tequlia", "Bourbon", "Vodka", "Rum", "Gin", "Whiskey"]
+    var storeItems = ["Tequlia", "Bourbon/Whiskey", "Vodka", "Rum", "Gin", "Others"]
     var storePictures = [#imageLiteral(resourceName: "Tequlia"), #imageLiteral(resourceName: "Bourbon"), #imageLiteral(resourceName: "Vodka"), #imageLiteral(resourceName: "Rum"), #imageLiteral(resourceName: "Gin"), #imageLiteral(resourceName: "Whiskey")]
     
     override func viewDidLoad() {
@@ -49,12 +49,14 @@ class LiquorStoreHomeViewController: UIViewController, UICollectionViewDelegate,
         
         // handle tap events
         print("You selected cell \(indexPath.row)")
+        performSegue(withIdentifier: "liquorSegueTwo", sender: self)
         
-        if indexPath.row == 2 {
-            performSegue(withIdentifier: "liquorSegue", sender: self)
-        } else {
-            performSegue(withIdentifier: "storeSegue", sender: self)
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "liquorSegueTwo" {
+            _ = segue.destination as! UIViewController
         }
-        
     }
 }

@@ -187,20 +187,20 @@
             </objects>
             <point key="canvasLocation" x="1365.5999999999999" y="-269.41529235382313"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Drink Table View Controller-->
         <scene sceneID="6hB-Nm-cf0">
             <objects>
-                <tableViewController id="KN7-dP-kSi" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ONJ-EP-68n">
+                <tableViewController storyboardIdentifier="drinkTableViewController" id="KN7-dP-kSi" customClass="DrinkTableViewController" customModule="TAP" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="58" sectionHeaderHeight="28" sectionFooterHeight="28" id="ONJ-EP-68n">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="bSA-Yx-4jv">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="tableCell" rowHeight="58" id="bSA-Yx-4jv">
+                                <rect key="frame" x="0.0" y="28" width="375" height="58"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bSA-Yx-4jv" id="fqc-9a-2NU">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="57.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -210,10 +210,13 @@
                             <outlet property="delegate" destination="KN7-dP-kSi" id="Yiy-qr-PZn"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="drinkTable" destination="ONJ-EP-68n" id="Zaw-Eo-aeg"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m37-D2-uDW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2281" y="116"/>
+            <point key="canvasLocation" x="2280.8000000000002" y="115.59220389805098"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Oas-le-8El">
