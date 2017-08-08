@@ -41,16 +41,10 @@ class DrinkTableViewController: UIViewController {
     
     func retrieveData() {
         
-        _refHandle = ref.child("Tequlia").observe(.childAdded, with: { (snapshot) in
-            
-            if let dictionary = snapshot.value as? [String: AnyObject] {
-                print(dictionary)
-            } else {
-                print("error")
-            }
-        
+        _refHandle = ref.observe(DataEventType.value, with: { (snapshot) in
+            let postDic = snapshot.value as? [String:AnyObject]
+            print(postDic)
         })
-        
         
     }
     
