@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class DrinkTableViewController: UITableViewController {
+class DrinkTableViewController: UIViewController {
     
     // declare variables
     var ref: DatabaseReference!
@@ -19,38 +19,69 @@ class DrinkTableViewController: UITableViewController {
     // outlets :)
     @IBOutlet var drinkTable: UITableView!
     
+    override func viewDidLoad() {
+        
+        configureDatabase()
+        retrieveData()
+    }
+    
     // MARK: config
     // configure database
     func configureDatabase() {
         ref = Database.database().reference()
-        _refHandle = ref.child("Tequlia").observe(.childAdded) { (snapshot: DataSnapshot) in
-            self.items.append(snapshot)
-            self.drinkTable.insertRows(at: [IndexPath(row: self.items.count-1, section: 0)], with: .automatic)
-            print(snapshot)
-        }
+        // _refHandle = ref.child("Tequlia").observe(.childAdded) { (snapshot: DataSnapshot) in
+        //    self.items.append(snapshot)
+        //    self.drinkTable.insertRows(at: [IndexPath(row: self.items.count - 1, section: 0)], with: .automatic)
+        //    print(snapshot)
+        //}
+        //DispatchQueue.main.async {
+        //    self.drinkTable.reloadData()
+        //}
+    }
+    
+    func retrieveData() {
+        
+        _refHandle = ref.child("Tequlia").observe(.childAdded, with: { (snapshot) in
+            
+            if let dictionary = snapshot.value as? [String: AnyObject] {
+                print(dictionary)
+            } else {
+                print("error")
+            }
+        
+        })
+        
+        
     }
     
     deinit {
         ref.child("Tequlia").removeObserver(withHandle: _refHandle)
     }
-    
-    // MARK: table view 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+}
+
+extension DrinkTableViewController: UITableViewDelegate, UITableViewDataSource {
+    // MARK: table view
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.items.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // dequeue cell
         let cell: UITableViewCell = drinkTable.dequeueReusableCell(withIdentifier: "tableCell", for: indexPath)
         // unpack item from firebase snapshot
-        let itemSnapshot = items[indexPath.row]
         
         
+        let itemSnapshot: DataSnapshot = items[indexPath.row]
+        let item = itemSnapshot.value as! [String:String]
+        print(item)
+        let name = item["prices"] ?? "[username]"
+        print (name)
+        cell.textLabel?.text = name
         
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
     }
     

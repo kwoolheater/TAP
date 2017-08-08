@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		036040D8F9FA9683137AA22F /* Pods_TAPTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78DC7D5B91ED1DDBD1392A40 /* Pods_TAPTests.framework */; };
+		41A3CEF51F3A1F3500063635 /* Drink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A3CEF41F3A1F3500063635 /* Drink.swift */; };
+		41B740231F38D2E5002322A5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B740221F38D2E5002322A5 /* Constants.swift */; };
 		41C570331F2BAE7500B1D661 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C570321F2BAE7500B1D661 /* AppDelegate.swift */; };
 		41C570351F2BAE7500B1D661 /* StoreHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C570341F2BAE7500B1D661 /* StoreHomeViewController.swift */; };
 		41C570381F2BAE7500B1D661 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41C570361F2BAE7500B1D661 /* Main.storyboard */; };
@@ -45,6 +47,8 @@
 		254AC90435932A12DCA55E9B /* Pods-TAP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TAP.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TAP/Pods-TAP.debug.xcconfig"; sourceTree = "<group>"; };
 		322A4EA28B0C79E718A674A9 /* Pods-TAP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TAP.release.xcconfig"; path = "Pods/Target Support Files/Pods-TAP/Pods-TAP.release.xcconfig"; sourceTree = "<group>"; };
 		3DCA77EEEDF1899DD4D0E811 /* Pods_TAPUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TAPUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		41A3CEF41F3A1F3500063635 /* Drink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drink.swift; sourceTree = "<group>"; };
+		41B740221F38D2E5002322A5 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		41C5702F1F2BAE7500B1D661 /* TAP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TAP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41C570321F2BAE7500B1D661 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		41C570341F2BAE7500B1D661 /* StoreHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreHomeViewController.swift; sourceTree = "<group>"; };
@@ -123,8 +127,10 @@
 			isa = PBXGroup;
 			children = (
 				41C570321F2BAE7500B1D661 /* AppDelegate.swift */,
+				41B740221F38D2E5002322A5 /* Constants.swift */,
 				41C570681F33A44900B1D661 /* LiquorStoreHomeViewController.swift */,
 				41C5706C1F34E64100B1D661 /* DrinkTableViewController.swift */,
+				41A3CEF41F3A1F3500063635 /* Drink.swift */,
 				41C570341F2BAE7500B1D661 /* StoreHomeViewController.swift */,
 				41C570621F2FA8CC00B1D661 /* StoreCollectionViewCell.swift */,
 				41C570361F2BAE7500B1D661 /* Main.storyboard */,
@@ -467,6 +473,8 @@
 				41C570631F2FA8CC00B1D661 /* StoreCollectionViewCell.swift in Sources */,
 				41C570331F2BAE7500B1D661 /* AppDelegate.swift in Sources */,
 				41C570691F33A44900B1D661 /* LiquorStoreHomeViewController.swift in Sources */,
+				41A3CEF51F3A1F3500063635 /* Drink.swift in Sources */,
+				41B740231F38D2E5002322A5 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
