@@ -15,8 +15,9 @@ class LiquorStoreHomeViewController: UIViewController, UICollectionViewDelegate,
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
     // initalize variables
-    var storeItems = ["Tequlia", "Bourbon/Whiskey", "Vodka", "Rum", "Gin", "Others"]
+    var storeItems = ["Tequila", "Bourbon", "Vodka", "Rum", "Gin", "Others"]
     var storePictures = [#imageLiteral(resourceName: "Tequlia"), #imageLiteral(resourceName: "Bourbon"), #imageLiteral(resourceName: "Vodka"), #imageLiteral(resourceName: "Rum"), #imageLiteral(resourceName: "Gin"), #imageLiteral(resourceName: "Whiskey")]
+    var liquorName: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,17 +47,16 @@ class LiquorStoreHomeViewController: UIViewController, UICollectionViewDelegate,
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         // handle tap events
         print("You selected cell \(indexPath.row)")
+        liquorName = storeItems[indexPath.row]
         performSegue(withIdentifier: "liquorSegueTwo", sender: self)
-        
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "liquorSegueTwo" {
-            _ = segue.destination as! UIViewController
+            let segue = segue.destination as! DrinkTableViewController
+            segue.type = liquorName
         }
     }
 }
