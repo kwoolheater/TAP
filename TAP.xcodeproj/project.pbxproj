@@ -130,10 +130,10 @@
 			children = (
 				41C570321F2BAE7500B1D661 /* AppDelegate.swift */,
 				41B740221F38D2E5002322A5 /* Constants.swift */,
-				41C570681F33A44900B1D661 /* LiquorStoreHomeViewController.swift */,
-				41C5706C1F34E64100B1D661 /* DrinkTableViewController.swift */,
 				416ED65F1F4511CE000C00ED /* DetailViewController.swift */,
 				41A3CEF41F3A1F3500063635 /* Drink.swift */,
+				41C5706C1F34E64100B1D661 /* DrinkTableViewController.swift */,
+				41C570681F33A44900B1D661 /* LiquorStoreHomeViewController.swift */,
 				41C570341F2BAE7500B1D661 /* StoreHomeViewController.swift */,
 				41C570621F2FA8CC00B1D661 /* StoreCollectionViewCell.swift */,
 				41C570361F2BAE7500B1D661 /* Main.storyboard */,
