@@ -12,6 +12,7 @@ import Firebase
 class DrinkTableViewController: UIViewController {
     
     // declare variables
+    var sentDrink: Drink?
     var type: String!
     var ref: DatabaseReference!
     var items = [Drink]()
@@ -83,7 +84,7 @@ class DrinkTableViewController: UIViewController {
 extension DrinkTableViewController: UITableViewDelegate, UITableViewDataSource {
     // MARK: table view
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.items.count
+        return self.items.count 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -93,12 +94,26 @@ extension DrinkTableViewController: UITableViewDelegate, UITableViewDataSource {
         // unpack drink items
         let drink = items[indexPath.row]
         cell.textLabel?.text = drink.name
-        
+        let priceString: String
+        if drink.price175L != nil && drink.price750mL != nil {
+            priceString = "$\(drink.price750mL!) - $\(drink.price175L!)"
+        } else {
+            priceString = "price unavilable"
+        }
+        cell.detailTextLabel?.text = priceString
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        sentDrink = items[indexPath.row]
+        performSegue(withIdentifier: "showDetailController", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showDetailController" {
+            let segue = segue.destination as! DetailViewController
+            segue.drink = sentDrink
+        }
     }
     
 }

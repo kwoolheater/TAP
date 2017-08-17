@@ -20,6 +20,7 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
     // initalize variables
     var storeItems = ["Beer", "Wine", "Liquor", "Extras"]
     var storePictures = [#imageLiteral(resourceName: "Beer"), #imageLiteral(resourceName: "Wine"), #imageLiteral(resourceName: "Liquor"), #imageLiteral(resourceName: "Extras")]
+    var liquorName: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,6 +67,7 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
         if indexPath.row == 2 {
             performSegue(withIdentifier: "liquorSegue", sender: self)
         } else {
+            liquorName = storeItems[indexPath.row]
             performSegue(withIdentifier: "storeSegue", sender: self)
         }
         
@@ -75,7 +77,8 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
         if segue.identifier == "liquorSegue" {
             _ = segue.destination as! UIViewController
         } else if segue.identifier == "storeSegue" {
-            _ = segue.destination as! UIViewController
+            let segue = segue.destination as! DrinkTableViewController
+            segue.type = liquorName
         }
     }
     
