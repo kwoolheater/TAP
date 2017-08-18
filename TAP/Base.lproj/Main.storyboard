@@ -271,16 +271,26 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="price" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ckv-9T-h2p">
-                                <rect key="frame" x="76" y="411" width="223" height="37"/>
+                                <rect key="frame" x="41" y="411" width="246" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="svV-Xh-jRz">
+                                <rect key="frame" x="295" y="411" width="38" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" image="Favorite"/>
+                                <connections>
+                                    <action selector="favorite:" destination="fG2-q6-ieL" eventType="touchUpInside" id="CVD-jC-jmi"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="favoritesButton" destination="svV-Xh-jRz" id="TrH-Fb-WT2"/>
                         <outlet property="name" destination="jGw-vI-NHd" id="kEk-WG-TyO"/>
                         <outlet property="orderButton" destination="Dsk-Q5-NWt" id="Y3r-b1-h7N"/>
                         <outlet property="price" destination="Ckv-9T-h2p" id="RCx-SN-GEu"/>
@@ -309,6 +319,7 @@
     </scenes>
     <resources>
         <image name="Alcohol" width="700" height="470"/>
+        <image name="Favorite" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="UUd-br-HNh"/>

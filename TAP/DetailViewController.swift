@@ -18,6 +18,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var price: UILabel!
     @IBOutlet weak var orderButton: UIButton!
+    @IBOutlet weak var favoritesButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +28,10 @@ class DetailViewController: UIViewController {
     
     @IBAction func placeOrder(_ sender: Any) {
         
+    }
+    
+    @IBAction func favorite(_ sender: Any) {
+        favoritesButton.tintColor = .red
     }
     
     
