@@ -23,7 +23,14 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         name.text = drink?.name
-        price.text = "Price: $\(drink?.price750mL ?? 0)"
+        
+        if drink?.price750mL != nil {
+            price.text = "Price: $\(drink?.price750mL ?? 0)"
+        } else if drink?.otherPrice != nil {
+            price.text = "Price: $\(drink?.otherPrice ?? 0)"
+        } else if drink?.price175L != nil {
+            price.text = "Price: $\(drink?.price175L ?? 0)"
+        }
     }
     
     @IBAction func placeOrder(_ sender: Any) {

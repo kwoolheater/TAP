@@ -298,7 +298,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mV7-H9-4Uz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3300" y="116.49175412293854"/>
+            <point key="canvasLocation" x="3393" y="116"/>
         </scene>
         <!--Store-->
         <scene sceneID="Oas-le-8El">
@@ -320,13 +320,13 @@
         <!--Favorites Table View Controller-->
         <scene sceneID="5aN-G8-GUS">
             <objects>
-                <tableViewController id="a9E-2O-xNK" userLabel="Favorites Table View Controller" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="favoritesTableViewController" id="a9E-2O-xNK" userLabel="Favorites Table View Controller" customClass="FavoritesTableViewController" customModule="TAP" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="GA4-sI-Dpr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="lSh-0m-rNR">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="favoritesCell" id="lSh-0m-rNR">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lSh-0m-rNR" id="s7a-bH-oFq">
@@ -347,7 +347,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7va-mC-ENE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="454" y="879"/>
+            <point key="canvasLocation" x="1794" y="878"/>
         </scene>
         <!--Favorites-->
         <scene sceneID="EWM-l4-UH9">
@@ -364,7 +364,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bfE-Vt-Sa7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-450" y="880"/>
+            <point key="canvasLocation" x="738" y="878"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="bhS-5L-JE3">
