@@ -62,7 +62,7 @@ class DrinkTableViewController: UIViewController {
                                     price1 = value as? Double
                                 }
                             }
-                            self.items.append(Drink.init(name: drinkName!, price1: price1, price2: price2, price3: price3))
+                            self.items.append(Drink.init(name: drinkName!, price175: price1, price1: price2, price750: price3))
                             print(self.items)
                         }
                     }

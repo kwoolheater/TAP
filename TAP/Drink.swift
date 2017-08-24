@@ -15,12 +15,12 @@ class Drink: NSObject {
     var price1L: Double?
     var price750mL: Double?
     
-    init(name: String, price1: Double?, price2: Double?, price3: Double?) {
+    init(name: String, price175: Double?, price1: Double?, price750: Double?) {
         // init prices and name
         self.name = name
-        self.price175L = price1
-        self.price1L = price2
-        self.price750mL = price3
+        self.price175L = price175
+        self.price1L = price1
+        self.price750mL = price750
         
     }
     
