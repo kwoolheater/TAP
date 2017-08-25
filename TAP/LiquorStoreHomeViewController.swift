@@ -15,7 +15,7 @@ class LiquorStoreHomeViewController: UIViewController, UICollectionViewDelegate,
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
     // initalize variables
-    var storeItems = ["Tequila", "Bourbon", "Vodka", "Rum", "Gin", "Others"]
+    var storeItems = ["Tequila", "Bourbon", "Vodka", "Rum", "Gin", "Other"]
     var storePictures = [#imageLiteral(resourceName: "Tequlia"), #imageLiteral(resourceName: "Bourbon"), #imageLiteral(resourceName: "Vodka"), #imageLiteral(resourceName: "Rum"), #imageLiteral(resourceName: "Gin"), #imageLiteral(resourceName: "Whiskey")]
     var liquorName: String?
     

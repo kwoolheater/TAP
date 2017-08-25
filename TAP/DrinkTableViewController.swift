@@ -54,21 +54,22 @@ class DrinkTableViewController: UIViewController {
                 for (key, value) in liquorArray! {
                     drinkName = key
                     if let typeArray = value as? [String: AnyObject] {
-                        print(typeArray)
                         for (key, value) in typeArray {
-                            
                             if key == "type" {
-                                if let bottleArray = value as? [String: AnyObject] {
-                                    for (_, value) in bottleArray {
-                                        if let bottlePricesArray = value as? [String: AnyObject] {
-                                            for (key, value) in bottlePricesArray {
-                                                if key == "6" {
-                                                    price4 = value as? Double
-                                                    size = "6 pack"
+                                if let canAndBottleArray = value as? [String: AnyObject] {
+                                    print(canAndBottleArray)
+                                    for (key, value) in canAndBottleArray {
+                                        if key == "bottle" {
+                                            if let bottlePricesArray = value as? [String: AnyObject] {
+                                                for (key, value) in bottlePricesArray {
+                                                    if key == "6" {
+                                                        price4 = value as? Double
+                                                        size = "6 pack"
+                                                    }
                                                 }
+                                                
+                                                self.items.append(Drink.init(name: drinkName!, price175: price1, price1:price2, price750: price3, otherPrice: price4, otherSize: size))
                                             }
-                                            
-                                            self.items.append(Drink.init(name: drinkName!, price175: price1, price1:price2, price750: price3, otherPrice: price4, otherSize: size))
                                         }
                                     }
                                 }
@@ -78,7 +79,23 @@ class DrinkTableViewController: UIViewController {
                     }
                 }
                 
-            } else if self.type == "Wine" {
+            /* } else if self.type == "Wine" {
+                for (key, value) in liquorArray! {
+                drinkName = key
+                if let priceArray = value as? [String: AnyObject] {
+                    for (_ , value) in priceArray {
+                        if let individualPriceArray = value as? [String: AnyObject] {
+                            for (key, value) in individualPriceArray {
+                                if key == "750mL" {
+                                    price3 = value as? Double
+                                }
+                            }
+                            self.items.append(Drink.init(name: drinkName!, price175: price1, price1:price2, price750: price3, otherPrice: price4, otherSize: size))
+                        }
+                    }
+                    }
+                }*/
+                
                 
             } else {
                 for (key, value) in liquorArray! {
