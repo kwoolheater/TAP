@@ -12,10 +12,10 @@ import Firebase
 class DrinkTableViewController: UIViewController {
     
     // declare variables
-    var sentDrink: Drink?
+    var sentDrink: DownloadedDrink?
     var type: String!
     var ref: DatabaseReference!
-    var items = [Drink]()
+    var items = [DownloadedDrink]()
     fileprivate var _refHandle: DatabaseHandle!
     
     // outlets :)
@@ -68,7 +68,7 @@ class DrinkTableViewController: UIViewController {
                                                     }
                                                 }
                                                 
-                                                self.items.append(Drink.init(name: drinkName!, price175: price1, price1:price2, price750: price3, otherPrice: price4, otherSize: size))
+                                                self.items.append(DownloadedDrink.init(name: drinkName!, price175: price1, price1:price2, price750: price3, otherPrice: price4, otherSize: size))
                                             }
                                         }
                                     }
@@ -115,7 +115,7 @@ class DrinkTableViewController: UIViewController {
                                         size = key as? String
                                     }
                                 }
-                                self.items.append(Drink.init(name: drinkName!, price175: price1, price1:price2, price750: price3, otherPrice: price4, otherSize: size))
+                                self.items.append(DownloadedDrink.init(name: drinkName!, price175: price1, price1:price2, price750: price3, otherPrice: price4, otherSize: size))
                                 print(self.items)
                             }
                         }

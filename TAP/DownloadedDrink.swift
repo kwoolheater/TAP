@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Drink: NSObject {
+class DownloadedDrink: NSObject {
     
     var name: String?
     var price175L: Double?
