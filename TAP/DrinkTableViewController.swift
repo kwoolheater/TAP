@@ -74,28 +74,9 @@ class DrinkTableViewController: UIViewController {
                                     }
                                 }
                             }
-                            
                         }
                     }
                 }
-                
-            /* } else if self.type == "Wine" {
-                for (key, value) in liquorArray! {
-                drinkName = key
-                if let priceArray = value as? [String: AnyObject] {
-                    for (_ , value) in priceArray {
-                        if let individualPriceArray = value as? [String: AnyObject] {
-                            for (key, value) in individualPriceArray {
-                                if key == "750mL" {
-                                    price3 = value as? Double
-                                }
-                            }
-                            self.items.append(Drink.init(name: drinkName!, price175: price1, price1:price2, price750: price3, otherPrice: price4, otherSize: size))
-                        }
-                    }
-                    }
-                }*/
-                
                 
             } else {
                 for (key, value) in liquorArray! {
@@ -116,7 +97,6 @@ class DrinkTableViewController: UIViewController {
                                     }
                                 }
                                 self.items.append(DownloadedDrink.init(name: drinkName!, price175: price1, price1:price2, price750: price3, otherPrice: price4, otherSize: size))
-                                print(self.items)
                             }
                         }
                     }

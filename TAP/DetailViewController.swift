@@ -15,6 +15,7 @@ class DetailViewController: UIViewController {
     // declare variables
     let delegate = UIApplication.shared.delegate as! AppDelegate
     var drink: DownloadedDrink?
+    var coreDataDrink: Drink?
     var isFavorite: Bool?
     var price: Double?
     
@@ -53,15 +54,26 @@ class DetailViewController: UIViewController {
             isFavorite = true
             favoritesButton.tintColor = .red
         } else {
-            
-            
+            DispatchQueue.main.async {
+                self.deleteFromCoreData(savedDrink: self.coreDataDrink!)
+            }
             isFavorite = false
             favoritesButton.tintColor = .black
         }
     }
     
     func saveToCoreData() {
-        _ = Drink(name: (drink?.name)!, price: (price)!, context: stack.context)
+        let fav = Drink(name: (drink?.name)!, price: (price)!, context: stack.context)
+        coreDataDrink = fav
+        do {
+            try stack.context.save()
+        } catch {
+            print("Error saving favorite.")
+        }
+    }
+    
+    func deleteFromCoreData(savedDrink: Drink) {
+        stack.context.delete(savedDrink)
         do {
             try stack.context.save()
         } catch {
