@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import CoreData
 
-class DetailViewController: UIViewController {
+class DetailViewController: CoreDataViewController {
     
     // declare variables
     let delegate = UIApplication.shared.delegate as! AppDelegate
@@ -29,17 +29,50 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        name.text = drink?.name
+        setDrinkText()
+        checkCoreData()
+    }
+    
+    func setDrinkText() {
+        if drink != nil {
+            name.text = drink?.name
         
-        if drink?.price750mL != nil {
-            price = (drink?.price750mL)!
-        } else if drink?.otherPrice != nil {
-            price = (drink?.otherPrice)!
-        } else if drink?.price175L != nil {
-            price = (drink?.price175L)!
+            if drink?.price750mL != nil {
+                price = (drink?.price750mL)!
+            } else if drink?.otherPrice != nil {
+                price = (drink?.otherPrice)!
+            } else if drink?.price175L != nil {
+                price = (drink?.price175L)!
+            }
+            
+            priceLabel.text = "Price: $\(price ?? 0)"
+        } else {
+            name.text = coreDataDrink?.name
+            priceLabel.text = "Price: $\((coreDataDrink?.price)!)"
+            isFavorite = true
+            favoritesButton.tintColor = .red
+        }
+    }
+    
+    func checkCoreData() {
+        var drinkArray: [Drink]?
+        
+        let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "Drink")
+        fr.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        
+        do {
+            drinkArray = try stack.context.fetch(fr) as? [Drink]
+        } catch {
+            fatalError("Could not fetch favorites.")
         }
         
-        priceLabel.text = "Price: $\(price ?? 0)"
+        for drink in drinkArray! {
+            if drink.name == self.drink?.name {
+                isFavorite = true
+                favoritesButton.tintColor = .red
+                self.coreDataDrink = drink
+            }
+        }
     }
     
     @IBAction func placeOrder(_ sender: Any) {

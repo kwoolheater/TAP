@@ -321,33 +321,50 @@
         <scene sceneID="5aN-G8-GUS">
             <objects>
                 <tableViewController storyboardIdentifier="favoritesTableViewController" id="a9E-2O-xNK" userLabel="Favorites Table View Controller" customClass="FavoritesTableViewController" customModule="TAP" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="GA4-sI-Dpr">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="58" sectionHeaderHeight="28" sectionFooterHeight="28" id="GA4-sI-Dpr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="favoritesCell" id="lSh-0m-rNR">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="favoritesCell" textLabel="7z9-EI-Xcr" detailTextLabel="hqM-8H-P23" rowHeight="58" style="IBUITableViewCellStyleValue1" id="lSh-0m-rNR">
+                                <rect key="frame" x="0.0" y="28" width="375" height="58"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lSh-0m-rNR" id="s7a-bH-oFq">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="57.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7z9-EI-Xcr">
+                                            <rect key="frame" x="15" y="19" width="33.5" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hqM-8H-P23">
+                                            <rect key="frame" x="316" y="19" width="44" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="a9E-2O-xNK" id="0Fk-7r-11C"/>
-                            <outlet property="delegate" destination="a9E-2O-xNK" id="MOu-21-ZkS"/>
+                            <outlet property="dataSource" destination="a9E-2O-xNK" id="jY1-RF-RQN"/>
+                            <outlet property="delegate" destination="a9E-2O-xNK" id="xK8-jr-P1r"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="KVy-YJ-YTy"/>
+                    <navigationItem key="navigationItem" title="Favorites" id="KVy-YJ-YTy"/>
                     <connections>
+                        <outlet property="tableView" destination="GA4-sI-Dpr" id="eqQ-vh-CpN"/>
                         <segue destination="fG2-q6-ieL" kind="show" identifier="favoritesSegue" id="5OS-Cu-eep"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7va-mC-ENE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1794" y="878"/>
+            <point key="canvasLocation" x="1792.8" y="877.51124437781118"/>
         </scene>
         <!--Favorites-->
         <scene sceneID="EWM-l4-UH9">
@@ -390,7 +407,7 @@
         <image name="Favorite" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="UUd-br-HNh"/>
         <segue reference="5OS-Cu-eep"/>
+        <segue reference="UUd-br-HNh"/>
     </inferredMetricsTieBreakers>
 </document>

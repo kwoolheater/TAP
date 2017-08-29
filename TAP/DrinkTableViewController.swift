@@ -103,7 +103,6 @@ class DrinkTableViewController: UIViewController {
                 }
             }
             
-            
             DispatchQueue.main.async {
                 self.drinkTable.reloadData()
             }
