@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import CoreData
 
-class DetailViewController: CoreDataViewController {
+class DetailViewController: CoreDataViewController, UINavigationControllerDelegate {
     
     // declare variables
     let delegate = UIApplication.shared.delegate as! AppDelegate
@@ -29,6 +29,7 @@ class DetailViewController: CoreDataViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.delegate = self
         setDrinkText()
         checkCoreData()
     }
@@ -55,18 +56,16 @@ class DetailViewController: CoreDataViewController {
     }
     
     func checkCoreData() {
-        var drinkArray: [Drink]?
-        
         let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "Drink")
         fr.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
         
         do {
-            drinkArray = try stack.context.fetch(fr) as? [Drink]
+            SavedItems.sharedInstance().favoritesArray = try stack.context.fetch(fr) as! [Drink]
         } catch {
             fatalError("Could not fetch favorites.")
         }
         
-        for drink in drinkArray! {
+        for drink in SavedItems.sharedInstance().favoritesArray {
             if drink.name == self.drink?.name {
                 isFavorite = true
                 favoritesButton.tintColor = .red
@@ -103,14 +102,26 @@ class DetailViewController: CoreDataViewController {
         } catch {
             print("Error saving favorite.")
         }
+        SavedItems.sharedInstance().favoritesArray.append(fav)
     }
     
     func deleteFromCoreData(savedDrink: Drink) {
         stack.context.delete(savedDrink)
+        
         do {
             try stack.context.save()
         } catch {
             print("Error saving favorite.")
         }
+        
+        if let index = SavedItems.sharedInstance().favoritesArray.index(of: savedDrink) {
+            SavedItems.sharedInstance().favoritesArray.remove(at: index)
+        }
     }
 }
+
+/*extension DetailViewController: UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        (viewController as? ProgressTableViewController)?.data = data // Here you pass the to your original view controller
+    }
+}*/

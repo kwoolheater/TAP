@@ -14,15 +14,16 @@ class FavoritesTableViewController: CoreDataViewController {
     
     //declare variables
     let delegate = UIApplication.shared.delegate as! AppDelegate
-    var drinkArray: [Drink]?
     let stack = (UIApplication.shared.delegate as! AppDelegate).stack
     var sentDrink: Drink?
+    var reloadData: Bool?
     
     @IBOutlet var tableView: UITableView!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         populateArray()
+        tableView.reloadData()
     }
     
     func populateArray() {
@@ -30,7 +31,7 @@ class FavoritesTableViewController: CoreDataViewController {
         fr.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
         
         do {
-            drinkArray = try stack.context.fetch(fr) as? [Drink]
+            SavedItems.sharedInstance().favoritesArray = try stack.context.fetch(fr) as! [Drink]
         } catch {
             fatalError("Could not fetch favorites.")
         }
@@ -40,20 +41,20 @@ class FavoritesTableViewController: CoreDataViewController {
 
 extension FavoritesTableViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.drinkArray!.count
+        return SavedItems.sharedInstance().favoritesArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "favoritesCell", for: indexPath)
         
-        cell.textLabel?.text = drinkArray?[indexPath.row].name
-        cell.detailTextLabel?.text = "$\((drinkArray?[indexPath.row].price)!)"
+        cell.textLabel?.text = SavedItems.sharedInstance().favoritesArray[indexPath.row].name
+        cell.detailTextLabel?.text = "$\((SavedItems.sharedInstance().favoritesArray[indexPath.row].price))"
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        sentDrink = drinkArray?[indexPath.row]
+        sentDrink = SavedItems.sharedInstance().favoritesArray[indexPath.row]
         performSegue(withIdentifier: "favoritesSegue", sender: self)
     }
     
