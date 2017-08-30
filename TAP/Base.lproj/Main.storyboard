@@ -305,7 +305,7 @@
             <objects>
                 <navigationController id="jro-xG-XWA" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Store" id="xLv-5d-9ej"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fCn-i0-QXP">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="fCn-i0-QXP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -371,7 +371,7 @@
             <objects>
                 <navigationController id="RBn-Gp-CQR" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Favorites" id="pdQ-gf-cg3"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2fH-1d-XUe">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="2fH-1d-XUe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3370B9DAEC3F8EF6B01966EC /* Pods_TAP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C876B12CD236AA6150A6EA6 /* Pods_TAP.framework */; };
 		41688AF81F55E990005F340C /* CoreDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41688AF71F55E990005F340C /* CoreDataViewController.swift */; };
 		41688AFA1F56085D005F340C /* SavedItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41688AF91F56085D005F340C /* SavedItems.swift */; };
 		416ED6601F4511CE000C00ED /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416ED65F1F4511CE000C00ED /* DetailViewController.swift */; };
@@ -28,6 +29,8 @@
 		41C570671F33A24B00B1D661 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 41C570661F33A24B00B1D661 /* GoogleService-Info.plist */; };
 		41C570691F33A44900B1D661 /* LiquorStoreHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C570681F33A44900B1D661 /* LiquorStoreHomeViewController.swift */; };
 		41C5706D1F34E64100B1D661 /* DrinkTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C5706C1F34E64100B1D661 /* DrinkTableViewController.swift */; };
+		8A8CDEA442811C79E75DC333 /* Pods_TAPUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00FC8ED2B84C07DC7CBC65BC /* Pods_TAPUITests.framework */; };
+		A220764E6EB874F56D913B27 /* Pods_TAPTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B489EE843FE23715F791A03 /* Pods_TAPTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,9 +51,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		00FC8ED2B84C07DC7CBC65BC /* Pods_TAPUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TAPUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		16576C0FD138163FC795C407 /* Pods-TAPTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TAPTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TAPTests/Pods-TAPTests.debug.xcconfig"; sourceTree = "<group>"; };
 		254AC90435932A12DCA55E9B /* Pods-TAP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TAP.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TAP/Pods-TAP.debug.xcconfig"; sourceTree = "<group>"; };
 		322A4EA28B0C79E718A674A9 /* Pods-TAP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TAP.release.xcconfig"; path = "Pods/Target Support Files/Pods-TAP/Pods-TAP.release.xcconfig"; sourceTree = "<group>"; };
+		3B489EE843FE23715F791A03 /* Pods_TAPTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TAPTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		41688AF71F55E990005F340C /* CoreDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataViewController.swift; sourceTree = "<group>"; };
 		41688AF91F56085D005F340C /* SavedItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedItems.swift; sourceTree = "<group>"; };
 		416ED65F1F4511CE000C00ED /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
@@ -80,6 +85,7 @@
 		41C5706C1F34E64100B1D661 /* DrinkTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrinkTableViewController.swift; sourceTree = "<group>"; };
 		83F8561217423B58FCDE6C38 /* Pods-TAPTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TAPTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TAPTests/Pods-TAPTests.release.xcconfig"; sourceTree = "<group>"; };
 		8B558F7164F18F023E794516 /* Pods-TAPUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TAPUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TAPUITests/Pods-TAPUITests.release.xcconfig"; sourceTree = "<group>"; };
+		8C876B12CD236AA6150A6EA6 /* Pods_TAP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TAP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F15D1C6085775D72C0654B0C /* Pods-TAPUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TAPUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TAPUITests/Pods-TAPUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -88,6 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3370B9DAEC3F8EF6B01966EC /* Pods_TAP.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,6 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A220764E6EB874F56D913B27 /* Pods_TAPTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,6 +110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A8CDEA442811C79E75DC333 /* Pods_TAPUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,6 +125,7 @@
 				41C570511F2BAE7500B1D661 /* TAPUITests */,
 				41C570301F2BAE7500B1D661 /* Products */,
 				DEA3EAA4AA9208B6EF942DCC /* Pods */,
+				C4F73FFB213BAFC0CFE1559E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -172,6 +182,16 @@
 				41C570541F2BAE7500B1D661 /* Info.plist */,
 			);
 			path = TAPUITests;
+			sourceTree = "<group>";
+		};
+		C4F73FFB213BAFC0CFE1559E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8C876B12CD236AA6150A6EA6 /* Pods_TAP.framework */,
+				3B489EE843FE23715F791A03 /* Pods_TAPTests.framework */,
+				00FC8ED2B84C07DC7CBC65BC /* Pods_TAPUITests.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		DEA3EAA4AA9208B6EF942DCC /* Pods */ = {
