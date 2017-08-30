@@ -11,7 +11,7 @@ import youtube_ios_player_helper
 import Firebase
 import FirebaseAuthUI
 
-class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UINavigationControllerDelegate {
     
     // initalize all outlets
     @IBOutlet weak var storeCollectionView: UICollectionView!
@@ -77,6 +77,16 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
     func loginSession() {
         let authViewController = FUIAuth.defaultAuthUI()!.authViewController()
         present(authViewController, animated: true, completion: nil)
+    }
+    
+    @IBAction func logout(_ sender: Any) {
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            print("unable to sign out: \(error)")
+        }
+        signedInStatus(isSignedIn: false)
+        loginSession()
     }
     
     deinit {

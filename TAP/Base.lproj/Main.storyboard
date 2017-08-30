@@ -97,7 +97,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="TAP" id="vlp-pM-pBC">
-                        <barButtonItem key="rightBarButtonItem" title="Cart" id="GqC-bu-LXW"/>
+                        <barButtonItem key="rightBarButtonItem" title="Logout" id="qaa-Dw-YAd">
+                            <connections>
+                                <action selector="logout:" destination="YLB-8M-Z2a" id="dyu-iy-v85"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="YTPlayerView" destination="wWk-QB-SHv" id="k0B-6j-Rcc"/>
@@ -305,7 +309,7 @@
             <objects>
                 <navigationController id="jro-xG-XWA" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Store" id="xLv-5d-9ej"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="fCn-i0-QXP">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fCn-i0-QXP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -356,7 +360,9 @@
                             <outlet property="delegate" destination="a9E-2O-xNK" id="xK8-jr-P1r"/>
                         </connections>
                     </tableView>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="Favorites" id="KVy-YJ-YTy"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="GA4-sI-Dpr" id="eqQ-vh-CpN"/>
                         <segue destination="fG2-q6-ieL" kind="show" identifier="favoritesSegue" id="5OS-Cu-eep"/>
@@ -371,7 +377,7 @@
             <objects>
                 <navigationController id="RBn-Gp-CQR" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Favorites" id="pdQ-gf-cg3"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="2fH-1d-XUe">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2fH-1d-XUe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -407,7 +413,7 @@
         <image name="Favorite" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="sI5-sf-Ki2"/>
         <segue reference="5OS-Cu-eep"/>
-        <segue reference="UUd-br-HNh"/>
     </inferredMetricsTieBreakers>
 </document>

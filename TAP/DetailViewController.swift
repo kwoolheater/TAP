@@ -75,7 +75,7 @@ class DetailViewController: CoreDataViewController, UINavigationControllerDelega
     }
     
     @IBAction func placeOrder(_ sender: Any) {
-        
+        // Not adding this functionality in order to prevent orders accidentally being made.
     }
     
     @IBAction func favorite(_ sender: Any) {
@@ -119,9 +119,3 @@ class DetailViewController: CoreDataViewController, UINavigationControllerDelega
         }
     }
 }
-
-/*extension DetailViewController: UINavigationControllerDelegate {
-    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        (viewController as? ProgressTableViewController)?.data = data // Here you pass the to your original view controller
-    }
-}*/
