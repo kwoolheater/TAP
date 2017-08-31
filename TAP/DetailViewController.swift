@@ -75,7 +75,9 @@ class DetailViewController: CoreDataViewController, UINavigationControllerDelega
     }
     
     @IBAction func placeOrder(_ sender: Any) {
-        // Not adding this functionality in order to prevent orders accidentally being made.
+        let alertController = UIAlertController(title: "Ordering Unavailable!", message: "Ordering will be available in your area soon.", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.destructive, handler: nil))
+        present(alertController, animated: true)
     }
     
     @IBAction func favorite(_ sender: Any) {

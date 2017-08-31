@@ -67,7 +67,6 @@ class DrinkTableViewController: UIViewController {
                                                         size = "6 pack"
                                                     }
                                                 }
-                                                
                                                 self.items.append(DownloadedDrink.init(name: drinkName!, price175: price1, price1:price2, price750: price3, otherPrice: price4, otherSize: size))
                                             }
                                         }
