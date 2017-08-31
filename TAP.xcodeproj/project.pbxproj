@@ -12,6 +12,7 @@
 		41688AFA1F56085D005F340C /* SavedItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41688AF91F56085D005F340C /* SavedItems.swift */; };
 		416ED6601F4511CE000C00ED /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416ED65F1F4511CE000C00ED /* DetailViewController.swift */; };
 		417EA3881F57CC5E006C756F /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 417EA3871F57CC5E006C756F /* README.md */; };
+		417EA38A1F5844CA006C756F /* GoogleService-Info 09-20-34-458.plist in Resources */ = {isa = PBXBuildFile; fileRef = 417EA3891F5844CA006C756F /* GoogleService-Info 09-20-34-458.plist */; };
 		419858791F4F76D300124DA9 /* FavoritesTableViewControler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419858781F4F76D300124DA9 /* FavoritesTableViewControler.swift */; };
 		4198587B1F50B3F200124DA9 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4198587A1F50B3F200124DA9 /* CoreDataStack.swift */; };
 		4198587E1F548F6100124DA9 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4198587C1F548F6100124DA9 /* Model.xcdatamodeld */; };
@@ -27,7 +28,6 @@
 		41C570481F2BAE7500B1D661 /* TAPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C570471F2BAE7500B1D661 /* TAPTests.swift */; };
 		41C570531F2BAE7500B1D661 /* TAPUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C570521F2BAE7500B1D661 /* TAPUITests.swift */; };
 		41C570631F2FA8CC00B1D661 /* StoreCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C570621F2FA8CC00B1D661 /* StoreCollectionViewCell.swift */; };
-		41C570671F33A24B00B1D661 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 41C570661F33A24B00B1D661 /* GoogleService-Info.plist */; };
 		41C570691F33A44900B1D661 /* LiquorStoreHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C570681F33A44900B1D661 /* LiquorStoreHomeViewController.swift */; };
 		41C5706D1F34E64100B1D661 /* DrinkTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C5706C1F34E64100B1D661 /* DrinkTableViewController.swift */; };
 		8A8CDEA442811C79E75DC333 /* Pods_TAPUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00FC8ED2B84C07DC7CBC65BC /* Pods_TAPUITests.framework */; };
@@ -61,6 +61,7 @@
 		41688AF91F56085D005F340C /* SavedItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedItems.swift; sourceTree = "<group>"; };
 		416ED65F1F4511CE000C00ED /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		417EA3871F57CC5E006C756F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		417EA3891F5844CA006C756F /* GoogleService-Info 09-20-34-458.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info 09-20-34-458.plist"; sourceTree = "<group>"; };
 		419858781F4F76D300124DA9 /* FavoritesTableViewControler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewControler.swift; sourceTree = "<group>"; };
 		4198587A1F50B3F200124DA9 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		4198587D1F548F6100124DA9 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
@@ -82,7 +83,6 @@
 		41C570521F2BAE7500B1D661 /* TAPUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TAPUITests.swift; sourceTree = "<group>"; };
 		41C570541F2BAE7500B1D661 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		41C570621F2FA8CC00B1D661 /* StoreCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreCollectionViewCell.swift; sourceTree = "<group>"; };
-		41C570661F33A24B00B1D661 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		41C570681F33A44900B1D661 /* LiquorStoreHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiquorStoreHomeViewController.swift; sourceTree = "<group>"; };
 		41C5706C1F34E64100B1D661 /* DrinkTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrinkTableViewController.swift; sourceTree = "<group>"; };
 		83F8561217423B58FCDE6C38 /* Pods-TAPTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TAPTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TAPTests/Pods-TAPTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -196,7 +196,7 @@
 				417EA3831F579106006C756F /* Controller */,
 				417EA3861F579140006C756F /* Assets */,
 				41C5703E1F2BAE7500B1D661 /* Info.plist */,
-				41C570661F33A24B00B1D661 /* GoogleService-Info.plist */,
+				417EA3891F5844CA006C756F /* GoogleService-Info 09-20-34-458.plist */,
 			);
 			path = TAP;
 			sourceTree = "<group>";
@@ -361,8 +361,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				417EA38A1F5844CA006C756F /* GoogleService-Info 09-20-34-458.plist in Resources */,
 				41C5703D1F2BAE7500B1D661 /* LaunchScreen.storyboard in Resources */,
-				41C570671F33A24B00B1D661 /* GoogleService-Info.plist in Resources */,
 				41C5703A1F2BAE7500B1D661 /* Assets.xcassets in Resources */,
 				41C570381F2BAE7500B1D661 /* Main.storyboard in Resources */,
 			);
