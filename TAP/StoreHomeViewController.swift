@@ -17,13 +17,14 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
     @IBOutlet weak var storeCollectionView: UICollectionView!
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var YTPlayerView: YTPlayerView!
-    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var contentView: UIView!
     
     // initalize variables
     var storeItems = ["Beer", "Wine", "Liquor", "Extras"]
     var storePictures = [#imageLiteral(resourceName: "Beer"), #imageLiteral(resourceName: "Wine"), #imageLiteral(resourceName: "Liquor"), #imageLiteral(resourceName: "Extras")]
     var liquorName: String?
     fileprivate var _authHandle: AuthStateDidChangeListenerHandle!
+    
     var user: User?
     var displayName = "No name"
     
@@ -64,8 +65,6 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
         flowLayout.itemSize = CGSize(width: dimensionWidth, height: dimension)
         
         self.YTPlayerView.load(withVideoId: "IGE9qpICfSw")
-        
-        scrollView.contentSize.height = 750
     }
     
     func signedInStatus(isSignedIn: Bool) {
@@ -75,8 +74,21 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
     }
     
     func loginSession() {
-        let authViewController = FUIAuth.defaultAuthUI()!.authViewController()
-        present(authViewController, animated: true, completion: nil)
+        let connectedRef = Database.database().reference(withPath: ".info/connected")
+        connectedRef.observe(.value, with: { snapshot in
+            DispatchQueue.main.async {
+                if let connected = snapshot.value as? Bool, connected {
+                    let authViewController = FUIAuth.defaultAuthUI()!.authViewController()
+                    self.present(authViewController, animated: true, completion: nil)
+                } else {
+                    let alertController = UIAlertController(title: "Error", message: "Check your internet connection.", preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "Done", style: .destructive, handler: { action in
+                    self.loginSession()
+                    }))
+                    self.present(alertController, animated: true, completion: nil)
+            }
+            }
+        })
     }
     
     @IBAction func logout(_ sender: Any) {
@@ -86,7 +98,7 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
             print("unable to sign out: \(error)")
         }
         signedInStatus(isSignedIn: false)
-        loginSession()
+        dismiss(animated: true, completion: nil)
     }
     
     deinit {
