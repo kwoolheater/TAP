@@ -307,8 +307,9 @@
         <!--Store-->
         <scene sceneID="Oas-le-8El">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6y0-rp-Vzr" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="jro-xG-XWA" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Store" id="xLv-5d-9ej"/>
+                    <tabBarItem key="tabBarItem" title="Store" image="blankStoreIcon" selectedImage="storeIcon" id="xLv-5d-9ej"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fCn-i0-QXP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -317,7 +318,6 @@
                         <segue destination="YLB-8M-Z2a" kind="relationship" relationship="rootViewController" id="7i7-Eg-yiM"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6y0-rp-Vzr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-449" y="116"/>
         </scene>
@@ -372,11 +372,11 @@
             </objects>
             <point key="canvasLocation" x="1792.8" y="877.51124437781118"/>
         </scene>
-        <!--Favorites-->
+        <!--Navigation Controller-->
         <scene sceneID="EWM-l4-UH9">
             <objects>
                 <navigationController id="RBn-Gp-CQR" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Favorites" id="pdQ-gf-cg3"/>
+                    <tabBarItem key="tabBarItem" systemItem="favorites" id="pdQ-gf-cg3"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="2fH-1d-XUe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -411,6 +411,8 @@
     <resources>
         <image name="Alcohol" width="700" height="470"/>
         <image name="Favorite" width="32" height="32"/>
+        <image name="blankStoreIcon" width="30" height="30"/>
+        <image name="storeIcon" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="sI5-sf-Ki2"/>
