@@ -83,6 +83,8 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
         if isSignedIn {
             // remove background blur (will use when showing image messages)
             configureUI()
+            SavedItems.sharedInstance().userName = self.displayName
+            print(SavedItems.sharedInstance().userName)
         }
     }
     

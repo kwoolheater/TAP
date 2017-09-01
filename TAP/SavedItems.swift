@@ -10,6 +10,7 @@ import Foundation
 class SavedItems: NSObject {
     
     var favoritesArray = [Drink]()
+    var userName: String?
     
     class func sharedInstance() -> SavedItems {
         struct Singleton {

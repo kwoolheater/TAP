@@ -267,6 +267,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <activityIndicatorView key="tableFooterView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="DHt-k9-sjn">
+                            <rect key="frame" x="0.0" y="86" width="375" height="20"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </activityIndicatorView>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="tableCell" textLabel="Wc1-e0-Eie" detailTextLabel="tyK-R3-89X" rowHeight="58" style="IBUITableViewCellStyleValue1" id="bSA-Yx-4jv">
                                 <rect key="frame" x="0.0" y="28" width="375" height="58"/>
@@ -299,6 +303,7 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="activityIndicator" destination="DHt-k9-sjn" id="4hu-nP-UAd"/>
                         <outlet property="drinkTable" destination="ONJ-EP-68n" id="Zaw-Eo-aeg"/>
                         <segue destination="fG2-q6-ieL" kind="show" identifier="showDetailController" id="7V4-hA-dCC"/>
                     </connections>

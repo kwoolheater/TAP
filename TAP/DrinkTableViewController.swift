@@ -20,6 +20,7 @@ class DrinkTableViewController: UIViewController {
     
     // outlets :)
     @IBOutlet var drinkTable: UITableView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         configureDatabase()
@@ -33,6 +34,8 @@ class DrinkTableViewController: UIViewController {
     }
     
     func retrieveData() {
+        self.activityIndicator.hidesWhenStopped = true
+        self.activityIndicator.startAnimating()
         
         _refHandle = ref.observe(DataEventType.value, with: { (snapshot) in
             let postDic = snapshot.value as? [String:AnyObject]
@@ -68,6 +71,9 @@ class DrinkTableViewController: UIViewController {
                                                     }
                                                 }
                                                 self.items.append(DownloadedDrink.init(name: drinkName!, price175: price1, price1:price2, price750: price3, otherPrice: price4, otherSize: size))
+                                                DispatchQueue.main.async {
+                                                    self.activityIndicator.stopAnimating()
+                                                }
                                             }
                                         }
                                     }
@@ -96,6 +102,9 @@ class DrinkTableViewController: UIViewController {
                                     }
                                 }
                                 self.items.append(DownloadedDrink.init(name: drinkName!, price175: price1, price1:price2, price750: price3, otherPrice: price4, otherSize: size))
+                                DispatchQueue.main.async {
+                                    self.activityIndicator.stopAnimating()
+                                }
                             }
                         }
                     }
