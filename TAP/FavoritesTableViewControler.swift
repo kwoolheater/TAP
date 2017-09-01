@@ -28,13 +28,27 @@ class FavoritesTableViewController: CoreDataViewController {
     }
     
     func populateArray() {
+        // insert if username
         let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "Drink")
-        fr.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        fr.sortDescriptors = [NSSortDescriptor(key: "userName", ascending: true)]
         
         do {
             SavedItems.sharedInstance().favoritesArray = try stack.context.fetch(fr) as! [Drink]
+            
         } catch {
             fatalError("Could not fetch favorites.")
+        }
+        
+        remove()
+    }
+    
+    func remove() {
+        for items in SavedItems.sharedInstance().favoritesArray {
+            if items.userName != SavedItems.sharedInstance().userName {
+                if let index = SavedItems.sharedInstance().favoritesArray.index(of: items) {
+                    SavedItems.sharedInstance().favoritesArray.remove(at: index)
+                }
+            }
         }
     }
     

@@ -58,9 +58,9 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
                 // check if the current app user is the current FIRUser
                 if self.user != activeUser {
                     self.user = activeUser
-                    self.signedInStatus(isSignedIn: true)
                     let name = user!.email!.components(separatedBy: "@")[0]
                     self.displayName = name
+                    self.signedInStatus(isSignedIn: true)
                 }
             } else {
                 // user must sign in
@@ -105,12 +105,14 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
 
     
     @IBAction func logout(_ sender: Any) {
+       
         do {
             try Auth.auth().signOut()
         } catch {
             print("unable to sign out: \(error)")
         }
         
+        user = nil
         dismiss(animated: true, completion: nil)
     }
     
