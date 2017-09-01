@@ -37,7 +37,7 @@ class DetailViewController: CoreDataViewController, UINavigationControllerDelega
     func setDrinkText() {
         if drink != nil {
             name.text = drink?.name
-        
+            
             if drink?.price750mL != nil {
                 price = (drink?.price750mL)!
             } else if drink?.otherPrice != nil {
@@ -82,11 +82,17 @@ class DetailViewController: CoreDataViewController, UINavigationControllerDelega
     
     @IBAction func favorite(_ sender: Any) {
         if isFavorite == nil || isFavorite == false {
-            DispatchQueue.main.async {
-                self.saveToCoreData()
+            if SavedItems.sharedInstance().userName != "No name" {
+                DispatchQueue.main.async {
+                    self.saveToCoreData()
+                }
+                isFavorite = true
+                favoritesButton.tintColor = .red
+            } else {
+                let alertViewController = UIAlertController(title: "Login Error", message: "There was an error logging your account in. Please login again before adding favorites.", preferredStyle: .alert)
+                alertViewController.addAction(UIAlertAction(title: "Done", style: .destructive, handler: nil))
+                present(alertViewController, animated: true, completion: nil)
             }
-            isFavorite = true
-            favoritesButton.tintColor = .red
         } else {
             DispatchQueue.main.async {
                 self.deleteFromCoreData(savedDrink: self.coreDataDrink!)
@@ -97,7 +103,7 @@ class DetailViewController: CoreDataViewController, UINavigationControllerDelega
     }
     
     func saveToCoreData() {
-        let fav = Drink(name: (drink?.name)!, price: (price)!, context: stack.context)
+        let fav = Drink(userName: SavedItems.sharedInstance().userName!, name: (drink?.name)!, price: (price)!, context: stack.context)
         coreDataDrink = fav
         do {
             try stack.context.save()

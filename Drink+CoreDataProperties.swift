@@ -2,7 +2,7 @@
 //  Drink+CoreDataProperties.swift
 //  
 //
-//  Created by Kiyoshi Woolheater on 8/28/17.
+//  Created by Kiyoshi Woolheater on 9/1/17.
 //
 //
 
@@ -18,5 +18,6 @@ extension Drink {
 
     @NSManaged public var name: String?
     @NSManaged public var price: Double
+    @NSManaged public var userName: String?
 
 }

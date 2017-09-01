@@ -16,9 +16,9 @@
 		419858791F4F76D300124DA9 /* FavoritesTableViewControler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419858781F4F76D300124DA9 /* FavoritesTableViewControler.swift */; };
 		4198587B1F50B3F200124DA9 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4198587A1F50B3F200124DA9 /* CoreDataStack.swift */; };
 		4198587E1F548F6100124DA9 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4198587C1F548F6100124DA9 /* Model.xcdatamodeld */; };
-		419858851F54BD4D00124DA9 /* Drink+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419858831F54BD4D00124DA9 /* Drink+CoreDataClass.swift */; };
-		419858861F54BD4D00124DA9 /* Drink+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419858841F54BD4D00124DA9 /* Drink+CoreDataProperties.swift */; };
 		41A3CEF51F3A1F3500063635 /* DownloadedDrink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A3CEF41F3A1F3500063635 /* DownloadedDrink.swift */; };
+		41ACF3B51F59DAFD009EFAEE /* Drink+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41ACF3B31F59DAFD009EFAEE /* Drink+CoreDataClass.swift */; };
+		41ACF3B61F59DAFD009EFAEE /* Drink+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41ACF3B41F59DAFD009EFAEE /* Drink+CoreDataProperties.swift */; };
 		41B740231F38D2E5002322A5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B740221F38D2E5002322A5 /* Constants.swift */; };
 		41C570331F2BAE7500B1D661 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C570321F2BAE7500B1D661 /* AppDelegate.swift */; };
 		41C570351F2BAE7500B1D661 /* StoreHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C570341F2BAE7500B1D661 /* StoreHomeViewController.swift */; };
@@ -65,9 +65,10 @@
 		419858781F4F76D300124DA9 /* FavoritesTableViewControler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewControler.swift; sourceTree = "<group>"; };
 		4198587A1F50B3F200124DA9 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		4198587D1F548F6100124DA9 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		419858831F54BD4D00124DA9 /* Drink+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Drink+CoreDataClass.swift"; sourceTree = "<group>"; };
-		419858841F54BD4D00124DA9 /* Drink+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Drink+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		41A3CEF41F3A1F3500063635 /* DownloadedDrink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadedDrink.swift; sourceTree = "<group>"; };
+		41ACF3B21F59D991009EFAEE /* Model5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model5.xcdatamodel; sourceTree = "<group>"; };
+		41ACF3B31F59DAFD009EFAEE /* Drink+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Drink+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		41ACF3B41F59DAFD009EFAEE /* Drink+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Drink+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		41B740221F38D2E5002322A5 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		41C5702F1F2BAE7500B1D661 /* TAP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TAP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41C570321F2BAE7500B1D661 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -138,8 +139,8 @@
 				41B740221F38D2E5002322A5 /* Constants.swift */,
 				4198587A1F50B3F200124DA9 /* CoreDataStack.swift */,
 				41A3CEF41F3A1F3500063635 /* DownloadedDrink.swift */,
-				419858831F54BD4D00124DA9 /* Drink+CoreDataClass.swift */,
-				419858841F54BD4D00124DA9 /* Drink+CoreDataProperties.swift */,
+				41ACF3B31F59DAFD009EFAEE /* Drink+CoreDataClass.swift */,
+				41ACF3B41F59DAFD009EFAEE /* Drink+CoreDataProperties.swift */,
 				41688AF91F56085D005F340C /* SavedItems.swift */,
 				4198587C1F548F6100124DA9 /* Model.xcdatamodeld */,
 			);
@@ -534,12 +535,12 @@
 				41C570331F2BAE7500B1D661 /* AppDelegate.swift in Sources */,
 				419858791F4F76D300124DA9 /* FavoritesTableViewControler.swift in Sources */,
 				417EA3881F57CC5E006C756F /* README.md in Sources */,
-				419858861F54BD4D00124DA9 /* Drink+CoreDataProperties.swift in Sources */,
 				41688AFA1F56085D005F340C /* SavedItems.swift in Sources */,
 				4198587B1F50B3F200124DA9 /* CoreDataStack.swift in Sources */,
 				41C570691F33A44900B1D661 /* LiquorStoreHomeViewController.swift in Sources */,
 				41A3CEF51F3A1F3500063635 /* DownloadedDrink.swift in Sources */,
-				419858851F54BD4D00124DA9 /* Drink+CoreDataClass.swift in Sources */,
+				41ACF3B51F59DAFD009EFAEE /* Drink+CoreDataClass.swift in Sources */,
+				41ACF3B61F59DAFD009EFAEE /* Drink+CoreDataProperties.swift in Sources */,
 				41B740231F38D2E5002322A5 /* Constants.swift in Sources */,
 				4198587E1F548F6100124DA9 /* Model.xcdatamodeld in Sources */,
 				416ED6601F4511CE000C00ED /* DetailViewController.swift in Sources */,
@@ -829,9 +830,10 @@
 		4198587C1F548F6100124DA9 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				41ACF3B21F59D991009EFAEE /* Model5.xcdatamodel */,
 				4198587D1F548F6100124DA9 /* Model.xcdatamodel */,
 			);
-			currentVersion = 4198587D1F548F6100124DA9 /* Model.xcdatamodel */;
+			currentVersion = 41ACF3B21F59D991009EFAEE /* Model5.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
