@@ -29,17 +29,23 @@ class FavoritesTableViewController: CoreDataViewController {
     
     func populateArray() {
         // insert if username
-        let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "Drink")
-        fr.sortDescriptors = [NSSortDescriptor(key: "userName", ascending: true)]
-        
-        do {
-            SavedItems.sharedInstance().favoritesArray = try stack.context.fetch(fr) as! [Drink]
+        if SavedItems.sharedInstance().userName != "No name" {
+            let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "Drink")
+            fr.sortDescriptors = [NSSortDescriptor(key: "userName", ascending: true)]
             
-        } catch {
-            fatalError("Could not fetch favorites.")
-        }
+            do {
+                SavedItems.sharedInstance().favoritesArray = try stack.context.fetch(fr) as! [Drink]
+            
+            } catch {
+                fatalError("Could not fetch favorites.")
+            }
         
-        remove()
+            remove()
+        } else {
+            let alert = UIAlertController(title: "Error with Login", message: "There was an error with logged in. Please login again.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Done", style: .destructive, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     func remove() {
