@@ -54,6 +54,7 @@ PODS:
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
+  - ReachabilitySwift (3)
   - Stripe (11.2.0)
   - youtube-ios-player-helper (0.1.6)
 
@@ -63,6 +64,7 @@ DEPENDENCIES:
   - Firebase/Storage
   - FirebaseUI/Auth
   - FirebaseUI/Database
+  - ReachabilitySwift (~> 3)
   - Stripe
   - youtube-ios-player-helper (~> 0.1.6)
 
@@ -79,9 +81,10 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 5ad62e8200fa00ed011fe5e08d27fef72c5b1429
   leveldb-library: 10fb39c39e243db4af1828441162405bbcec1404
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
   Stripe: 898f83a95d72180c6eb4acd65b2ae6158fc6a8bd
   youtube-ios-player-helper: 21ab92db027c7ff86cb17a3843a3f6eafc8158d2
 
-PODFILE CHECKSUM: 463841d747769f87825b8fbb49bd947d9eb0f29f
+PODFILE CHECKSUM: ccee58bce4d8359a3ce7a4a0d5c29f9cd448818a
 
 COCOAPODS: 1.2.1

@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import ReachabilitySwift
 
 class DrinkTableViewController: UIViewController {
     
@@ -17,6 +18,7 @@ class DrinkTableViewController: UIViewController {
     var ref: DatabaseReference!
     var items = [DownloadedDrink]()
     fileprivate var _refHandle: DatabaseHandle!
+    let reachability = Reachability()!
     
     // outlets :)
     @IBOutlet var drinkTable: UITableView!
@@ -25,6 +27,15 @@ class DrinkTableViewController: UIViewController {
     override func viewDidLoad() {
         configureDatabase()
         retrieveData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.reachabilityChanged),name: ReachabilityChangedNotification,object: reachability)
+        do{
+            try reachability.startNotifier()
+        }catch{
+            print("could not start reachability notifier")
+        }
     }
     
     // MARK: config
@@ -117,8 +128,23 @@ class DrinkTableViewController: UIViewController {
         })
     }
     
+    func reachabilityChanged(note: Notification) {
+        
+        let reachability = note.object as! Reachability
+        
+        if reachability.isReachable {
+            print("Reachable.")
+        } else {
+            let alertController = UIAlertController(title: "Error", message: "Check your internet connection.", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "Done", style: .destructive, handler: nil))
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
+    
     deinit {
         ref.child(type).removeObserver(withHandle: _refHandle)
+        reachability.stopNotifier()
+        NotificationCenter.default.removeObserver(self, name: ReachabilityChangedNotification, object: reachability)
     }
 }
 

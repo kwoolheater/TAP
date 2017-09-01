@@ -10,6 +10,7 @@ import UIKit
 import youtube_ios_player_helper
 import Firebase
 import FirebaseAuthUI
+import ReachabilitySwift
 
 class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UINavigationControllerDelegate {
     
@@ -26,7 +27,7 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
     var storePictures = [#imageLiteral(resourceName: "Beer"), #imageLiteral(resourceName: "Wine"), #imageLiteral(resourceName: "Liquor"), #imageLiteral(resourceName: "Extras")]
     var liquorName: String?
     fileprivate var _authHandle: AuthStateDidChangeListenerHandle!
-    
+    let reachability = Reachability()!
     var user: User?
     var displayName = "No name"
     
@@ -34,6 +35,15 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         configureAuth()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.reachabilityChanged),name: ReachabilityChangedNotification,object: reachability)
+        do{
+            try reachability.startNotifier()
+        }catch{
+            print("could not start reachability notifier")
+        }
     }
     
     @IBAction func signIn(_ sender: Any) {
@@ -89,17 +99,8 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
     }
     
     func loginSession() {
-        let connectedRef = Database.database().reference(withPath: ".info/connected")
-        connectedRef.observe(.value, with: { snapshot in
-            if let connected = snapshot.value as? Bool, connected {
-                let authViewController = FUIAuth.defaultAuthUI()!.authViewController()
-                self.present(authViewController, animated: true, completion: nil)
-            } else {
-                let alertController = UIAlertController(title: "Error", message: "Check your internet connection.", preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: "Done", style: .destructive, handler: nil))
-                self.present(alertController, animated: true, completion: nil)
-            }
-        })
+        let authViewController = FUIAuth.defaultAuthUI()!.authViewController()
+        self.present(authViewController, animated: true, completion: nil)
     }
 
     
@@ -113,10 +114,25 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
         dismiss(animated: true, completion: nil)
     }
     
+    func reachabilityChanged(note: Notification) {
+        
+        let reachability = note.object as! Reachability
+        
+        if reachability.isReachable {
+            print("Reachable.")
+        } else {
+            let alertController = UIAlertController(title: "Error", message: "Check your internet connection.", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "Done", style: .destructive, handler: nil))
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
+    
     deinit {
         if _authHandle != nil {
             Auth.auth().removeStateDidChangeListener(_authHandle)
         }
+        reachability.stopNotifier()
+        NotificationCenter.default.removeObserver(self, name: ReachabilityChangedNotification, object: reachability)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

@@ -34,6 +34,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>ReachabilitySwift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Stripe-Stripe.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -67,11 +72,6 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1CD0F651E19B6F1BE61E399A7E93D81C</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>266AE1506DAD13D34C0725E909C0C476</key>
 		<dict>
 			<key>primary</key>
@@ -87,17 +87,32 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>395CEE594AF777E03E41D9DF70245EC4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>4904C01902AD146703891B4F41D42B55</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AA6EA4C4877B43D4F16A303AF5970E13</key>
+		<key>638DD13CA894C2F47BE277A052072214</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AE33EC624CCC25DFB1C8684350475AED</key>
+		<key>92DFB568BC0C54A4F87522FF67507496</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>97455C291DBF38A0F47CFE787E116DB8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A779DA4E23EF5B1AE4EA2CDA2F241AE2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -108,11 +123,6 @@
 			<true/>
 		</dict>
 		<key>E4DD95323C54A78F879DAB0F1508B8E7</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>FC745AD411AA33948BE096E221FB6B97</key>
 		<dict>
 			<key>primary</key>
 			<true/>
