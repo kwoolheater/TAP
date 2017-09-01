@@ -73,61 +73,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TAP/StoreHomeViewController.swift"
-            timestampString = "525906287.614461"
+            filePath = "TAP/LoginViewController.swift"
+            timestampString = "525923247.517218"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
-            landmarkName = "loginSession()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "TAP.StoreHomeViewController.(loginSession () -&gt; ()).(closure #1).(closure #1)"
-                  moduleName = "TAP"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Kiyoshi/TAP/TAP/StoreHomeViewController.swift"
-                  timestampString = "525906287.763849"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "80"
-                  endingLineNumber = "80"
-                  offsetFromSymbolStart = "19">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "TAP.StoreHomeViewController.(loginSession () -&gt; ()).(closure #1).(closure #1)"
-                  moduleName = "TAP"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Kiyoshi/TAP/TAP/StoreHomeViewController.swift"
-                  timestampString = "525906287.76628"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "80"
-                  endingLineNumber = "80"
-                  offsetFromSymbolStart = "476">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TAP/StoreHomeViewController.swift"
-            timestampString = "525906287.614461"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
-            landmarkName = "loginSession()"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "signedInStatus(isSignedIn:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -137,13 +89,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TAP/StoreHomeViewController.swift"
-            timestampString = "525906287.614461"
+            filePath = "TAP/LoginViewController.swift"
+            timestampString = "525923247.517218"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
-            landmarkName = "loginSession()"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "signedInStatus(isSignedIn:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -153,158 +105,14 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TAP/StoreHomeViewController.swift"
-            timestampString = "525906287.614461"
+            filePath = "TAP/LoginViewController.swift"
+            timestampString = "525923247.517218"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
-            landmarkName = "loginSession()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TAP/StoreHomeViewController.swift"
-            timestampString = "525906287.614461"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
-            landmarkName = "loginSession()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TAP/StoreHomeViewController.swift"
-            timestampString = "525906287.614461"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
-            landmarkName = "loginSession()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "TAP.StoreHomeViewController.(loginSession () -&gt; ()).(closure #1).(closure #1)"
-                  moduleName = "TAP"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Kiyoshi/TAP/TAP/StoreHomeViewController.swift"
-                  timestampString = "525906287.796203"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "85"
-                  endingLineNumber = "85"
-                  offsetFromSymbolStart = "1505">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "TAP.StoreHomeViewController.(loginSession () -&gt; ()).(closure #1).(closure #1).(closure #1)"
-                  moduleName = "TAP"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Kiyoshi/TAP/TAP/StoreHomeViewController.swift"
-                  timestampString = "525906287.798692"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "86"
-                  endingLineNumber = "86"
-                  offsetFromSymbolStart = "23">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TAP/StoreHomeViewController.swift"
-            timestampString = "525906287.614461"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
-            landmarkName = "loginSession()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TAP/StoreHomeViewController.swift"
-            timestampString = "525906287.614461"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
-            landmarkName = "loginSession()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "TAP.StoreHomeViewController.(loginSession () -&gt; ()).(closure #1).(closure #1)"
-                  moduleName = "TAP"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Kiyoshi/TAP/TAP/StoreHomeViewController.swift"
-                  timestampString = "525906287.810938"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "87"
-                  endingLineNumber = "87"
-                  offsetFromSymbolStart = "1661">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "TAP.StoreHomeViewController.(loginSession () -&gt; ()).(closure #1).(closure #1).(closure #1)"
-                  moduleName = "TAP"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Kiyoshi/TAP/TAP/StoreHomeViewController.swift"
-                  timestampString = "525906287.813915"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "87"
-                  endingLineNumber = "87"
-                  offsetFromSymbolStart = "46">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TAP/StoreHomeViewController.swift"
-            timestampString = "525906287.614461"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
-            landmarkName = "loginSession()"
-            landmarkType = "7">
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "LoginViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

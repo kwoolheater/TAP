@@ -17,7 +17,9 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
     @IBOutlet weak var storeCollectionView: UICollectionView!
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var YTPlayerView: YTPlayerView!
-    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var signInButton: UIButton!
+    @IBOutlet weak var backgroundBlur: UIVisualEffectView!
     
     // initalize variables
     var storeItems = ["Beer", "Wine", "Liquor", "Extras"]
@@ -32,13 +34,18 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         configureAuth()
-        
+    }
+    
+    @IBAction func signIn(_ sender: Any) {
+        self.loginSession()
     }
     
     func configureAuth() {
-        // listen for changes in auth state 
+        // listen for changes in the authorization state
         _authHandle = Auth.auth().addStateDidChangeListener { (auth: Auth, user: User?) in
+            // check if there is a current user
             if let activeUser = user {
+                // check if the current app user is the current FIRUser
                 if self.user != activeUser {
                     self.user = activeUser
                     self.signedInStatus(isSignedIn: true)
@@ -68,7 +75,13 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
     }
     
     func signedInStatus(isSignedIn: Bool) {
+        storeCollectionView.isHidden = !isSignedIn
+        YTPlayerView.isHidden = !isSignedIn
+        tabBarController?.tabBar.isHidden = !isSignedIn
+        label.isHidden = !isSignedIn
+        signInButton.isHidden = isSignedIn
         if isSignedIn {
+            // remove background blur (will use when showing image messages)
             configureUI()
         }
     }
@@ -76,20 +89,17 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
     func loginSession() {
         let connectedRef = Database.database().reference(withPath: ".info/connected")
         connectedRef.observe(.value, with: { snapshot in
-            DispatchQueue.main.async {
-                if let connected = snapshot.value as? Bool, connected {
-                    let authViewController = FUIAuth.defaultAuthUI()!.authViewController()
-                    self.present(authViewController, animated: true, completion: nil)
-                } else {
-                    let alertController = UIAlertController(title: "Error", message: "Check your internet connection.", preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: "Done", style: .destructive, handler: { action in
-                    self.loginSession()
-                    }))
-                    self.present(alertController, animated: true, completion: nil)
-            }
+            if let connected = snapshot.value as? Bool, connected {
+                let authViewController = FUIAuth.defaultAuthUI()!.authViewController()
+                self.present(authViewController, animated: true, completion: nil)
+            } else {
+                let alertController = UIAlertController(title: "Error", message: "Check your internet connection.", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "Done", style: .destructive, handler: nil))
+                self.present(alertController, animated: true, completion: nil)
             }
         })
     }
+
     
     @IBAction func logout(_ sender: Any) {
         do {
@@ -97,12 +107,14 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
         } catch {
             print("unable to sign out: \(error)")
         }
-        signedInStatus(isSignedIn: false)
+        
         dismiss(animated: true, completion: nil)
     }
     
     deinit {
-        Auth.auth().removeStateDidChangeListener(_authHandle)
+        if _authHandle != nil {
+            Auth.auth().removeStateDidChangeListener(_authHandle)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
