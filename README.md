@@ -4,4 +4,5 @@ This is an application that allows users to see prices of different alcohols, ad
 
 Installation 
 
-Clone the file from this github and then install the pod files.
+Clone the file from this github and then install the pod files. The app should run without any problems when all of the pod files are installed.
+
