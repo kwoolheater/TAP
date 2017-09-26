@@ -13,6 +13,7 @@ class SavedItems: NSObject {
     var favoritesArray = [Drink]()
     var userName: String?
     
+    // create a shared instance
     class func sharedInstance() -> SavedItems {
         struct Singleton {
             static var sharedInstance = SavedItems()
