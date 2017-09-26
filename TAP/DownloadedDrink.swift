@@ -10,6 +10,7 @@ import Foundation
 
 class DownloadedDrink: NSObject {
     
+    // create variables for the model
     var name: String?
     var price175L: Double?
     var price1L: Double?
@@ -17,6 +18,7 @@ class DownloadedDrink: NSObject {
     var otherPrice: Double?
     var otherSize: String?
     
+    // create the init message for a downloaded drink
     init(name: String, price175: Double?, price1: Double?, price750: Double?, otherPrice: Double?, otherSize: String?) {
         // init prices and name
         self.name = name
