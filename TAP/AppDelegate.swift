@@ -15,11 +15,14 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    // integrate the Core Data stack
     let stack = CoreDataStack(modelName: "Model")!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        // configure Firebase
         FirebaseApp.configure()
+        
+        // configure Stripe with publishable key
         STPPaymentConfiguration.shared().publishableKey = "pk_test_zXwdlOOuj7gAsRYuZux4NsaU"
         
         return true
