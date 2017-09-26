@@ -9,6 +9,7 @@
 import Foundation
 class SavedItems: NSObject {
     
+    // initailized the drink array
     var favoritesArray = [Drink]()
     var userName: String?
     
