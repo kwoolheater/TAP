@@ -11,7 +11,9 @@ import UIKit
 import CoreData
 
 class CoreDataViewController: UIViewController {
+    // class that all other core data views will inherit from for code reuse purposes
     
+    // create fetched result controller, set delegate, and excute search
     var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>? {
         didSet{
             fetchedResultsController?.delegate = self as! NSFetchedResultsControllerDelegate
@@ -31,6 +33,7 @@ class CoreDataViewController: UIViewController {
 
 extension CoreDataViewController {
     
+    // function that searches data stores or returns an error
     func executeSearch() {
         if let fc = fetchedResultsController {
             do {
