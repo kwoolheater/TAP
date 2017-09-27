@@ -39,9 +39,15 @@ class DetailViewController: CoreDataViewController, UINavigationControllerDelega
     }
     
     func setDrinkText() {
+        // this function sets the text for the name of the drink and the price of the drink on this controller
+        
+        // if statement that differentiates between a drink that is stored in core data or not by checking if the if variable is nil or not
         if drink != nil {
+            
+            // set the text of the name label
             name.text = drink?.name
             
+            // check to see what bottle size to populate
             if drink?.price750mL != nil {
                 price = (drink?.price750mL)!
             } else if drink?.otherPrice != nil {
@@ -50,16 +56,23 @@ class DetailViewController: CoreDataViewController, UINavigationControllerDelega
                 price = (drink?.price175L)!
             }
             
+            // set the price label
             priceLabel.text = "Price: $\(price ?? 0)"
         } else {
+            // set the name label
             name.text = coreDataDrink?.name
+            
+            // set the price label
             priceLabel.text = "Price: $\((coreDataDrink?.price)!)"
+            
+            // set the favorites button to favorited
             isFavorite = true
             favoritesButton.tintColor = .red
         }
     }
     
     func checkCoreData() {
+        
         let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "Drink")
         fr.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
         
