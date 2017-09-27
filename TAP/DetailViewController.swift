@@ -25,11 +25,15 @@ class DetailViewController: CoreDataViewController, UINavigationControllerDelega
     @IBOutlet weak var orderButton: UIButton!
     @IBOutlet weak var favoritesButton: UIButton!
     
+    // initalize the core data stack
     let stack = (UIApplication.shared.delegate as! AppDelegate).stack
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // set the navigation controller delegate to self
         navigationController?.delegate = self
+        
+        // call the drink text function and the core data function
         setDrinkText()
         checkCoreData()
     }
