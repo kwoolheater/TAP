@@ -72,17 +72,22 @@ class DetailViewController: CoreDataViewController, UINavigationControllerDelega
     }
     
     func checkCoreData() {
+        // this function checks a current drink against core data too see if this drink is favorited or not (in the case that the drink isn't called from the favorites array
         
+        // create a fetch request with sort descriptors
         let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "Drink")
         fr.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
         
+        // try the fetch and save it to the Saved Items array if it suceeds otherwise crash the app
         do {
             SavedItems.sharedInstance().favoritesArray = try stack.context.fetch(fr) as! [Drink]
         } catch {
             fatalError("Could not fetch favorites.")
         }
         
+        // check to see if the drink pass from last view controller is in the favorites array
         for drink in SavedItems.sharedInstance().favoritesArray {
+            // if it is then favorite the drink
             if drink.name == self.drink?.name {
                 isFavorite = true
                 favoritesButton.tintColor = .red
@@ -92,6 +97,7 @@ class DetailViewController: CoreDataViewController, UINavigationControllerDelega
     }
     
     @IBAction func placeOrder(_ sender: Any) {
+        // currently the order function is disabled, present an alert saying ordering isn't available
         let alertController = UIAlertController(title: "Ordering Unavailable!", message: "Ordering will be available in your area soon.", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.destructive, handler: nil))
         present(alertController, animated: true)
