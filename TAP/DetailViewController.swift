@@ -148,6 +148,9 @@ class DetailViewController: CoreDataViewController, UINavigationControllerDelega
     }
     
     func deleteFromCoreData(savedDrink: Drink) {
+        // function that deletes drink information from core data
+        
+        // delete from core data and save context
         stack.context.delete(savedDrink)
         
         do {
@@ -156,6 +159,7 @@ class DetailViewController: CoreDataViewController, UINavigationControllerDelega
             print("Error saving favorite.")
         }
         
+        // remove from favorites array
         if let index = SavedItems.sharedInstance().favoritesArray.index(of: savedDrink) {
             SavedItems.sharedInstance().favoritesArray.remove(at: index)
         }
