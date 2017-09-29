@@ -132,6 +132,9 @@ class DetailViewController: CoreDataViewController, UINavigationControllerDelega
     }
     
     func saveToCoreData() {
+        // function that saves the drink information to core data
+        
+        // create a drink object and try saving it
         let fav = Drink(userName: SavedItems.sharedInstance().userName!, name: (drink?.name)!, price: (price)!, context: stack.context)
         coreDataDrink = fav
         do {
@@ -139,6 +142,8 @@ class DetailViewController: CoreDataViewController, UINavigationControllerDelega
         } catch {
             print("Error saving favorite.")
         }
+        
+        // add drink to the favorites array
         SavedItems.sharedInstance().favoritesArray.append(fav)
     }
     
