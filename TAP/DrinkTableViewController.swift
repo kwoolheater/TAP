@@ -45,10 +45,13 @@ class DrinkTableViewController: UIViewController {
     }
     
     func retrieveData() {
+        // start activity indicator
         self.activityIndicator.hidesWhenStopped = true
         self.activityIndicator.startAnimating()
         
+        // gets all the data from Firebase and puts it into an items array
         _refHandle = ref.observe(DataEventType.value, with: { (snapshot) in
+            // declare variables
             let postDic = snapshot.value as? [String:AnyObject]
             var liquorArray: [String:AnyObject]?
             var drinkName: String?
@@ -57,6 +60,7 @@ class DrinkTableViewController: UIViewController {
             var price3: Double?
             var price4: Double?
             var size: String?
+            
             
             for (key, value) in postDic! {
                 if key == self.type {
