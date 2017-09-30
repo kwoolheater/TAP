@@ -13,29 +13,30 @@ import Firebase
 
 class FavoritesTableViewController: CoreDataViewController {
     
-    //declare variables
+    // declare variables
     let delegate = UIApplication.shared.delegate as! AppDelegate
     let stack = (UIApplication.shared.delegate as! AppDelegate).stack
     var sentDrink: Drink?
     var reloadData: Bool?
     
+    // declare outlets for the table view
     @IBOutlet var tableView: UITableView!
     
     override func viewWillAppear(_ animated: Bool) {
+        // this code was placed in the view will appear function instead of the viewdidload function because the table view needed to reload everytime the view appeared, including when a back button from the navigation bar on the detail view controller was pressed.
         super.viewWillAppear(true)
         populateArray()
         tableView.reloadData()
     }
     
     func populateArray() {
-        // insert if username
+        // function that pulls from core data the favorites array for the specific user that is logged in unless there is no user currently logged in
         if SavedItems.sharedInstance().userName != "No name" {
             let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "Drink")
             fr.sortDescriptors = [NSSortDescriptor(key: "userName", ascending: true)]
             
             do {
                 SavedItems.sharedInstance().favoritesArray = try stack.context.fetch(fr) as! [Drink]
-            
             } catch {
                 fatalError("Could not fetch favorites.")
             }
@@ -49,6 +50,7 @@ class FavoritesTableViewController: CoreDataViewController {
     }
     
     func remove() {
+        // function that removes all favorites from the array that don't have the right correct username
         for items in SavedItems.sharedInstance().favoritesArray {
             if items.userName != SavedItems.sharedInstance().userName {
                 if let index = SavedItems.sharedInstance().favoritesArray.index(of: items) {
@@ -75,6 +77,7 @@ extension FavoritesTableViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // pass the drink info for the selected drink to the next view 
         sentDrink = SavedItems.sharedInstance().favoritesArray[indexPath.row]
         performSegue(withIdentifier: "favoritesSegue", sender: self)
     }

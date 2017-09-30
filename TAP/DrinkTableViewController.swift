@@ -189,6 +189,7 @@ extension DrinkTableViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // send the drink that was selected to the next view controller
         sentDrink = items[indexPath.row]
         performSegue(withIdentifier: "showDetailController", sender: self)
     }
