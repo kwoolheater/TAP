@@ -61,13 +61,14 @@ class DrinkTableViewController: UIViewController {
             var price4: Double?
             var size: String?
             
-            
+            // parsed the data by alcohol type
             for (key, value) in postDic! {
                 if key == self.type {
                     liquorArray = value as? [String : AnyObject]
                 }
             }
             
+            // parse Beer data
             if self.type == "Beer" {
                 for (key, value) in liquorArray! {
                     drinkName = key
@@ -85,6 +86,8 @@ class DrinkTableViewController: UIViewController {
                                                         size = "6 pack"
                                                     }
                                                 }
+                                                
+                                                // add beer data to items array and stop activity indicator
                                                 self.items.append(DownloadedDrink.init(name: drinkName!, price175: price1, price1:price2, price750: price3, otherPrice: price4, otherSize: size))
                                                 DispatchQueue.main.async {
                                                     self.activityIndicator.stopAnimating()
@@ -97,7 +100,7 @@ class DrinkTableViewController: UIViewController {
                         }
                     }
                 }
-                
+            // parse all other alcohol type data
             } else {
                 for (key, value) in liquorArray! {
                     drinkName = key
@@ -116,6 +119,7 @@ class DrinkTableViewController: UIViewController {
                                         size = key as? String
                                     }
                                 }
+                                // add to items array
                                 self.items.append(DownloadedDrink.init(name: drinkName!, price175: price1, price1:price2, price750: price3, otherPrice: price4, otherSize: size))
                                 DispatchQueue.main.async {
                                     self.activityIndicator.stopAnimating()
@@ -126,6 +130,7 @@ class DrinkTableViewController: UIViewController {
                 }
             }
             
+            // reload the table view on the main queue
             DispatchQueue.main.async {
                 self.drinkTable.reloadData()
             }
@@ -133,9 +138,12 @@ class DrinkTableViewController: UIViewController {
     }
     
     func reachabilityChanged(note: Notification) {
+        // function that finds out if there is a network connection
         
+        // create a reachability object
         let reachability = note.object as! Reachability
         
+        // if it isn't reachable present an alert controller
         if reachability.isReachable {
             print("Reachable.")
         } else {
@@ -146,6 +154,7 @@ class DrinkTableViewController: UIViewController {
     }
     
     deinit {
+        // deinitalize all of the observers
         ref.child(type).removeObserver(withHandle: _refHandle)
         reachability.stopNotifier()
         NotificationCenter.default.removeObserver(self, name: ReachabilityChangedNotification, object: reachability)
