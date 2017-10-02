@@ -11,6 +11,7 @@ import UIKit
 
 class LiquorStoreHomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
+    // declare outlets
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
@@ -25,6 +26,7 @@ class LiquorStoreHomeViewController: UIViewController, UICollectionViewDelegate,
         let dimension = (view.frame.size.width - (2 * space)) / 3.0
         let dimensionWidth = (view.frame.size.width + (10 * space)) / 3.0
         
+        // set up flow layout
         flowLayout.minimumInteritemSpacing = space
         flowLayout.minimumLineSpacing = space
         flowLayout.itemSize = CGSize(width: dimensionWidth, height: dimension)
@@ -49,6 +51,7 @@ class LiquorStoreHomeViewController: UIViewController, UICollectionViewDelegate,
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // handle tap events
         print("You selected cell \(indexPath.row)")
+        // send liquor name to next view controller
         liquorName = storeItems[indexPath.row]
         performSegue(withIdentifier: "liquorSegueTwo", sender: self)
     }
