@@ -38,6 +38,7 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        // check for reachbility
         NotificationCenter.default.addObserver(self, selector: #selector(self.reachabilityChanged),name: ReachabilityChangedNotification,object: reachability)
         do{
             try reachability.startNotifier()
@@ -81,43 +82,45 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
         flowLayout.minimumLineSpacing = space
         flowLayout.itemSize = CGSize(width: dimensionWidth, height: dimension)
         
+        // call youtube video to youtube player
         self.YTPlayerView.load(withVideoId: "IGE9qpICfSw")
     }
     
     func signedInStatus(isSignedIn: Bool) {
+        // check if signed in the call this function and set these ui elements
         storeCollectionView.isHidden = !isSignedIn
         YTPlayerView.isHidden = !isSignedIn
         tabBarController?.tabBar.isHidden = !isSignedIn
         label.isHidden = !isSignedIn
         signInButton.isHidden = isSignedIn
         if isSignedIn {
-            // remove background blur (will use when showing image messages)
+            // configure UI and save username
             configureUI()
             SavedItems.sharedInstance().userName = self.displayName
-            print(SavedItems.sharedInstance().userName)
         }
     }
     
     func loginSession() {
+        // call the Firebase authentication view controller so user can login
         let authViewController = FUIAuth.defaultAuthUI()!.authViewController()
         self.present(authViewController, animated: true, completion: nil)
     }
 
     
     @IBAction func logout(_ sender: Any) {
-       
+        // try logging out
         do {
             try Auth.auth().signOut()
         } catch {
             print("unable to sign out: \(error)")
         }
-        
+        // if logout is successful set user to nil than dismiss the view controller
         user = nil
         dismiss(animated: true, completion: nil)
     }
     
     func reachabilityChanged(note: Notification) {
-        
+        // check for changes in reachability
         let reachability = note.object as! Reachability
         
         if reachability.isReachable {
@@ -130,6 +133,7 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
     }
     
     deinit {
+        // deinitalize all observers and notifiers
         if _authHandle != nil {
             Auth.auth().removeStateDidChangeListener(_authHandle)
         }
@@ -154,17 +158,15 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         // handle tap events
         print("You selected cell \(indexPath.row)")
-        
+        // check if liquor is clicked and segue to liquor or straight to table view controller
         if indexPath.row == 2 {
             performSegue(withIdentifier: "liquorSegue", sender: self)
         } else {
             liquorName = storeItems[indexPath.row]
             performSegue(withIdentifier: "storeSegue", sender: self)
         }
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
