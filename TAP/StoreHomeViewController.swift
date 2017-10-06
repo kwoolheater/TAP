@@ -83,7 +83,7 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
         flowLayout.itemSize = CGSize(width: dimensionWidth, height: dimension)
         
         // call youtube video to youtube player
-        self.YTPlayerView.load(withVideoId: "IGE9qpICfSw")
+        self.YTPlayerView.load(withVideoId: "dd5Bde5j-sg")
     }
     
     func signedInStatus(isSignedIn: Bool) {
