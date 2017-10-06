@@ -9,8 +9,26 @@
 import Foundation
 import UIKit
 import CoreData
+import Stripe
 
-class DetailViewController: CoreDataViewController, UINavigationControllerDelegate {
+class DetailViewController: CoreDataViewController, UINavigationControllerDelegate, STPPaymentContextDelegate {
+    
+    func paymentContext(_ paymentContext: STPPaymentContext, didFailToLoadWithError error: Error) {
+        <#code#>
+    }
+    
+    func paymentContextDidChange(_ paymentContext: STPPaymentContext) {
+        <#code#>
+    }
+    
+    func paymentContext(_ paymentContext: STPPaymentContext, didCreatePaymentResult paymentResult: STPPaymentResult, completion: @escaping STPErrorBlock) {
+        <#code#>
+    }
+    
+    func paymentContext(_ paymentContext: STPPaymentContext, didFinishWith status: STPPaymentStatus, error: Error?) {
+        <#code#>
+    }
+    
     
     // declare variables
     let delegate = UIApplication.shared.delegate as! AppDelegate
