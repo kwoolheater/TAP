@@ -13,7 +13,7 @@ import Stripe
 
 class DetailViewController: CoreDataViewController, UINavigationControllerDelegate, STPPaymentContextDelegate {
     
-    // add STPPaymentContext protocol 
+    // add STPPaymentContext protocol
     func paymentContext(_ paymentContext: STPPaymentContext, didFailToLoadWithError error: Error) {
         <#code#>
     }
@@ -117,8 +117,11 @@ class DetailViewController: CoreDataViewController, UINavigationControllerDelega
     
     @IBAction func placeOrder(_ sender: Any) {
         // currently the order function is disabled, present an alert saying ordering isn't available
+        // declare alert controller variable with title Ordering Unavailable
         let alertController = UIAlertController(title: "Ordering Unavailable!", message: "Ordering will be available in your area soon.", preferredStyle: .alert)
+        // create a destructive action for alert controller
         alertController.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.destructive, handler: nil))
+        // present controller
         present(alertController, animated: true)
     }
     
