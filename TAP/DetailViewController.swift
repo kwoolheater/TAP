@@ -13,6 +13,7 @@ import Stripe
 
 class DetailViewController: CoreDataViewController, UINavigationControllerDelegate, STPPaymentContextDelegate {
     
+    // add STPPaymentContext protocol 
     func paymentContext(_ paymentContext: STPPaymentContext, didFailToLoadWithError error: Error) {
         <#code#>
     }
