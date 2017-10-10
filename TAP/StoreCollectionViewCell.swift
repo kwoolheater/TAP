@@ -17,9 +17,9 @@ class StoreCollectionViewCell: UICollectionViewCell {
     // create init message that sets cells UI compenents
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        contentView.layer.cornerRadius = 5
+        contentView.layer.cornerRadius = 1
         contentView.layer.borderColor = UIColor.black.cgColor
-        contentView.layer.borderWidth = 1.5
+        contentView.layer.borderWidth = 1.2
         contentView.layer.shouldRasterize = true
         contentView.layer.rasterizationScale = UIScreen.main.scale
         contentView.clipsToBounds = true

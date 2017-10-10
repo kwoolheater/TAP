@@ -86,17 +86,6 @@
                                             <constraint firstAttribute="bottom" secondItem="GTn-71-Aaq" secondAttribute="bottom" id="nsI-2W-zlk"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="scz-md-alK">
-                                        <rect key="frame" x="161" y="198" width="53" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="Sign In">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="signIn:" destination="YLB-8M-Z2a" eventType="touchUpInside" id="0pA-0K-alZ"/>
-                                        </connections>
-                                    </button>
                                     <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="36z-RU-ou3">
                                         <rect key="frame" x="0.0" y="255" width="375" height="39"/>
                                         <subviews>
@@ -155,9 +144,9 @@
                     </navigationItem>
                     <connections>
                         <outlet property="YTPlayerView" destination="wWk-QB-SHv" id="k0B-6j-Rcc"/>
+                        <outlet property="button" destination="qaa-Dw-YAd" id="bFm-D2-ttO"/>
                         <outlet property="flowLayout" destination="eJ6-KN-7IV" id="Zuo-pz-J7n"/>
                         <outlet property="label" destination="mHm-Hu-eP0" id="5ic-7p-hrR"/>
-                        <outlet property="signInButton" destination="scz-md-alK" id="HvV-mC-DBG"/>
                         <outlet property="storeCollectionView" destination="GTn-71-Aaq" id="cnj-07-Yr3"/>
                         <segue destination="j6K-Fs-VDF" kind="show" identifier="liquorSegue" id="amO-VC-4Zy"/>
                         <segue destination="KN7-dP-kSi" kind="show" identifier="storeSegue" id="sI5-sf-Ki2"/>
@@ -331,10 +320,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="Alcohol" translatesAutoresizingMaskIntoConstraints="NO" id="DrQ-M2-fBH">
-                                <rect key="frame" x="41" y="179" width="292" height="158"/>
+                                <rect key="frame" x="41" y="179" width="292" height="114"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dsk-Q5-NWt">
-                                <rect key="frame" x="112" y="455" width="151" height="35"/>
+                                <rect key="frame" x="112" y="411" width="151" height="35"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <state key="normal" title="Order">
@@ -345,13 +334,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="price" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ckv-9T-h2p">
-                                <rect key="frame" x="41" y="345" width="252" height="86"/>
+                                <rect key="frame" x="41" y="301" width="252" height="86"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="svV-Xh-jRz">
-                                <rect key="frame" x="301" y="345" width="32" height="86"/>
+                                <rect key="frame" x="301" y="301" width="32" height="86"/>
                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="Favorite"/>
                                 <connections>
@@ -435,9 +424,16 @@
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Item" id="T2S-hw-Lmf"/>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Favorites" id="KVy-YJ-YTy"/>
+                    <navigationItem key="navigationItem" title="Favorites" id="KVy-YJ-YTy">
+                        <barButtonItem key="rightBarButtonItem" title="Logout" id="Ur3-G3-HLR">
+                            <connections>
+                                <action selector="buttonAction:" destination="a9E-2O-xNK" id="f0M-Wk-4nL"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="navigationButton" destination="Ur3-G3-HLR" id="I2C-mm-udT"/>
                         <outlet property="tableView" destination="GA4-sI-Dpr" id="eqQ-vh-CpN"/>
                         <segue destination="fG2-q6-ieL" kind="show" identifier="favoritesSegue" id="5OS-Cu-eep"/>
                     </connections>
@@ -489,7 +485,7 @@
         <image name="storeIcon" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="7V4-hA-dCC"/>
+        <segue reference="5OS-Cu-eep"/>
         <segue reference="sI5-sf-Ki2"/>
     </inferredMetricsTieBreakers>
 </document>

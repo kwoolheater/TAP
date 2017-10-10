@@ -137,7 +137,7 @@ class DrinkTableViewController: UIViewController {
         })
     }
     
-    func reachabilityChanged(note: Notification) {
+    @objc func reachabilityChanged(note: Notification) {
         // function that finds out if there is a network connection
         
         // create a reachability object

@@ -8,6 +8,7 @@
 
 import XCTest
 @testable import TAP
+import Firebase
 
 class TAPTests: XCTestCase {
     

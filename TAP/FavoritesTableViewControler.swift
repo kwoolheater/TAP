@@ -21,6 +21,7 @@ class FavoritesTableViewController: CoreDataViewController {
     
     // declare outlets for the table view
     @IBOutlet var tableView: UITableView!
+    @IBOutlet weak var navigationButton: UIBarButtonItem!
     
     override func viewWillAppear(_ animated: Bool) {
         // this code was placed in the view will appear function instead of the viewdidload function because the table view needed to reload everytime the view appeared, including when a back button from the navigation bar on the detail view controller was pressed.
@@ -58,6 +59,9 @@ class FavoritesTableViewController: CoreDataViewController {
                 }
             }
         }
+    }
+    
+    @IBAction func buttonAction(_ sender: Any) {
     }
     
 }

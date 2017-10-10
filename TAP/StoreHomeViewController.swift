@@ -20,7 +20,7 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var YTPlayerView: YTPlayerView!
     @IBOutlet weak var label: UILabel!
-    @IBOutlet weak var signInButton: UIButton!
+    @IBOutlet weak var button: UIBarButtonItem!
     
     // initalize variables
     var storeItems = ["Beer", "Wine", "Liquor", "Extras"]
@@ -36,9 +36,9 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        // TO DO: get users location
         setUpLocation()
-        // configureAuth()
+        configureUI()
+        configureAuth()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -78,9 +78,8 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
         if distance < 4827 {
             print("yes")
         } else {
-            print("no")
+            SavedItems.sharedInstance().inRange = false
         }
-    
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -108,7 +107,6 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
             } else {
                 // user must sign in
                 self.signedInStatus(isSignedIn: false)
-                self.loginSession()
             }
         }
     }
@@ -130,15 +128,11 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
     
     func signedInStatus(isSignedIn: Bool) {
         // check if signed in the call this function and set these ui elements
-        storeCollectionView.isHidden = !isSignedIn
-        YTPlayerView.isHidden = !isSignedIn
-        tabBarController?.tabBar.isHidden = !isSignedIn
-        label.isHidden = !isSignedIn
-        signInButton.isHidden = isSignedIn
+        self.button.title = "Sign In"
         if isSignedIn {
             // configure UI and save username
-            configureUI()
             SavedItems.sharedInstance().userName = self.displayName
+            self.button.title = "Logout"
         }
     }
     
@@ -151,17 +145,21 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
     
     @IBAction func logout(_ sender: Any) {
         // try logging out
-        do {
-            try Auth.auth().signOut()
-        } catch {
-            print("unable to sign out: \(error)")
+        if button.title != "Sign In" {
+            do {
+                try Auth.auth().signOut()
+            } catch {
+                print("unable to sign out: \(error)")
+            }
+            // if logout is successful set user to nil than dismiss the view controller
+            user = nil
+            dismiss(animated: true, completion: nil)
+        } else {
+            loginSession()
         }
-        // if logout is successful set user to nil than dismiss the view controller
-        user = nil
-        dismiss(animated: true, completion: nil)
     }
     
-    func reachabilityChanged(note: Notification) {
+    @objc func reachabilityChanged(note: Notification) {
         // check for changes in reachability
         let reachability = note.object as! Reachability
         
@@ -213,7 +211,7 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "liquorSegue" {
-            _ = segue.destination as! UIViewController
+            _ = segue.destination 
         } else if segue.identifier == "storeSegue" {
             let segue = segue.destination as! DrinkTableViewController
             segue.type = liquorName
