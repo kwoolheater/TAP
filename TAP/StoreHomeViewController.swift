@@ -13,7 +13,7 @@ import FirebaseAuthUI
 import ReachabilitySwift
 import CoreLocation
 
-class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UINavigationControllerDelegate {
+class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UINavigationControllerDelegate, CLLocationManagerDelegate {
     
     // initalize all outlets
     @IBOutlet weak var storeCollectionView: UICollectionView!
@@ -31,12 +31,13 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
     var user: User?
     var displayName = "No name"
     let location = CLLocationManager()
+    var locValue: CLLocationCoordinate2D?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         // TO DO: get users location
-        
+        setUpLocation()
         // configureAuth()
     }
     
@@ -50,7 +51,42 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
         }
     }
     
-    func getLocation() {
+    func setUpLocation() {
+        // ask for user authorization
+        self.location.requestAlwaysAuthorization()
+        
+        // for use in foreground
+        self.location.requestWhenInUseAuthorization()
+        
+        // if yes set delegate
+        if CLLocationManager.locationServicesEnabled() {
+            location.delegate = self
+            location.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            location.startUpdatingLocation()
+        } else {
+            // TO DO: add function that adds navigation label saying that this is a sample store
+        }
+    }
+    
+    func checkLocation() {
+        // check to see if the users location is in deliever range
+        let latitude = locValue?.latitude
+        let longitude = locValue?.longitude
+        let homeLocation = CLLocation(latitude: 34.072, longitude: -84.216)
+        let userLocation = CLLocation(latitude: latitude!, longitude: longitude!)
+        let distance = homeLocation.distance(from: userLocation)
+        if distance < 4827 {
+            print("yes")
+        } else {
+            print("no")
+        }
+    
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        self.locValue = manager.location!.coordinate
+        checkLocation()
+        print("locations = \(locValue?.latitude) \(locValue?.longitude)")
     }
     
     @IBAction func signIn(_ sender: Any) {

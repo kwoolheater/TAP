@@ -2,6 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>TAP would like you use your current location to check if you are in delivery range.</string>
+	<key>NSLocationUsageDescription</key>
+	<string>TAP would like you use your current location to check if you are in delivery range.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>TAP would like you use your current location to check if you are in delivery range.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>TAP would like you use your current location to check if you are in delivery range.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
