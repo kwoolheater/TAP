@@ -2,12 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Drink+CoreDataClass.swift">
-   </FileRef>
-   <FileRef
-      location = "group:Drink+CoreDataProperties.swift">
-   </FileRef>
-   <FileRef
       location = "group:TAP.xcodeproj">
    </FileRef>
    <FileRef

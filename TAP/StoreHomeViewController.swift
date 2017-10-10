@@ -11,6 +11,7 @@ import youtube_ios_player_helper
 import Firebase
 import FirebaseAuthUI
 import ReachabilitySwift
+import CoreLocation
 
 class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UINavigationControllerDelegate {
     
@@ -20,7 +21,6 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
     @IBOutlet weak var YTPlayerView: YTPlayerView!
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var signInButton: UIButton!
-    @IBOutlet weak var backgroundBlur: UIVisualEffectView!
     
     // initalize variables
     var storeItems = ["Beer", "Wine", "Liquor", "Extras"]
@@ -30,11 +30,14 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
     let reachability = Reachability()!
     var user: User?
     var displayName = "No name"
+    let location = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        configureAuth()
+        // TO DO: get users location
+        
+        // configureAuth()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,6 +48,9 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
         }catch{
             print("could not start reachability notifier")
         }
+    }
+    
+    func getLocation() {
     }
     
     @IBAction func signIn(_ sender: Any) {
