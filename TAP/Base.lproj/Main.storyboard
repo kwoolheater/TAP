@@ -433,7 +433,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="navigationButton" destination="Ur3-G3-HLR" id="I2C-mm-udT"/>
+                        <outlet property="button" destination="Ur3-G3-HLR" id="Scd-WD-YfE"/>
                         <outlet property="tableView" destination="GA4-sI-Dpr" id="eqQ-vh-CpN"/>
                         <segue destination="fG2-q6-ieL" kind="show" identifier="favoritesSegue" id="5OS-Cu-eep"/>
                     </connections>

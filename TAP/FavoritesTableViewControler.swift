@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import CoreData
 import Firebase
+import FirebaseAuthUI
 
 class FavoritesTableViewController: CoreDataViewController {
     
@@ -18,10 +19,18 @@ class FavoritesTableViewController: CoreDataViewController {
     let stack = (UIApplication.shared.delegate as! AppDelegate).stack
     var sentDrink: Drink?
     var reloadData: Bool?
+    fileprivate var _authHandle: AuthStateDidChangeListenerHandle!
+    var user: User?
+    var displayName = "No name"
     
     // declare outlets for the table view
     @IBOutlet var tableView: UITableView!
-    @IBOutlet weak var navigationButton: UIBarButtonItem!
+    @IBOutlet weak var button: UIBarButtonItem!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureAuth()
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         // this code was placed in the view will appear function instead of the viewdidload function because the table view needed to reload everytime the view appeared, including when a back button from the navigation bar on the detail view controller was pressed.
@@ -62,8 +71,61 @@ class FavoritesTableViewController: CoreDataViewController {
     }
     
     @IBAction func buttonAction(_ sender: Any) {
+        if button.title != "Sign In" {
+            do {
+                try Auth.auth().signOut()
+            } catch {
+                print("unable to sign out: \(error)")
+            }
+            // if logout is successful set user to nil than dismiss the view controller
+            user = nil
+            dismiss(animated: true, completion: nil)
+        } else {
+            loginSession()
+        }
     }
     
+    func signedInStatus(isSignedIn: Bool) {
+        // check if signed in the call this function and set these ui elements
+        self.button.title = "Sign In"
+        if isSignedIn {
+            // configure UI and save username
+            SavedItems.sharedInstance().userName = self.displayName
+            self.button.title = "Logout"
+        }
+    }
+    
+    func configureAuth() {
+        // listen for changes in the authorization state
+        _authHandle = Auth.auth().addStateDidChangeListener { (auth: Auth, user: User?) in
+            // check if there is a current user
+            if let activeUser = user {
+                // check if the current app user is the current FIRUser
+                if self.user != activeUser {
+                    self.user = activeUser
+                    let name = user!.email!.components(separatedBy: "@")[0]
+                    self.displayName = name
+                    self.signedInStatus(isSignedIn: true)
+                }
+            } else {
+                // user must sign in
+                self.signedInStatus(isSignedIn: false)
+            }
+        }
+    }
+    
+    func loginSession() {
+        // call the Firebase authentication view controller so user can login
+        let authViewController = FUIAuth.defaultAuthUI()!.authViewController()
+        self.present(authViewController, animated: true, completion: nil)
+    }
+    
+    deinit {
+        // deinitalize all observers and notifiers
+        if _authHandle != nil {
+            Auth.auth().removeStateDidChangeListener(_authHandle)
+        }
+    }
 }
 
 extension FavoritesTableViewController: UITableViewDelegate, UITableViewDataSource {

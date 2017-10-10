@@ -88,10 +88,6 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
         print("locations = \(locValue?.latitude) \(locValue?.longitude)")
     }
     
-    @IBAction func signIn(_ sender: Any) {
-        self.loginSession()
-    }
-    
     func configureAuth() {
         // listen for changes in the authorization state
         _authHandle = Auth.auth().addStateDidChangeListener { (auth: Auth, user: User?) in
