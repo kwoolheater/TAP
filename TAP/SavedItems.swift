@@ -12,6 +12,7 @@ class SavedItems: NSObject {
     // initailized the drink array
     var favoritesArray = [Drink]()
     var userName: String?
+    var isLoggedIn: Bool?
     
     // create a shared instance
     class func sharedInstance() -> SavedItems {

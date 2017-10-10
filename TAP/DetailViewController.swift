@@ -11,10 +11,10 @@ import UIKit
 import CoreData
 import Stripe
 
-class DetailViewController: CoreDataViewController, UINavigationControllerDelegate, STPPaymentContextDelegate {
+class DetailViewController: CoreDataViewController, UINavigationControllerDelegate {
     
     // add STPPaymentContext protocol
-    func paymentContext(_ paymentContext: STPPaymentContext, didFailToLoadWithError error: Error) {
+    /*func paymentContext(_ paymentContext: STPPaymentContext, didFailToLoadWithError error: Error) {
         <#code#>
     }
     
@@ -28,8 +28,7 @@ class DetailViewController: CoreDataViewController, UINavigationControllerDelega
     
     func paymentContext(_ paymentContext: STPPaymentContext, didFinishWith status: STPPaymentStatus, error: Error?) {
         <#code#>
-    }
-    
+    }*/
     
     // declare variables
     let delegate = UIApplication.shared.delegate as! AppDelegate
