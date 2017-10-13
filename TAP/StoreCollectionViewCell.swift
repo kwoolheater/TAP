@@ -12,7 +12,6 @@ class StoreCollectionViewCell: UICollectionViewCell {
     
     // declare outlates for collection view cell
     @IBOutlet weak var label: UILabel!
-    @IBOutlet weak var picture: UIImageView!
     
     // create init message that sets cells UI compenents
     required init?(coder aDecoder: NSCoder) {

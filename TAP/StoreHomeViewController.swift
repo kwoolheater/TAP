@@ -21,6 +21,7 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
     @IBOutlet weak var YTPlayerView: YTPlayerView!
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var button: UIBarButtonItem!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     // initalize variables
     var storeItems = ["Beer", "Wine", "Liquor", "Extras"]
@@ -187,7 +188,7 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
         let cell = storeCollectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! StoreCollectionViewCell
         
         cell.label.text = storeItems[indexPath.row]
-        cell.picture.image = storePictures[indexPath.row]
+//        cell.picture.image = storePictures[indexPath.row]
         
         return cell
     

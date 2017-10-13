@@ -42,7 +42,7 @@ class LiquorStoreHomeViewController: UIViewController, UICollectionViewDelegate,
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! StoreCollectionViewCell
         
         cell.label.text = storeItems[indexPath.row]
-        cell.picture.image = storePictures[indexPath.row]
+//        cell.picture.image = storePictures[indexPath.row]
         
         return cell
         
