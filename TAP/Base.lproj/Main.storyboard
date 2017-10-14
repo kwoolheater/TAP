@@ -22,9 +22,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="8Vw-VO-8Qv">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="8Vw-VO-8Qv">
                                 <rect key="frame" x="0.0" y="64" width="375" height="278"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="YZE-3n-YBo">
                                     <size key="itemSize" width="168" height="125"/>
@@ -64,13 +63,22 @@
                                     <outlet property="delegate" destination="2UU-gi-npk" id="ZP4-4C-aF9"/>
                                 </connections>
                             </collectionView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kTV-Tq-pNm" customClass="YTPlayerView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kTV-Tq-pNm" customClass="YTPlayerView">
                                 <rect key="frame" x="0.0" y="350" width="375" height="260"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="gYz-5y-gzI" firstAttribute="top" secondItem="kTV-Tq-pNm" secondAttribute="bottom" constant="8" id="6Lo-wz-Xx3"/>
+                            <constraint firstAttribute="trailing" secondItem="kTV-Tq-pNm" secondAttribute="trailing" id="8e3-Tw-yLw"/>
+                            <constraint firstItem="8Vw-VO-8Qv" firstAttribute="centerX" secondItem="phg-Ax-NQk" secondAttribute="centerX" id="dTs-Qq-t48"/>
+                            <constraint firstItem="8Vw-VO-8Qv" firstAttribute="top" secondItem="YaY-Ei-FaS" secondAttribute="bottom" id="j27-hk-Iby"/>
+                            <constraint firstItem="kTV-Tq-pNm" firstAttribute="leading" secondItem="phg-Ax-NQk" secondAttribute="leading" id="kpz-Ao-eSY"/>
+                            <constraint firstItem="kTV-Tq-pNm" firstAttribute="top" secondItem="8Vw-VO-8Qv" secondAttribute="bottom" constant="8" id="p3B-wy-PeD"/>
+                            <constraint firstItem="8Vw-VO-8Qv" firstAttribute="centerY" secondItem="phg-Ax-NQk" secondAttribute="centerY" constant="-130.5" id="q4Z-ue-g8s"/>
+                            <constraint firstItem="8Vw-VO-8Qv" firstAttribute="leading" secondItem="phg-Ax-NQk" secondAttribute="leading" id="sCM-Db-npL"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="BCP-xz-EXw">
                         <barButtonItem key="rightBarButtonItem" title="Logout" id="bmv-6f-X0C">
