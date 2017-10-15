@@ -22,8 +22,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="8Vw-VO-8Qv">
-                                <rect key="frame" x="0.0" y="64" width="375" height="278"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kTV-Tq-pNm" customClass="YTPlayerView">
+                                <rect key="frame" x="0.0" y="350" width="375" height="260"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="8Vw-VO-8Qv">
+                                <rect key="frame" x="0.0" y="72" width="375" height="278"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="YZE-3n-YBo">
                                     <size key="itemSize" width="168" height="125"/>
@@ -54,31 +60,17 @@
                                             <constraint firstAttribute="bottomMargin" secondItem="r6h-E7-FnG" secondAttribute="bottom" constant="25" id="xU6-Lh-Y7b"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="label" destination="r6h-E7-FnG" id="eYe-6O-GZV"/>
+                                            <outlet property="label" destination="r6h-E7-FnG" id="ZHG-bD-mbh"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
                                     <outlet property="dataSource" destination="2UU-gi-npk" id="onr-iV-sCI"/>
-                                    <outlet property="delegate" destination="2UU-gi-npk" id="ZP4-4C-aF9"/>
+                                    <outlet property="delegate" destination="2UU-gi-npk" id="HaK-0c-XKE"/>
                                 </connections>
                             </collectionView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kTV-Tq-pNm" customClass="YTPlayerView">
-                                <rect key="frame" x="0.0" y="350" width="375" height="260"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="gYz-5y-gzI" firstAttribute="top" secondItem="kTV-Tq-pNm" secondAttribute="bottom" constant="8" id="6Lo-wz-Xx3"/>
-                            <constraint firstAttribute="trailing" secondItem="kTV-Tq-pNm" secondAttribute="trailing" id="8e3-Tw-yLw"/>
-                            <constraint firstItem="8Vw-VO-8Qv" firstAttribute="centerX" secondItem="phg-Ax-NQk" secondAttribute="centerX" id="dTs-Qq-t48"/>
-                            <constraint firstItem="8Vw-VO-8Qv" firstAttribute="top" secondItem="YaY-Ei-FaS" secondAttribute="bottom" id="j27-hk-Iby"/>
-                            <constraint firstItem="kTV-Tq-pNm" firstAttribute="leading" secondItem="phg-Ax-NQk" secondAttribute="leading" id="kpz-Ao-eSY"/>
-                            <constraint firstItem="kTV-Tq-pNm" firstAttribute="top" secondItem="8Vw-VO-8Qv" secondAttribute="bottom" constant="8" id="p3B-wy-PeD"/>
-                            <constraint firstItem="8Vw-VO-8Qv" firstAttribute="centerY" secondItem="phg-Ax-NQk" secondAttribute="centerY" constant="-130.5" id="q4Z-ue-g8s"/>
-                            <constraint firstItem="8Vw-VO-8Qv" firstAttribute="leading" secondItem="phg-Ax-NQk" secondAttribute="leading" id="sCM-Db-npL"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="BCP-xz-EXw">
                         <barButtonItem key="rightBarButtonItem" title="Logout" id="bmv-6f-X0C">
@@ -90,9 +82,9 @@
                     <connections>
                         <outlet property="YTPlayerView" destination="kTV-Tq-pNm" id="lrf-Cp-xHP"/>
                         <outlet property="button" destination="bmv-6f-X0C" id="HD3-R5-aAf"/>
-                        <outlet property="flowLayout" destination="YZE-3n-YBo" id="vnj-zh-WtF"/>
+                        <outlet property="flowLayout" destination="YZE-3n-YBo" id="Xfh-Kp-WnK"/>
                         <outlet property="storeCollectionView" destination="8Vw-VO-8Qv" id="QzL-JV-vhl"/>
-                        <segue destination="j6K-Fs-VDF" kind="show" id="CQa-aZ-lMV"/>
+                        <segue destination="j6K-Fs-VDF" kind="show" identifier="liquorSegue" id="CQa-aZ-lMV"/>
                         <segue destination="KN7-dP-kSi" kind="show" identifier="storeSegue" id="IUA-nq-eZu"/>
                     </connections>
                 </viewController>
@@ -130,7 +122,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="KbY-53-X4y">
-                                <rect key="frame" x="16" y="64" width="343" height="603"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ZUz-kg-fa2">
@@ -147,9 +139,6 @@
                                             <rect key="frame" x="0.0" y="0.0" width="121" height="110"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wAz-Zb-als">
-                                                    <rect key="frame" x="0.0" y="0.0" width="121" height="83"/>
-                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GYk-lj-I0w">
                                                     <rect key="frame" x="0.0" y="82" width="121" height="28"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -162,15 +151,10 @@
                                             <constraint firstItem="GYk-lj-I0w" firstAttribute="top" secondItem="9TJ-oU-lHw" secondAttribute="top" constant="82" id="4f8-Ow-Tjh"/>
                                             <constraint firstItem="GYk-lj-I0w" firstAttribute="leading" secondItem="9TJ-oU-lHw" secondAttribute="leading" id="CSG-AJ-ziS"/>
                                             <constraint firstAttribute="trailing" secondItem="GYk-lj-I0w" secondAttribute="trailing" id="ETE-eQ-2RV"/>
-                                            <constraint firstAttribute="bottom" secondItem="wAz-Zb-als" secondAttribute="bottom" constant="27" id="LY1-Vh-Gzs"/>
                                             <constraint firstAttribute="bottom" secondItem="GYk-lj-I0w" secondAttribute="bottom" id="SkP-ym-rCY"/>
-                                            <constraint firstAttribute="trailing" secondItem="wAz-Zb-als" secondAttribute="trailing" id="UIg-0B-2yk"/>
-                                            <constraint firstItem="wAz-Zb-als" firstAttribute="top" secondItem="9TJ-oU-lHw" secondAttribute="top" id="a1g-3e-llO"/>
-                                            <constraint firstItem="wAz-Zb-als" firstAttribute="leading" secondItem="9TJ-oU-lHw" secondAttribute="leading" id="hxi-KU-qiD"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="label" destination="GYk-lj-I0w" id="ldF-kS-YTF"/>
-                                            <outlet property="picture" destination="wAz-Zb-als" id="uGd-kB-QzG"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -190,7 +174,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7K6-25-94Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1398" y="-212"/>
+            <point key="canvasLocation" x="1397.5999999999999" y="-212.74362818590706"/>
         </scene>
         <!--Drink Table View Controller-->
         <scene sceneID="6hB-Nm-cf0">
@@ -430,6 +414,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="5OS-Cu-eep"/>
-        <segue reference="IUA-nq-eZu"/>
+        <segue reference="UUd-br-HNh"/>
     </inferredMetricsTieBreakers>
 </document>

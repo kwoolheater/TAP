@@ -21,7 +21,6 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
     @IBOutlet weak var YTPlayerView: YTPlayerView!
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var button: UIBarButtonItem!
-    @IBOutlet weak var scrollView: UIScrollView!
     
     // initalize variables
     var storeItems = ["Beer", "Wine", "Liquor", "Extras"]
@@ -138,7 +137,6 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
         let authViewController = FUIAuth.defaultAuthUI()!.authViewController()
         self.present(authViewController, animated: true, completion: nil)
     }
-
     
     @IBAction func logout(_ sender: Any) {
         // try logging out
@@ -214,6 +212,4 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
             segue.type = liquorName
         }
     }
-    
 }
-
