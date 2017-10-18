@@ -22,14 +22,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kTV-Tq-pNm" customClass="YTPlayerView">
-                                <rect key="frame" x="0.0" y="350" width="375" height="260"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="8Vw-VO-8Qv">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="8Vw-VO-8Qv">
                                 <rect key="frame" x="0.0" y="72" width="375" height="278"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="YZE-3n-YBo">
                                     <size key="itemSize" width="168" height="125"/>
@@ -69,8 +63,18 @@
                                     <outlet property="delegate" destination="2UU-gi-npk" id="HaK-0c-XKE"/>
                                 </connections>
                             </collectionView>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kTV-Tq-pNm" customClass="YTPlayerView">
+                                <rect key="frame" x="0.0" y="350" width="375" height="260"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="8Vw-VO-8Qv" secondAttribute="trailing" id="BLv-0a-vyr"/>
+                            <constraint firstItem="8Vw-VO-8Qv" firstAttribute="leading" secondItem="phg-Ax-NQk" secondAttribute="leading" id="PFj-sT-hwh"/>
+                            <constraint firstItem="8Vw-VO-8Qv" firstAttribute="top" secondItem="YaY-Ei-FaS" secondAttribute="bottom" constant="8" id="VMV-mR-EJg"/>
+                            <constraint firstItem="kTV-Tq-pNm" firstAttribute="top" secondItem="8Vw-VO-8Qv" secondAttribute="bottom" id="k18-a9-v8W"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="BCP-xz-EXw">
                         <barButtonItem key="rightBarButtonItem" title="Logout" id="bmv-6f-X0C">
@@ -414,6 +418,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="5OS-Cu-eep"/>
-        <segue reference="UUd-br-HNh"/>
+        <segue reference="IUA-nq-eZu"/>
     </inferredMetricsTieBreakers>
 </document>
