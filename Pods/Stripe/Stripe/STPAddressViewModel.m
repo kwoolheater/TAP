@@ -8,7 +8,7 @@
 
 #import "STPAddressViewModel.h"
 
-#import "NSArray+Stripe_BoundSafe.h"
+#import "NSArray+Stripe.h"
 #import "STPDispatchFunctions.h"
 #import "STPPostalCodeValidator.h"
 
@@ -16,12 +16,12 @@
 #import <CoreLocation/CoreLocation.h>
 
 @interface STPAddressViewModel()<STPAddressFieldTableViewCellDelegate>
-@property(nonatomic)BOOL isBillingAddress;
-@property(nonatomic)STPBillingAddressFields requiredBillingAddressFields;
-@property(nonatomic)PKAddressField requiredShippingAddressFields;
-@property(nonatomic)NSArray<STPAddressFieldTableViewCell *> *addressCells;
-@property(nonatomic)BOOL showingPostalCodeCell;
-@property(nonatomic)BOOL geocodeInProgress;
+@property (nonatomic) BOOL isBillingAddress;
+@property (nonatomic) STPBillingAddressFields requiredBillingAddressFields;
+@property (nonatomic) PKAddressField requiredShippingAddressFields;
+@property (nonatomic) NSArray<STPAddressFieldTableViewCell *> *addressCells;
+@property (nonatomic) BOOL showingPostalCodeCell;
+@property (nonatomic) BOOL geocodeInProgress;
 @end
 
 @implementation STPAddressViewModel

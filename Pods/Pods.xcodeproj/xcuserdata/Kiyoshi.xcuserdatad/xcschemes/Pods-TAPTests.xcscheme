@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4904C01902AD146703891B4F41D42B55"
+               BlueprintIdentifier = "3DC20A50F7B664B895403DDED704AEFA"
                BuildableName = "Pods_TAPTests.framework"
                BlueprintName = "Pods-TAPTests"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -26,6 +26,7 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
@@ -36,6 +37,7 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      language = ""
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -45,7 +47,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4904C01902AD146703891B4F41D42B55"
+            BlueprintIdentifier = "3DC20A50F7B664B895403DDED704AEFA"
             BuildableName = "Pods_TAPTests.framework"
             BlueprintName = "Pods-TAPTests"
             ReferencedContainer = "container:Pods.xcodeproj">

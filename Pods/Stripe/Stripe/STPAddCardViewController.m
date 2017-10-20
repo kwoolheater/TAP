@@ -8,7 +8,7 @@
 
 #import "STPAddCardViewController.h"
 
-#import "NSArray+Stripe_BoundSafe.h"
+#import "NSArray+Stripe.h"
 #import "STPAddressFieldTableViewCell.h"
 #import "STPAddressViewModel.h"
 #import "STPAnalyticsClient.h"
@@ -46,22 +46,22 @@
     UITableViewDelegate,
     UITableViewDataSource>
 
-@property(nonatomic)STPPaymentConfiguration *configuration;
-@property(nonatomic)STPAddress *shippingAddress;
-@property(nonatomic)BOOL hasUsedShippingAddress;
-@property(nonatomic)STPAPIClient *apiClient;
-@property(nonatomic, weak)UIImageView *cardImageView;
-@property(nonatomic)UIBarButtonItem *doneItem;
-@property(nonatomic)STPSectionHeaderView *cardHeaderView;
-@property(nonatomic)STPCardIOProxy *cardIOProxy;
-@property(nonatomic)STPSectionHeaderView *addressHeaderView;
-@property(nonatomic)STPPaymentCardTextFieldCell *paymentCell;
-@property(nonatomic)BOOL loading;
-@property(nonatomic)STPPaymentActivityIndicatorView *activityIndicator;
-@property(nonatomic, weak)STPPaymentActivityIndicatorView *lookupActivityIndicator;
-@property(nonatomic)STPAddressViewModel *addressViewModel;
-@property(nonatomic)UIToolbar *inputAccessoryToolbar;
-@property(nonatomic)BOOL lookupSucceeded;
+@property (nonatomic) STPPaymentConfiguration *configuration;
+@property (nonatomic) STPAddress *shippingAddress;
+@property (nonatomic) BOOL hasUsedShippingAddress;
+@property (nonatomic) STPAPIClient *apiClient;
+@property (nonatomic, weak) UIImageView *cardImageView;
+@property (nonatomic) UIBarButtonItem *doneItem;
+@property (nonatomic) STPSectionHeaderView *cardHeaderView;
+@property (nonatomic) STPCardIOProxy *cardIOProxy;
+@property (nonatomic) STPSectionHeaderView *addressHeaderView;
+@property (nonatomic) STPPaymentCardTextFieldCell *paymentCell;
+@property (nonatomic) BOOL loading;
+@property (nonatomic) STPPaymentActivityIndicatorView *activityIndicator;
+@property (nonatomic, weak) STPPaymentActivityIndicatorView *lookupActivityIndicator;
+@property (nonatomic) STPAddressViewModel *addressViewModel;
+@property (nonatomic) UIToolbar *inputAccessoryToolbar;
+@property (nonatomic) BOOL lookupSucceeded;
 @end
 
 static NSString *const STPPaymentCardCellReuseIdentifier = @"STPPaymentCardCellReuseIdentifier";
@@ -250,7 +250,7 @@ typedef NS_ENUM(NSUInteger, STPPaymentCardSection) {
     return nil;
 }
 
-- (void)handleBackOrCancelTapped:(__unused id)sender {
+- (void)handleCancelTapped:(__unused id)sender {
     [self.delegate addCardViewControllerDidCancel:self];
 }
 

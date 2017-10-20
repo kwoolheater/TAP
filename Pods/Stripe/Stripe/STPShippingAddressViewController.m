@@ -8,7 +8,7 @@
 
 #import "STPShippingAddressViewController.h"
 
-#import "NSArray+Stripe_BoundSafe.h"
+#import "NSArray+Stripe.h"
 #import "STPAddress.h"
 #import "STPAddressViewModel.h"
 #import "STPColorUtils.h"
@@ -28,17 +28,17 @@
 #import "UIViewController+Stripe_ParentViewController.h"
 
 @interface STPShippingAddressViewController ()<STPAddressViewModelDelegate, UITableViewDelegate, UITableViewDataSource, STPShippingMethodsViewControllerDelegate>
-@property(nonatomic)STPPaymentConfiguration *configuration;
-@property(nonatomic)NSString *currency;
-@property(nonatomic)PKShippingMethod *selectedShippingMethod;
-@property(nonatomic, weak)UIImageView *imageView;
-@property(nonatomic)UIBarButtonItem *nextItem;
-@property(nonatomic)BOOL loading;
-@property(nonatomic)STPPaymentActivityIndicatorView *activityIndicator;
-@property(nonatomic)STPAddressViewModel *addressViewModel;
-@property(nonatomic)STPAddress *billingAddress;
-@property(nonatomic)BOOL hasUsedBillingAddress;
-@property(nonatomic)STPSectionHeaderView *addressHeaderView;
+@property (nonatomic) STPPaymentConfiguration *configuration;
+@property (nonatomic) NSString *currency;
+@property (nonatomic) PKShippingMethod *selectedShippingMethod;
+@property (nonatomic, weak) UIImageView *imageView;
+@property (nonatomic) UIBarButtonItem *nextItem;
+@property (nonatomic) BOOL loading;
+@property (nonatomic) STPPaymentActivityIndicatorView *activityIndicator;
+@property (nonatomic) STPAddressViewModel *addressViewModel;
+@property (nonatomic) STPAddress *billingAddress;
+@property (nonatomic) BOOL hasUsedBillingAddress;
+@property (nonatomic) STPSectionHeaderView *addressHeaderView;
 @end
 
 @implementation STPShippingAddressViewController
@@ -204,7 +204,7 @@
     }
 }
 
-- (void)handleBackOrCancelTapped:(__unused id)sender {
+- (void)handleCancelTapped:(__unused id)sender {
     [self.delegate shippingAddressViewControllerDidCancel:self];
 }
 

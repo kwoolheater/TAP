@@ -9,6 +9,7 @@
 #import "STPSourceParams.h"
 #import "STPSourceParams+Private.h"
 
+#import "NSBundle+Stripe_AppName.h"
 #import "STPCardParams.h"
 #import "STPFormEncoder.h"
 #import "STPSource+Private.h"
@@ -196,7 +197,7 @@
 
     NSMutableDictionary<NSString *,NSString *> *address = [NSMutableDictionary new];
     address[@"city"] = city;
-    address[@"postal_code"] = postalCode,
+    address[@"postal_code"] = postalCode;
     address[@"country"] = country;
     address[@"line1"] = addressLine1;
 
@@ -255,6 +256,36 @@
     params.type = STPSourceTypeAlipay;
     params.amount = @(amount);
     params.currency = currency;
+    params.redirect = @{ @"return_url": returnURL };
+
+    NSString *bundleID = [[NSBundle mainBundle] bundleIdentifier];
+    NSString *versionKey = [NSBundle stp_applicationVersion];
+    if (bundleID && versionKey) {
+        params.additionalAPIParameters = @{
+                                           @"alipay": @{
+                                                   @"app_bundle_id": bundleID,
+                                                   @"app_version_key": versionKey,
+                                                   },
+                                           };
+    }
+    return params;
+}
+
++ (STPSourceParams *)p24ParamsWithAmount:(NSUInteger)amount
+                                currency:(NSString *)currency
+                                   email:(NSString *)email
+                                    name:(nullable NSString *)name
+                               returnURL:(NSString *)returnURL {
+    STPSourceParams *params = [self new];
+    params.type = STPSourceTypeP24;
+    params.amount = @(amount);
+    params.currency = currency;
+
+    NSMutableDictionary *ownerDict = @{ @"email" : email }.mutableCopy;
+    if (name) {
+        ownerDict[@"name"] = name;
+    }
+    params.owner = ownerDict.copy;
     params.redirect = @{ @"return_url": returnURL };
     return params;
 }

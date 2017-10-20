@@ -8,7 +8,7 @@
 
 #import "STPPaymentMethodsInternalViewController.h"
 
-#import "NSArray+Stripe_BoundSafe.h"
+#import "NSArray+Stripe.h"
 #import "STPAddCardViewController.h"
 #import "STPAddCardViewController+Private.h"
 #import "STPCoreTableViewController.h"
@@ -168,7 +168,7 @@ static NSInteger const PaymentMethodSectionAddCard = 1;
 
 #pragma mark - Button Handlers
 
-- (void)handleBackOrCancelTapped:(__unused id)sender {
+- (void)handleCancelTapped:(__unused id)sender {
     [self.delegate internalViewControllerDidCancel];
 }
 

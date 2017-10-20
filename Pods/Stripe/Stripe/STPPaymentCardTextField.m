@@ -23,38 +23,38 @@
 
 @interface STPPaymentCardTextField()<STPFormTextFieldDelegate>
 
-@property(nonatomic, readwrite, weak) UIImageView *brandImageView;
-@property(nonatomic, readwrite, weak) UIView *fieldsView;
-@property(nonatomic, readwrite, weak) STPFormTextField *numberField;
-@property(nonatomic, readwrite, weak) STPFormTextField *expirationField;
-@property(nonatomic, readwrite, weak) STPFormTextField *cvcField;
-@property(nonatomic, readwrite, weak) STPFormTextField *postalCodeField;
-@property(nonatomic, readwrite, strong) STPPaymentCardTextFieldViewModel *viewModel;
-@property(nonatomic, readwrite, strong) STPCardParams *internalCardParams;
-@property(nonatomic, strong) NSArray<STPFormTextField *> *allFields;
-@property(nonatomic, readwrite, strong) STPFormTextField *sizingField;
-@property(nonatomic, readwrite, strong) UILabel *sizingLabel;
+@property (nonatomic, readwrite, weak) UIImageView *brandImageView;
+@property (nonatomic, readwrite, weak) UIView *fieldsView;
+@property (nonatomic, readwrite, weak) STPFormTextField *numberField;
+@property (nonatomic, readwrite, weak) STPFormTextField *expirationField;
+@property (nonatomic, readwrite, weak) STPFormTextField *cvcField;
+@property (nonatomic, readwrite, weak) STPFormTextField *postalCodeField;
+@property (nonatomic, readwrite, strong) STPPaymentCardTextFieldViewModel *viewModel;
+@property (nonatomic, readwrite, strong) STPCardParams *internalCardParams;
+@property (nonatomic, strong) NSArray<STPFormTextField *> *allFields;
+@property (nonatomic, readwrite, strong) STPFormTextField *sizingField;
+@property (nonatomic, readwrite, strong) UILabel *sizingLabel;
 
 /*
  These track the input parameters to the brand image setter so that we can
  later perform proper transition animations when new values are set
  */
-@property(nonatomic, assign) STPCardFieldType currentBrandImageFieldType;
-@property(nonatomic, assign) STPCardBrand currentBrandImageBrand;
+@property (nonatomic, assign) STPCardFieldType currentBrandImageFieldType;
+@property (nonatomic, assign) STPCardBrand currentBrandImageBrand;
 
 /**
  This is a number-wrapped STPCardFieldType (or nil) that layout uses
  to determine how it should move/animate its subviews so that the chosen
  text field is fully visible.
  */
-@property(nonatomic, copy) NSNumber *focusedTextFieldForLayout;
+@property (nonatomic, copy) NSNumber *focusedTextFieldForLayout;
 
 /*
  Creating and measuring the size of attributed strings is expensive so
  cache the values here.
  */
-@property(nonatomic, strong) NSMutableDictionary<NSString *, NSNumber *> *textToWidthCache;
-@property(nonatomic, strong) NSMutableDictionary<NSString *, NSNumber *> *numberToWidthCache;
+@property (nonatomic, strong) NSMutableDictionary<NSString *, NSNumber *> *textToWidthCache;
+@property (nonatomic, strong) NSMutableDictionary<NSString *, NSNumber *> *numberToWidthCache;
 
 /**
  These bits lets us track beginEditing and endEditing for payment text field
@@ -73,9 +73,9 @@
  pair (shouldBegin/didBegin or shouldEnd/didEnd) then we are transitioning
  into/out of our subviews from/to outside of ourselves
  */
-@property(nonatomic, assign) BOOL isMidSubviewEditingTransitionInternal;
-@property(nonatomic, assign) BOOL receivedUnmatchedShouldBeginEditing;
-@property(nonatomic, assign) BOOL receivedUnmatchedShouldEndEditing;
+@property (nonatomic, assign) BOOL isMidSubviewEditingTransitionInternal;
+@property (nonatomic, assign) BOOL receivedUnmatchedShouldBeginEditing;
+@property (nonatomic, assign) BOOL receivedUnmatchedShouldEndEditing;
 
 @end
 
@@ -608,7 +608,7 @@ CGFloat const STPPaymentCardTextFieldMinimumPadding = 10;
     if (self.postalCodeEntryEnabled) {
         // We don't clobber any manually set address zip code that was on our params
         // if we are not showing the postal code entry field.
-        self.internalCardParams.addressZip = self.postalCode;
+        self.internalCardParams.address.postalCode = self.postalCode;
     }
     return self.internalCardParams;
 }
@@ -644,7 +644,7 @@ CGFloat const STPPaymentCardTextFieldMinimumPadding = 10;
     }
     [self setText:cardParams.cvc inField:STPCardFieldTypeCVC];
 
-    [self setText:cardParams.addressZip inField:STPCardFieldTypePostalCode];
+    [self setText:cardParams.address.postalCode inField:STPCardFieldTypePostalCode];
 
     if ([self isFirstResponder]) {
         STPCardFieldType fieldType = originalSubResponder.tag;
@@ -881,7 +881,7 @@ typedef NS_ENUM(NSInteger, STPCardTextFieldState) {
     __block STPCardTextFieldState cvcVisibility = STPCardTextFieldStateVisible;
     __block STPCardTextFieldState postalVisibility = self.postalCodeEntryEnabled ? STPCardTextFieldStateVisible : STPCardTextFieldStateHidden;
 
-    CGFloat (^calculateMinimumPaddingWithLocalVars)() = ^CGFloat() {
+    CGFloat (^calculateMinimumPaddingWithLocalVars)(void) = ^CGFloat() {
         return [self minimumPaddingForViewsWithWidth:availableFieldsWidth
                                                  pan:panVisibility
                                               expiry:expiryVisibility
@@ -1149,7 +1149,7 @@ typedef void (^STPLayoutAnimationCompletionBlock)(BOOL completed);
 
     self.focusedTextFieldForLayout = fieldtoFocus;
 
-    void (^animations)() = ^void() {
+    void (^animations)(void) = ^void() {
         [self recalculateSubviewLayout];
     };
 
