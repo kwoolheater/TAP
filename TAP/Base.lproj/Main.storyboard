@@ -147,9 +147,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="KbY-53-X4y">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="KbY-53-X4y">
+                                <rect key="frame" x="0.0" y="64" width="414" height="623"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ZUz-kg-fa2">
                                     <size key="itemSize" width="121" height="110"/>
@@ -191,6 +190,12 @@
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Pdc-mM-jyr" firstAttribute="top" secondItem="KbY-53-X4y" secondAttribute="bottom" id="4s0-Gg-DQt"/>
+                            <constraint firstAttribute="trailing" secondItem="KbY-53-X4y" secondAttribute="trailing" id="DO4-ro-oGa"/>
+                            <constraint firstItem="KbY-53-X4y" firstAttribute="top" secondItem="OqE-f8-Wlx" secondAttribute="bottom" id="QpW-I2-Ko5"/>
+                            <constraint firstItem="KbY-53-X4y" firstAttribute="leading" secondItem="ZTY-Uv-q10" secondAttribute="leading" id="WDY-E8-OR5"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="KbY-53-X4y" id="QUB-MH-Ix1"/>
@@ -440,6 +445,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="5OS-Cu-eep"/>
-        <segue reference="IUA-nq-eZu"/>
+        <segue reference="UUd-br-HNh"/>
     </inferredMetricsTieBreakers>
 </document>
