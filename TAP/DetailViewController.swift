@@ -126,29 +126,34 @@ class DetailViewController: CoreDataViewController, UINavigationControllerDelega
     
     @IBAction func favorite(_ sender: Any) {
         // this action either favorites or unfavorites a drink and then places it in Core Data and the favorites table 
-        
-        // if statement checking whether a drink is favorited or not already
-        if isFavorite == nil || isFavorite == false {
-            // save to core data and add to favorites if there is a username
-            if SavedItems.sharedInstance().userName != "No name" {
-                DispatchQueue.main.async {
-                    self.saveToCoreData()
+        if SavedItems.sharedInstance().userName != nil {
+            // if statement checking whether a drink is favorited or not already
+            if isFavorite == nil || isFavorite == false {
+                // save to core data and add to favorites if there is a username
+                if SavedItems.sharedInstance().userName != "No name" {
+                    DispatchQueue.main.async {
+                        self.saveToCoreData()
+                    }
+                    isFavorite = true
+                    favoritesButton.tintColor = .red
+                } else {
+                    // if there isn't a username present an alert saying there was an error logging in
+                    let alertViewController = UIAlertController(title: "Login Error", message: "There was an error logging your account in. Please login again before adding favorites.", preferredStyle: .alert)
+                    alertViewController.addAction(UIAlertAction(title: "Done", style: .destructive, handler: nil))
+                    present(alertViewController, animated: true, completion: nil)
                 }
-                isFavorite = true
-                favoritesButton.tintColor = .red
             } else {
-                // if there isn't a username present an alert saying there was an error logging in
-                let alertViewController = UIAlertController(title: "Login Error", message: "There was an error logging your account in. Please login again before adding favorites.", preferredStyle: .alert)
-                alertViewController.addAction(UIAlertAction(title: "Done", style: .destructive, handler: nil))
-                present(alertViewController, animated: true, completion: nil)
+                // if it is a favorite than unfavorite and delete from core data
+                DispatchQueue.main.async {
+                    self.deleteFromCoreData(savedDrink: self.coreDataDrink!)
+                }
+                isFavorite = false
+                favoritesButton.tintColor = .black
             }
         } else {
-            // if it is a favorite than unfavorite and delete from core data
-            DispatchQueue.main.async {
-                self.deleteFromCoreData(savedDrink: self.coreDataDrink!)
-            }
-            isFavorite = false
-            favoritesButton.tintColor = .black
+            let alertController = UIAlertController(title: "Favorites Error", message: "Please login before adding Favorites.", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "Done", style: .destructive, handler: nil))
+            present(alertController, animated: true, completion: nil)
         }
     }
     

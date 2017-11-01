@@ -52,6 +52,7 @@ class LiquorStoreHomeViewController: UIViewController, UICollectionViewDelegate,
         // handle tap events
         print("You selected cell \(indexPath.row)")
         // send liquor name to next view controller
+        
         liquorName = storeItems[indexPath.row]
         performSegue(withIdentifier: "liquorSegueTwo", sender: self)
     }

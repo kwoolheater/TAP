@@ -109,14 +109,15 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
     
     func configureUI() {
         // set up flow layout
-        let space:CGFloat = 12.0
+        let space:CGFloat = 8.0
         let dimension = (view.frame.size.width - (2 * space)) / 3.0
         let dimensionWidth = (view.frame.size.width + (10 * space)) / 3.0
-        // let heightDimension = (view.frame.size.height - (20 * space)) / 3.0
+        let heightDimension = (view.frame.size.height - (20 * space)) / 3.0
         
         flowLayout.minimumInteritemSpacing = space
         flowLayout.minimumLineSpacing = space
         flowLayout.itemSize = CGSize(width: dimensionWidth, height: dimension)
+        flowLayout.sectionInset = UIEdgeInsetsMake(0, 10, 0, 10)
         
         // call youtube video to youtube player
         self.YTPlayerView.load(withVideoId: "dd5Bde5j-sg")

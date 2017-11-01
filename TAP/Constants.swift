@@ -12,5 +12,4 @@ struct Constants {
         static let Tequlia = "Tequlia"
     }
     
-    
 }
