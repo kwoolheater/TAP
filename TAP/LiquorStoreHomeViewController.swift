@@ -42,7 +42,7 @@ class LiquorStoreHomeViewController: UIViewController, UICollectionViewDelegate,
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! StoreCollectionViewCell
         
         cell.label.text = storeItems[indexPath.row]
-//        cell.picture.image = storePictures[indexPath.row]
+        // cell.picture.image = storePictures[indexPath.row]
         
         return cell
         
@@ -51,8 +51,8 @@ class LiquorStoreHomeViewController: UIViewController, UICollectionViewDelegate,
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // handle tap events
         print("You selected cell \(indexPath.row)")
-        // send liquor name to next view controller
         
+        // send liquor name to next view controller
         liquorName = storeItems[indexPath.row]
         performSegue(withIdentifier: "liquorSegueTwo", sender: self)
     }
