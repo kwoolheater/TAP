@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         
         // configure Stripe with publishable key
-        STPPaymentConfiguration.shared().publishableKey = "pk_test_zXwdlOOuj7gAsRYuZux4NsaU"
+        Stripe.setDefaultPublishableKey("pk_test_zXwdlOOuj7gAsRYuZux4NsaU")
         
         return true
     }
