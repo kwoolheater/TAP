@@ -5,15 +5,22 @@ const functions = require('firebase-functions'),
 
 admin.initializeApp(functions.config().firebase);
 
-const stripe = require('stripe')(functions.config().stripe.sk_test_wcjBJ4P8fF1rLTIPbi1E9vJs);
+const stripe = require('stripe')(functions.config().stripe.token);
 
 // When a user is created, register them with Stripe
 exports.createStripeCustomer = functions.auth.user().onCreate(event => {
-	const data = event.data;
+	const user = event.data;
 	return stripe.customers.create({
-		email: data.email
+		email: user.email
 	}).then (customer => {
-		return admin.database().ref('/stripe_customers/${data.uid}/customer_id').set(customer.id);
+		const data = { customerId: customer.id }
+      
+      const updates = {}
+      updates[`/customers/${customer.id}`]     = user.uid
+      updates[`/users/${user.uid}/customerId`] = customer.id
+      
+      
+      return admin.database().ref().update(updates);
 	});
 	console.log("Successful key created")
 });

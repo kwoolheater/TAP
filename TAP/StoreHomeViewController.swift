@@ -12,6 +12,7 @@ import Firebase
 import FirebaseAuthUI
 import ReachabilitySwift
 import CoreLocation
+import Stripe
 
 class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UINavigationControllerDelegate, CLLocationManagerDelegate {
     
