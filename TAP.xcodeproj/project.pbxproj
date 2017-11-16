@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		3370B9DAEC3F8EF6B01966EC /* Pods_TAP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C876B12CD236AA6150A6EA6 /* Pods_TAP.framework */; };
+		41678C2A1FBC93A500446E36 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41678C291FBC93A500446E36 /* CheckoutViewController.swift */; };
+		41678C2C1FBC943200446E36 /* CheckoutRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41678C2B1FBC943200446E36 /* CheckoutRowView.swift */; };
+		41678C2E1FBC978300446E36 /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41678C2D1FBC978300446E36 /* Buttons.swift */; };
+		41678C301FBC98E900446E36 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41678C2F1FBC98E900446E36 /* SettingsViewController.swift */; };
 		41688AF81F55E990005F340C /* CoreDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41688AF71F55E990005F340C /* CoreDataViewController.swift */; };
 		41688AFA1F56085D005F340C /* SavedItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41688AF91F56085D005F340C /* SavedItems.swift */; };
 		416ED6601F4511CE000C00ED /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416ED65F1F4511CE000C00ED /* DetailViewController.swift */; };
@@ -57,6 +61,10 @@
 		254AC90435932A12DCA55E9B /* Pods-TAP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TAP.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TAP/Pods-TAP.debug.xcconfig"; sourceTree = "<group>"; };
 		322A4EA28B0C79E718A674A9 /* Pods-TAP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TAP.release.xcconfig"; path = "Pods/Target Support Files/Pods-TAP/Pods-TAP.release.xcconfig"; sourceTree = "<group>"; };
 		3B489EE843FE23715F791A03 /* Pods_TAPTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TAPTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		41678C291FBC93A500446E36 /* CheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
+		41678C2B1FBC943200446E36 /* CheckoutRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutRowView.swift; sourceTree = "<group>"; };
+		41678C2D1FBC978300446E36 /* Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
+		41678C2F1FBC98E900446E36 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		41688AF71F55E990005F340C /* CoreDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataViewController.swift; sourceTree = "<group>"; };
 		41688AF91F56085D005F340C /* SavedItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedItems.swift; sourceTree = "<group>"; };
 		416ED65F1F4511CE000C00ED /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
@@ -124,11 +132,13 @@
 			isa = PBXGroup;
 			children = (
 				41688AF71F55E990005F340C /* CoreDataViewController.swift */,
+				41678C291FBC93A500446E36 /* CheckoutViewController.swift */,
 				416ED65F1F4511CE000C00ED /* DetailViewController.swift */,
 				41C5706C1F34E64100B1D661 /* DrinkTableViewController.swift */,
 				419858781F4F76D300124DA9 /* FavoritesTableViewControler.swift */,
 				41C570681F33A44900B1D661 /* LiquorStoreHomeViewController.swift */,
 				41C570341F2BAE7500B1D661 /* StoreHomeViewController.swift */,
+				41678C2F1FBC98E900446E36 /* SettingsViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -150,6 +160,8 @@
 		417EA3851F57912E006C756F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				41678C2D1FBC978300446E36 /* Buttons.swift */,
+				41678C2B1FBC943200446E36 /* CheckoutRowView.swift */,
 				41C570621F2FA8CC00B1D661 /* StoreCollectionViewCell.swift */,
 			);
 			name = View;
@@ -532,7 +544,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				41C570351F2BAE7500B1D661 /* StoreHomeViewController.swift in Sources */,
+				41678C2C1FBC943200446E36 /* CheckoutRowView.swift in Sources */,
 				41C5706D1F34E64100B1D661 /* DrinkTableViewController.swift in Sources */,
+				41678C301FBC98E900446E36 /* SettingsViewController.swift in Sources */,
 				41C570631F2FA8CC00B1D661 /* StoreCollectionViewCell.swift in Sources */,
 				41688AF81F55E990005F340C /* CoreDataViewController.swift in Sources */,
 				41C570331F2BAE7500B1D661 /* AppDelegate.swift in Sources */,
@@ -542,9 +556,11 @@
 				4198587B1F50B3F200124DA9 /* CoreDataStack.swift in Sources */,
 				41C570691F33A44900B1D661 /* LiquorStoreHomeViewController.swift in Sources */,
 				41A3CEF51F3A1F3500063635 /* DownloadedDrink.swift in Sources */,
+				41678C2A1FBC93A500446E36 /* CheckoutViewController.swift in Sources */,
 				41ACF3B51F59DAFD009EFAEE /* Drink+CoreDataClass.swift in Sources */,
 				41ACF3B61F59DAFD009EFAEE /* Drink+CoreDataProperties.swift in Sources */,
 				41B740231F38D2E5002322A5 /* Constants.swift in Sources */,
+				41678C2E1FBC978300446E36 /* Buttons.swift in Sources */,
 				4198587E1F548F6100124DA9 /* Model.xcdatamodeld in Sources */,
 				416ED6601F4511CE000C00ED /* DetailViewController.swift in Sources */,
 			);

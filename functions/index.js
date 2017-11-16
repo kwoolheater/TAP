@@ -7,6 +7,7 @@ admin.initializeApp(functions.config().firebase);
 
 const stripe = require('stripe')(functions.config().stripe.token);
 
+
 // When a user is created, register them with Stripe
 exports.createStripeCustomer = functions.auth.user().onCreate(event => {
 	const user = event.data;

@@ -20,13 +20,14 @@ class DetailViewController: CoreDataViewController, UINavigationControllerDelega
     var isFavorite: Bool?
     var price: Double?
     
+    
     // initalize outlets
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var orderButton: UIButton!
     @IBOutlet weak var favoritesButton: UIButton!
     
-    // initalize the core data stack
+    // declare the core data stack
     let stack = (UIApplication.shared.delegate as! AppDelegate).stack
     
     override func viewDidLoad() {
@@ -98,13 +99,17 @@ class DetailViewController: CoreDataViewController, UINavigationControllerDelega
     }
     
     @IBAction func placeOrder(_ sender: Any) {
-        // currently the order function is disabled, present an alert saying ordering isn't available
+        let checkoutViewController = CheckoutViewController(product: (drink?.name)!,
+                                                            price: (Int(price! * 100.0)),
+                                                            settings: self.SettingsViewController().settings)
+        self.navigationController?.pushViewController(checkoutViewController, animated: true)
+        /*// currently the order function is disabled, present an alert saying ordering isn't available
         // declare alert controller variable with title Ordering Unavailable
         let alertController = UIAlertController(title: "Ordering Unavailable!", message: "Ordering will be available in your area soon.", preferredStyle: .alert)
         // create a destructive action for alert controller
         alertController.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.destructive, handler: nil))
         // present controller
-        present(alertController, animated: true)
+        present(alertController, animated: true)*/
     }
     
     @IBAction func favorite(_ sender: Any) {
@@ -173,22 +178,4 @@ class DetailViewController: CoreDataViewController, UINavigationControllerDelega
             SavedItems.sharedInstance().favoritesArray.remove(at: index)
         }
     }
-    
-    
-    // add STPPaymentContext protocol
-    /*func paymentContext(_ paymentContext: STPPaymentContext, didFailToLoadWithError error: Error) {
-     <#code#>
-     }
-     
-     func paymentContextDidChange(_ paymentContext: STPPaymentContext) {
-     <#code#>
-     }
-     
-     func paymentContext(_ paymentContext: STPPaymentContext, didCreatePaymentResult paymentResult: STPPaymentResult, completion: @escaping STPErrorBlock) {
-     <#code#>
-     }
-     
-     func paymentContext(_ paymentContext: STPPaymentContext, didFinishWith status: STPPaymentStatus, error: Error?) {
-     <#code#>
-     }*/
 }
