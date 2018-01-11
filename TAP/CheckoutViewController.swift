@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Stripe
 
-class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
+class CheckoutViewController: UIViewController {
     
     // stripe variables
     let stripePublishableKey = "pk_test_zXwdlOOuj7gAsRYuZux4NsaU"
@@ -28,7 +28,7 @@ class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
     let shippingString: String
     var product = ""
     
-    init(product: String, price: Int, settings: Settings) {
+    /*init(product: String, price: Int, settings: Settings) {
         
         let stripePublishableKey = self.stripePublishableKey
         let backendBaseURL = self.backendBaseURL
@@ -45,7 +45,7 @@ class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
         let config = STPPaymentConfiguration.shared()
         config.publishableKey = self.stripePublishableKey
         // config.appleMerchantIdentifier = self.appleMerchantID
-        config.companyName = self.companyName
+        // config.companyName = self.companyName
         config.requiredBillingAddressFields = settings.requiredBillingAddressFields
         config.requiredShippingAddressFields = settings.requiredShippingAddressFields
         config.shippingType = settings.shippingType
@@ -96,7 +96,7 @@ class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
         super.init(nibName: nil, bundle: nil)
         self.paymentContext.delegate = self
         paymentContext.hostViewController = self
-    }
+    }*/
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -104,7 +104,7 @@ class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = self.theme.primaryBackgroundColor
+        /*self.view.backgroundColor = self.theme.primaryBackgroundColor
         var red: CGFloat = 0
         self.theme.primaryBackgroundColor.getRed(&red, green: nil, blue: nil, alpha: nil)
         // self.activityIndicator.activityIndicatorViewStyle = red < 0.5 ? .white : .gray
@@ -125,6 +125,29 @@ class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
         }
         self.shippingRow.onTap = { [weak self] _ in
             self?.paymentContext.pushShippingViewController()
-        }
+        }*/
     }
+    
+    /*override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let width = self.view.bounds.width
+        // self.productImage.sizeToFit()
+        // self.productImage.center = CGPoint(x: width/2.0, y: self.productImage.bounds.height/2.0 + rowHeight)
+        self.paymentRow.frame = CGRect(x: 0, y: self.productImage.frame.maxY + rowHeight,
+                                       width: width, height: rowHeight)
+        self.shippingRow.frame = CGRect(x: 0, y: self.paymentRow.frame.maxY,
+                                        width: width, height: rowHeight)
+        self.totalRow.frame = CGRect(x: 0, y: self.shippingRow.frame.maxY,
+                                     width: width, height: rowHeight)
+        self.buyButton.frame = CGRect(x: 0, y: 0, width: 88, height: 44)
+        self.buyButton.center = CGPoint(x: width/2.0, y: self.totalRow.frame.maxY + rowHeight*1.5)
+        // self.activityIndicator.center = self.buyButton.center
+    }*/
+    
+    func didTapBuy() {
+        // self.paymentInProgress = true
+        self.paymentContext.requestPayment()
+    }
+    
+    
 }

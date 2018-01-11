@@ -14,14 +14,8 @@ exports.createStripeCustomer = functions.auth.user().onCreate(event => {
 	return stripe.customers.create({
 		email: user.email
 	}).then (customer => {
-		const data = { customerId: customer.id }
-      
-      const updates = {}
-      updates[`/customers/${customer.id}`]     = user.uid
-      updates[`/users/${user.uid}/customerId`] = customer.id
-      
-      
-      return admin.database().ref().update(updates);
+		
+    return admin.database().ref(`/stripe_customers/${user.uid}/customer_id`).set(customer.id);
 	});
 	console.log("Successful key created")
 });
