@@ -15,6 +15,7 @@
 		41688AF81F55E990005F340C /* CoreDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41688AF71F55E990005F340C /* CoreDataViewController.swift */; };
 		41688AFA1F56085D005F340C /* SavedItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41688AF91F56085D005F340C /* SavedItems.swift */; };
 		416ED6601F4511CE000C00ED /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416ED65F1F4511CE000C00ED /* DetailViewController.swift */; };
+		41729EB320086A05001E570E /* MyAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41729EB220086A05001E570E /* MyAPIClient.swift */; };
 		417EA3881F57CC5E006C756F /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 417EA3871F57CC5E006C756F /* README.md */; };
 		417EA38C1F587849006C756F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 417EA38B1F587849006C756F /* GoogleService-Info.plist */; };
 		419858791F4F76D300124DA9 /* FavoritesTableViewControler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419858781F4F76D300124DA9 /* FavoritesTableViewControler.swift */; };
@@ -68,6 +69,7 @@
 		41688AF71F55E990005F340C /* CoreDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataViewController.swift; sourceTree = "<group>"; };
 		41688AF91F56085D005F340C /* SavedItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedItems.swift; sourceTree = "<group>"; };
 		416ED65F1F4511CE000C00ED /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		41729EB220086A05001E570E /* MyAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAPIClient.swift; sourceTree = "<group>"; };
 		417EA3871F57CC5E006C756F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		417EA38B1F587849006C756F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		419858781F4F76D300124DA9 /* FavoritesTableViewControler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewControler.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				41A3CEF41F3A1F3500063635 /* DownloadedDrink.swift */,
 				41ACF3B31F59DAFD009EFAEE /* Drink+CoreDataClass.swift */,
 				41ACF3B41F59DAFD009EFAEE /* Drink+CoreDataProperties.swift */,
+				41729EB220086A05001E570E /* MyAPIClient.swift */,
 				41688AF91F56085D005F340C /* SavedItems.swift */,
 				4198587C1F548F6100124DA9 /* Model.xcdatamodeld */,
 			);
@@ -560,6 +563,7 @@
 				41ACF3B51F59DAFD009EFAEE /* Drink+CoreDataClass.swift in Sources */,
 				41ACF3B61F59DAFD009EFAEE /* Drink+CoreDataProperties.swift in Sources */,
 				41B740231F38D2E5002322A5 /* Constants.swift in Sources */,
+				41729EB320086A05001E570E /* MyAPIClient.swift in Sources */,
 				41678C2E1FBC978300446E36 /* Buttons.swift in Sources */,
 				4198587E1F548F6100124DA9 /* Model.xcdatamodeld in Sources */,
 				416ED6601F4511CE000C00ED /* DetailViewController.swift in Sources */,

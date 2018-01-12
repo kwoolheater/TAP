@@ -11,6 +11,23 @@ import Stripe
 
 class CheckoutRowView: UIView {
     
+    var loading = false {
+        didSet {
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+                if self.loading {
+                    self.activityIndicator.startAnimating()
+                    self.activityIndicator.alpha = 1
+                    self.detailLabel.alpha = 0
+                }
+                else {
+                    self.activityIndicator.stopAnimating()
+                    self.activityIndicator.alpha = 0
+                    self.detailLabel.alpha = 1
+                }
+            }, completion: nil)
+        }
+    }
+    
     var title: String = "" {
         didSet {
             self.titleLabel.text = title
