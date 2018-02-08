@@ -98,7 +98,7 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
                 if self.user != activeUser {
                     self.user = activeUser
                     let name = user!.email!.components(separatedBy: "@")[0]
-                    self.displayName = name
+                    self.displayName = user!.email!
                     self.signedInStatus(isSignedIn: true)
                 }
             } else {
@@ -132,6 +132,7 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
         if isSignedIn {
             // configure UI and save username
             SavedItems.sharedInstance().userName = self.displayName
+            
             self.button.title = "Logout"
         }
     }

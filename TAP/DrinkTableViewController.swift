@@ -76,7 +76,6 @@ class DrinkTableViewController: UIViewController {
                         for (key, value) in typeArray {
                             if key == "type" {
                                 if let canAndBottleArray = value as? [String: AnyObject] {
-                                    print(canAndBottleArray)
                                     for (key, value) in canAndBottleArray {
                                         if key == "bottle" {
                                             if let bottlePricesArray = value as? [String: AnyObject] {

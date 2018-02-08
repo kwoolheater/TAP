@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Stripe
+import Firebase
 
 class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
     
@@ -44,6 +45,7 @@ class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
     let numberFormatter: NumberFormatter
     let shippingString: String
     var product = ""
+    var ref: DatabaseReference!
     var paymentInProgress: Bool = false {
         didSet {
             UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
@@ -65,14 +67,15 @@ class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
         
         let stripePublishableKey = self.stripePublishableKey
         let backendBaseURL = self.backendBaseURL
+        let ref = Database.database().reference()
         
         assert(stripePublishableKey.hasPrefix("pk_"), "You must set your Stripe publishable key at the top of CheckoutViewController.swift to run this app.")
-        assert(backendBaseURL != nil, "You must set your backend base url at the top of CheckoutViewController.swift to run this app.")
+        // assert(backendBaseURL != nil, "You must set your backend base url at the top of CheckoutViewController.swift to run this app.")
         
         self.product = product
         self.productImage.text = product
         self.theme = settings.theme
-        MyAPIClient.sharedClient.baseURLString = self.backendBaseURL
+        // MyAPIClient.sharedClient.baseURLString = self.backendBaseURL
         
         // This code is included here for the sake of readability, but in your application you should set up your configuration and theme earlier, preferably in your App Delegate.
         let config = STPPaymentConfiguration.shared()
@@ -141,7 +144,7 @@ class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
         var red: CGFloat = 0
         self.theme.primaryBackgroundColor.getRed(&red, green: nil, blue: nil, alpha: nil)
         self.activityIndicator.activityIndicatorViewStyle = red < 0.5 ? .white : .gray
-        self.navigationItem.title = "Emoji Apparel"
+        self.navigationItem.title = "TAP"
         
         self.productImage.font = UIFont.systemFont(ofSize: 70)
         self.view.addSubview(self.totalRow)
@@ -170,7 +173,7 @@ class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
         let width = self.view.bounds.width - (insets.left + insets.right)
         self.productImage.sizeToFit()
         self.productImage.center = CGPoint(x: width/2.0,
-                                           y: self.productImage.bounds.height/2.0 + rowHeight)
+                                           y: self.productImage.bounds.height/0.5 + rowHeight)
         self.paymentRow.frame = CGRect(x: insets.left, y: self.productImage.frame.maxY + rowHeight,
                                        width: width, height: rowHeight)
         self.shippingRow.frame = CGRect(x: insets.left, y: self.paymentRow.frame.maxY,
@@ -190,11 +193,13 @@ class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
     // MARK: STPPaymentContextDelegate
     
     func paymentContext(_ paymentContext: STPPaymentContext, didCreatePaymentResult paymentResult: STPPaymentResult, completion: @escaping STPErrorBlock) {
-        MyAPIClient.sharedClient.completeCharge(paymentResult,
-                                                amount: self.paymentContext.paymentAmount,
-                                                shippingAddress: self.paymentContext.shippingAddress,
-                                                shippingMethod: self.paymentContext.selectedShippingMethod,
-                                                completion: completion)
+        
+        //MyAPIClient.sharedClient.completeCharge(paymentResult,
+                                                //amount: self.paymentContext.paymentAmount,
+                                                //shippingAddress: self.paymentContext.shippingAddress,
+                                                //shippingMethod: self.paymentContext.selectedShippingMethod,
+                                                //completion: completion)
+        
     }
     
     func paymentContext(_ paymentContext: STPPaymentContext, didFinishWith status: STPPaymentStatus, error: Error?) {
