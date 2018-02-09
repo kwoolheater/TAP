@@ -16,8 +16,6 @@
 
 #import <SafariServices/SafariServices.h>
 
-#define FAUXPAS_IGNORED_IN_METHOD(...)
-
 NS_ASSUME_NONNULL_BEGIN
 
 typedef void (^STPBoolCompletionBlock)(BOOL success);
@@ -27,6 +25,9 @@ typedef void (^STPBoolCompletionBlock)(BOOL success);
 @property (nonatomic, strong) STPSource *source;
 @property (nonatomic, strong, nullable) SFSafariViewController *safariVC;
 @property (nonatomic, assign, readwrite) STPRedirectContextState state;
+
+@property (nonatomic, assign) BOOL subscribedToURLNotifications;
+@property (nonatomic, assign) BOOL subscribedToForegroundNotifications;
 @end
 
 @implementation STPRedirectContext
@@ -35,7 +36,8 @@ typedef void (^STPBoolCompletionBlock)(BOOL success);
                              completion:(STPRedirectContextCompletionBlock)completion {
 
     if (source.flow != STPSourceFlowRedirect
-        || source.status != STPSourceStatusPending
+        || !(source.status == STPSourceStatusPending ||
+             source.status == STPSourceStatusChargeable)
         || source.redirect.returnURL == nil
         || (source.redirect.url == nil
             && [self nativeRedirectURLForSource:source] == nil)) {
@@ -46,6 +48,8 @@ typedef void (^STPBoolCompletionBlock)(BOOL success);
     if (self) {
         _source = source;
         _completion = [completion copy];
+        _subscribedToURLNotifications = NO;
+        _subscribedToForegroundNotifications = NO;
     }
     return self;
 }
@@ -55,7 +59,6 @@ typedef void (^STPBoolCompletionBlock)(BOOL success);
 }
 
 - (void)performAppRedirectIfPossibleWithCompletion:(STPBoolCompletionBlock)onCompletion {
-    FAUXPAS_IGNORED_IN_METHOD(APIAvailability)
 
     if (self.state == STPRedirectContextStateNotStarted) {
         NSURL *nativeUrl = [self nativeRedirectURLForSource:self.source];
@@ -70,7 +73,7 @@ typedef void (^STPBoolCompletionBlock)(BOOL success);
         [self subscribeToUrlAndForegroundNotifications];
 
         UIApplication *application = [UIApplication sharedApplication];
-        if ([application respondsToSelector:@selector(openURL:options:completionHandler:)]) {
+        if (@available(iOS 10, *)) {
 
             WEAK(self);
             [application openURL:nativeUrl options:@{} completionHandler:^(BOOL success) {
@@ -98,10 +101,11 @@ typedef void (^STPBoolCompletionBlock)(BOOL success);
 }
 
 - (void)startRedirectFlowFromViewController:(UIViewController *)presentingViewController {
-    FAUXPAS_IGNORED_IN_METHOD(APIAvailability)
 
+    WEAK(self)
     [self performAppRedirectIfPossibleWithCompletion:^(BOOL success) {
         if (!success) {
+            STRONG(self)
             if ([SFSafariViewController class] != nil) {
                 [self startSafariViewControllerRedirectFlowFromViewController:presentingViewController];
             }
@@ -113,10 +117,10 @@ typedef void (^STPBoolCompletionBlock)(BOOL success);
 }
 
 - (void)startSafariViewControllerRedirectFlowFromViewController:(UIViewController *)presentingViewController {
-    FAUXPAS_IGNORED_IN_METHOD(APIAvailability)
+
     if (self.state == STPRedirectContextStateNotStarted) {
         _state = STPRedirectContextStateInProgress;
-        [self subscribeToUrlAndForegroundNotifications];
+        [self subscribeToUrlNotifications];
         self.safariVC = [[SFSafariViewController alloc] initWithURL:self.source.redirect.url];
         self.safariVC.delegate = self;
         [presentingViewController presentViewController:self.safariVC
@@ -142,14 +146,14 @@ typedef void (^STPBoolCompletionBlock)(BOOL success);
 
 #pragma mark - SFSafariViewControllerDelegate -
 
-- (void)safariViewControllerDidFinish:(__unused SFSafariViewController *)controller { FAUXPAS_IGNORED_ON_LINE(APIAvailability)
+- (void)safariViewControllerDidFinish:(__unused SFSafariViewController *)controller {
     stpDispatchToMainThreadIfNecessary(^{
         [self handleRedirectCompletionWithError:nil
                     shouldDismissViewController:NO];
     });
 }
 
-- (void)safariViewController:(__unused SFSafariViewController *)controller didCompleteInitialLoad:(BOOL)didLoadSuccessfully { FAUXPAS_IGNORED_ON_LINE(APIAvailability)
+- (void)safariViewController:(__unused SFSafariViewController *)controller didCompleteInitialLoad:(BOOL)didLoadSuccessfully {
     if (didLoadSuccessfully == NO) {
         stpDispatchToMainThreadIfNecessary(^{
             [self handleRedirectCompletionWithError:[NSError stp_genericConnectionError]
@@ -193,13 +197,23 @@ typedef void (^STPBoolCompletionBlock)(BOOL success);
     self.completion(self.source.stripeID, self.source.clientSecret, error);
 }
 
+- (void)subscribeToUrlNotifications {
+    if (!self.subscribedToURLNotifications) {
+        self.subscribedToURLNotifications = YES;
+        [[STPURLCallbackHandler shared] registerListener:self
+                                                  forURL:self.source.redirect.returnURL];
+    }
+}
+
 - (void)subscribeToUrlAndForegroundNotifications {
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(handleWillForegroundNotification)
-                                                 name:UIApplicationWillEnterForegroundNotification
-                                               object:nil];
-    [[STPURLCallbackHandler shared] registerListener:self
-                                              forURL:self.source.redirect.returnURL];
+    [self subscribeToUrlNotifications];
+    if (!self.subscribedToForegroundNotifications) {
+        self.subscribedToForegroundNotifications = YES;
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(handleWillForegroundNotification)
+                                                     name:UIApplicationWillEnterForegroundNotification
+                                                   object:nil];
+    }
 }
 
 - (void)unsubscribeFromNotificationsAndDismissPresentedViewControllers {
@@ -212,6 +226,8 @@ typedef void (^STPBoolCompletionBlock)(BOOL success);
                                                     name:UIApplicationWillEnterForegroundNotification
                                                   object:nil];
     [[STPURLCallbackHandler shared] unregisterListener:self];
+    self.subscribedToURLNotifications = NO;
+    self.subscribedToForegroundNotifications = NO;
 }
 
 - (void)dismissPresentedViewController {

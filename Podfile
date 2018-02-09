@@ -14,6 +14,7 @@ target 'TAP' do
   pod “FirebaseUI/Database”
   pod “FirebaseUI/Auth”
   pod “ReachabilitySwift”, “~> 3”
+  pod 'Alamofire', '~> 4.5'
 
   target 'TAPTests' do
     inherit! :search_paths

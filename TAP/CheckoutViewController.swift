@@ -83,7 +83,7 @@ class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
         config.appleMerchantIdentifier = self.appleMerchantID
         config.companyName = self.companyName
         config.requiredBillingAddressFields = settings.requiredBillingAddressFields
-        config.requiredShippingAddressFields = settings.requiredShippingAddressFields
+        //config.requiredShippingAddressFields = settings.requiredShippingAddressFields
         config.shippingType = settings.shippingType
         config.additionalPaymentMethods = settings.additionalPaymentMethods
         
@@ -109,9 +109,9 @@ class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
         self.paymentRow = CheckoutRowView(title: "Payment", detail: "Select Payment",
                                           theme: settings.theme)
         var shippingString = "Contact"
-        if config.requiredShippingAddressFields.contains(.postalAddress) ?? false {
+        /*if config.requiredShippingAddressFields.contains(.postalAddress) ?? false {
             shippingString = config.shippingType == .shipping ? "Shipping" : "Delivery"
-        }
+        }*/
         self.shippingString = shippingString
         self.shippingRow = CheckoutRowView(title: self.shippingString,
                                            detail: "Enter \(self.shippingString) Info",

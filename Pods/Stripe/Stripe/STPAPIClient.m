@@ -43,9 +43,6 @@
 #import "STPCategoryLoader.h"
 #endif
 
-#define FAUXPAS_IGNORED_IN_METHOD(...)
-FAUXPAS_IGNORED_IN_FILE(APIAvailability)
-
 static NSString * const APIVersion = @"2015-10-12";
 static NSString * const APIBaseURL = @"https://api.stripe.com/v1";
 static NSString * const APIEndpointToken = @"tokens";
@@ -123,10 +120,11 @@ static NSString * const FileUploadURL = @"https://uploads.stripe.com/v1/files";
     if (self) {
         _apiKey = publishableKey;
         _apiURL = [NSURL URLWithString:APIBaseURL];
-        _urlSession = [NSURLSession sessionWithConfiguration:[self sessionConfiguration]];
         _configuration = configuration;
+        _stripeAccount = configuration.stripeAccount;
         _sourcePollers = [NSMutableDictionary dictionary];
         _sourcePollersQueue = dispatch_queue_create("com.stripe.sourcepollers", DISPATCH_QUEUE_SERIAL);
+        _urlSession = [NSURLSession sessionWithConfiguration:[self sessionConfiguration]];
     }
     return self;
 }
@@ -222,11 +220,10 @@ static NSString * const FileUploadURL = @"https://uploads.stripe.com/v1/files";
     if (model) {
         details[@"model"] = model;
     }
-    if ([[UIDevice currentDevice] respondsToSelector:@selector(identifierForVendor)]) {
-        NSString *vendorIdentifier = [[[UIDevice currentDevice] performSelector:@selector(identifierForVendor)] performSelector:@selector(UUIDString)];
-        if (vendorIdentifier) {
-            details[@"vendor_identifier"] = vendorIdentifier;
-        }
+
+    NSString *vendorIdentifier = [UIDevice currentDevice].identifierForVendor.UUIDString;
+    if (vendorIdentifier) {
+        details[@"vendor_identifier"] = vendorIdentifier;
     }
     return [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:[details copy] options:(NSJSONWritingOptions)kNilOptions error:NULL] encoding:NSUTF8StringEncoding];
 }
@@ -284,6 +281,19 @@ static NSString * const FileUploadURL = @"https://uploads.stripe.com/v1/files";
 
 - (void)createTokenWithPersonalIDNumber:(NSString *)pii completion:(__nullable STPTokenCompletionBlock)completion {
     NSMutableDictionary *params = [@{@"pii": @{ @"personal_id_number": pii }} mutableCopy];
+    [[STPTelemetryClient sharedInstance] addTelemetryFieldsToParams:params];
+    [self createTokenWithParameters:params completion:completion];
+    [[STPTelemetryClient sharedInstance] sendTelemetryData];
+}
+
+@end
+
+#pragma mark - Connect Accounts
+
+@implementation STPAPIClient (ConnectAccounts)
+
+- (void)createTokenWithConnectAccount:(STPConnectAccountParams *)account completion:(__nullable STPTokenCompletionBlock)completion {
+    NSMutableDictionary *params = [[STPFormEncoder dictionaryForObject:account] mutableCopy];
     [[STPTelemetryClient sharedInstance] addTelemetryFieldsToParams:params];
     [self createTokenWithParameters:params completion:completion];
     [[STPTelemetryClient sharedInstance] sendTelemetryData];
@@ -414,8 +424,8 @@ static NSString * const FileUploadURL = @"https://uploads.stripe.com/v1/files";
     [paymentRequest setMerchantIdentifier:merchantIdentifier];
     [paymentRequest setSupportedNetworks:[self supportedPKPaymentNetworks]];
     [paymentRequest setMerchantCapabilities:PKMerchantCapability3DS];
-    [paymentRequest setCountryCode:countryCode];
-    [paymentRequest setCurrencyCode:currencyCode];
+    [paymentRequest setCountryCode:countryCode.uppercaseString];
+    [paymentRequest setCurrencyCode:currencyCode.uppercaseString];
     return paymentRequest;
 }
 

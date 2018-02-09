@@ -271,6 +271,17 @@
     return params;
 }
 
++ (STPSourceParams *)alipayReusableParamsWithCurrency:(NSString *)currency
+                                            returnURL:(NSString *)returnURL {
+    STPSourceParams *params = [self new];
+    params.type = STPSourceTypeAlipay;
+    params.currency = currency;
+    params.redirect = @{ @"return_url": returnURL };
+    params.usage = STPSourceUsageReusable;
+
+    return params;
+}
+
 + (STPSourceParams *)p24ParamsWithAmount:(NSUInteger)amount
                                 currency:(NSString *)currency
                                    email:(NSString *)email
@@ -287,6 +298,13 @@
     }
     params.owner = ownerDict.copy;
     params.redirect = @{ @"return_url": returnURL };
+    return params;
+}
+
++ (STPSourceParams *)visaCheckoutParamsWithCallId:(NSString *)callId {
+    STPSourceParams *params = [self new];
+    params.type = STPSourceTypeCard;
+    params.additionalAPIParameters = @{ @"card": @{ @"visa_checkout": @{ @"callid": callId } } };
     return params;
 }
 

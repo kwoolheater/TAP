@@ -26,7 +26,34 @@ exports.createStripeCustomer = functions.auth.user().onCreate(event => {
 	console.log("Successful key created");
 });
 
-exports.getKey = functions.database.ref('/stripe_customers/${user.uid}/ephemeral_keys').onWrite(event => {
+//make key 
+exports.ephemeralKey = functions.database.ref('/stripe_customers').onWrite(event =>{
+	const user = event.data;
+	console.log(event);
+});
+
+// Make key for ephemeral key through Stripe
+exports.createEphemeralKeys = functions.https.onRequest((req, res) => {
+	var api_version = req.body.api_version;
+	var customerId = req.body.customerId;
+
+	if (!api_version) {
+  		res.status(400).end();
+ 	 	return;
+	}
+
+	stripe.ephemeralKeys.create(
+  		{ customer: customerId },
+  		{ stripe_version: api_version }, 
+
+ 	function(err, key) {
+ 		console.log(key)
+    	return res.send(key);
+ 	});   
+
+});
+//problem is that the user id is unset...on write function needs to be called after...need it to be some sort of post method
+/*exports.getKey = functions.database.ref('/stripe_customers/${user.uid}/ephemeral_keys').onWrite(event => {
   	const stripe_version = admin.database().ref('/stripe_customers/${user.uid}/ephemeral_keys');
   	if (!stripe_version) {
     	return;
@@ -34,5 +61,7 @@ exports.getKey = functions.database.ref('/stripe_customers/${user.uid}/ephemeral
   	stripe.ephemeral_keys.create(
     	{customer: admin.database().ref('/stripe_customers/${user.uid}/customer_id')},
     	{stripe_version: stripe_version}
-  	).then
-});
+  	).then((key) => {
+  		admin.database.ref('/stripe_customers/${user.uid}/customer_id')
+ 	});
+});*/

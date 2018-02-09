@@ -11,8 +11,8 @@
 
 #import "PKPaymentAuthorizationViewController+Stripe_Blocks.h"
 #import "STPAddCardViewController+Private.h"
-#import "STPCardTuple.h"
-#import "STPCustomerContext+Private.h"
+#import "STPCustomer+SourceTuple.h"
+#import "STPCustomerContext.h"
 #import "STPDispatchFunctions.h"
 #import "STPPaymentConfiguration+Private.h"
 #import "STPPaymentContext+Private.h"
@@ -24,9 +24,6 @@
 #import "UINavigationController+Stripe_Completion.h"
 #import "UIViewController+Stripe_ParentViewController.h"
 #import "UIViewController+Stripe_Promises.h"
-
-#define FAUXPAS_IGNORED_IN_METHOD(...)
-
 
 /**
  The current state of the payment context
@@ -45,10 +42,7 @@ typedef NS_ENUM(NSUInteger, STPPaymentContextState) {
 
 @property (nonatomic) STPPaymentConfiguration *configuration;
 @property (nonatomic) STPTheme *theme;
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated"
 @property (nonatomic) id<STPBackendAPIAdapter> apiAdapter;
-#pragma clang diagnostic pop
 @property (nonatomic) STPAPIClient *apiClient;
 @property (nonatomic) STPPromise<STPPaymentMethodTuple *> *loadingPromise;
 
@@ -75,8 +69,6 @@ typedef NS_ENUM(NSUInteger, STPPaymentContextState) {
 
 @implementation STPPaymentContext
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated"
 - (instancetype)initWithCustomerContext:(STPCustomerContext *)customerContext {
     return [self initWithAPIAdapter:customerContext];
 }
@@ -88,7 +80,6 @@ typedef NS_ENUM(NSUInteger, STPPaymentContextState) {
                       configuration:configuration
                               theme:theme];
 }
-#pragma clang diagnostic pop
 
 - (instancetype)initWithAPIAdapter:(id<STPBackendAPIAdapter>)apiAdapter {
     return [self initWithAPIAdapter:apiAdapter
@@ -111,6 +102,9 @@ typedef NS_ENUM(NSUInteger, STPPaymentContextState) {
         _paymentCountry = @"US";
         _paymentAmountModel = [[STPPaymentContextAmountModel alloc] initWithAmount:0];
         _modalPresentationStyle = UIModalPresentationFullScreen;
+        if (@available(iOS 11, *)) {
+            _largeTitleDisplayMode = UINavigationItemLargeTitleDisplayModeAutomatic;
+        }
         _state = STPPaymentContextStateNone;
         [self retryLoading];
     }
@@ -118,8 +112,10 @@ typedef NS_ENUM(NSUInteger, STPPaymentContextState) {
 }
 
 - (void)retryLoading {
-    if (self.loadingPromise && self.loadingPromise.value) {
-        return;
+    // Clear any cached customer object before refetching
+    if ([self.apiAdapter isKindOfClass:[STPCustomerContext class]]) {
+        STPCustomerContext *customerContext = (STPCustomerContext *)self.apiAdapter;
+        [customerContext clearCachedCustomer];
     }
     WEAK(self);
     self.loadingPromise = [[[STPPromise<STPPaymentMethodTuple *> new] onSuccess:^(STPPaymentMethodTuple *tuple) {
@@ -154,19 +150,9 @@ typedef NS_ENUM(NSUInteger, STPPaymentContextState) {
                 self.shippingAddress = customer.shippingAddress;
                 self.shippingAddressNeedsVerification = YES;
             }
-            STPCard *selectedCard;
-            NSMutableArray<STPCard *> *cards = [NSMutableArray array];
-            for (id<STPSourceProtocol> source in customer.sources) {
-                if ([source isKindOfClass:[STPCard class]]) {
-                    STPCard *card = (STPCard *)source;
-                    [cards addObject:card];
-                    if ([card.stripeID isEqualToString:customer.defaultSource.stripeID]) {
-                        selectedCard = card;
-                    }
-                }
-            }
-            STPCardTuple *tuple = [STPCardTuple tupleWithSelectedCard:selectedCard cards:cards];
-            STPPaymentMethodTuple *paymentTuple = [STPPaymentMethodTuple tupleWithCardTuple:tuple applePayEnabled:self.configuration.applePayEnabled];
+
+            STPPaymentMethodTuple *paymentTuple = [customer filteredSourceTupleForUIWithConfiguration:self.configuration];
+
             [self.loadingPromise succeed:paymentTuple];
         });
     }];
@@ -174,6 +160,11 @@ typedef NS_ENUM(NSUInteger, STPPaymentContextState) {
 
 - (BOOL)loading {
     return !self.loadingPromise.completed;
+}
+
+// Disable transition animations in tests
+- (BOOL)transitionAnimationsEnabled {
+    return NSClassFromString(@"XCTest") == nil;
 }
 
 - (void)setHostViewController:(UIViewController *)hostViewController {
@@ -255,12 +246,10 @@ typedef NS_ENUM(NSUInteger, STPPaymentContextState) {
 }
 
 - (void)setPaymentSummaryItems:(NSArray<PKPaymentSummaryItem *> *)paymentSummaryItems {
-    FAUXPAS_IGNORED_IN_METHOD(APIAvailability)
     self.paymentAmountModel = [[STPPaymentContextAmountModel alloc] initWithPaymentSummaryItems:paymentSummaryItems];
 }
 
 - (NSArray<PKPaymentSummaryItem *> *)paymentSummaryItems {
-    FAUXPAS_IGNORED_IN_METHOD(APIAvailability)
     return [self.paymentAmountModel paymentSummaryItemsWithCurrency:self.paymentCurrency
                                                         companyName:self.configuration.companyName
                                                      shippingMethod:self.selectedShippingMethod];
@@ -306,10 +295,21 @@ typedef NS_ENUM(NSUInteger, STPPaymentContextState) {
             STPPaymentMethodsViewController *paymentMethodsViewController = [[STPPaymentMethodsViewController alloc] initWithPaymentContext:self];
             self.paymentMethodsViewController = paymentMethodsViewController;
             paymentMethodsViewController.prefilledInformation = self.prefilledInformation;
+            paymentMethodsViewController.paymentMethodsViewControllerFooterView = self.paymentMethodsViewControllerFooterView;
+            paymentMethodsViewController.addCardViewControllerFooterView = self.addCardViewControllerFooterView;
+            if (@available(iOS 11, *)) {
+                paymentMethodsViewController.navigationItem.largeTitleDisplayMode = self.largeTitleDisplayMode;
+            }
+
             UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:paymentMethodsViewController];
             navigationController.navigationBar.stp_theme = self.theme;
+            if (@available(iOS 11, *)) {
+                navigationController.navigationBar.prefersLargeTitles = YES;
+            }
             navigationController.modalPresentationStyle = self.modalPresentationStyle;
-            [self.hostViewController presentViewController:navigationController animated:YES completion:nil];
+            [self.hostViewController presentViewController:navigationController
+                                                  animated:[self transitionAnimationsEnabled]
+                                                completion:nil];
         }
     }];
 }
@@ -332,7 +332,14 @@ typedef NS_ENUM(NSUInteger, STPPaymentContextState) {
             STPPaymentMethodsViewController *paymentMethodsViewController = [[STPPaymentMethodsViewController alloc] initWithPaymentContext:self];
             self.paymentMethodsViewController = paymentMethodsViewController;
             paymentMethodsViewController.prefilledInformation = self.prefilledInformation;
-            [navigationController pushViewController:paymentMethodsViewController animated:YES];
+            paymentMethodsViewController.paymentMethodsViewControllerFooterView = self.paymentMethodsViewControllerFooterView;
+            paymentMethodsViewController.addCardViewControllerFooterView = self.addCardViewControllerFooterView;
+            if (@available(iOS 11, *)) {
+                paymentMethodsViewController.navigationItem.largeTitleDisplayMode = self.largeTitleDisplayMode;
+            }
+
+            [navigationController pushViewController:paymentMethodsViewController
+                                            animated:[self transitionAnimationsEnabled]];
         }
     }];
 }
@@ -375,7 +382,8 @@ typedef NS_ENUM(NSUInteger, STPPaymentContextState) {
                                               completion:(STPVoidBlock)completion {
     if ([viewController stp_isAtRootOfNavigationController]) {
         // if we're the root of the navigation controller, we've been presented modally.
-        [viewController.presentingViewController dismissViewControllerAnimated:YES completion:^{
+        [viewController.presentingViewController dismissViewControllerAnimated:[self transitionAnimationsEnabled]
+                                                                    completion:^{
             self.paymentMethodsViewController = nil;
             if (completion) {
                 completion();
@@ -388,7 +396,9 @@ typedef NS_ENUM(NSUInteger, STPPaymentContextState) {
         if ([self.hostViewController isKindOfClass:[UINavigationController class]]) {
             destinationViewController = self.originalTopViewController;
         }
-        [viewController.navigationController stp_popToViewController:destinationViewController animated:YES completion:^{
+        [viewController.navigationController stp_popToViewController:destinationViewController
+                                                            animated:[self transitionAnimationsEnabled]
+                                                          completion:^{
             self.paymentMethodsViewController = nil;
             if (completion) {
                 completion();
@@ -412,10 +422,18 @@ typedef NS_ENUM(NSUInteger, STPPaymentContextState) {
             self.state = state;
 
             STPShippingAddressViewController *addressViewController = [[STPShippingAddressViewController alloc] initWithPaymentContext:self];
+            if (@available(iOS 11, *)) {
+                addressViewController.navigationItem.largeTitleDisplayMode = self.largeTitleDisplayMode;
+            }
             UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:addressViewController];
             navigationController.navigationBar.stp_theme = self.theme;
+            if (@available(iOS 11, *)) {
+                navigationController.navigationBar.prefersLargeTitles = YES;
+            }
             navigationController.modalPresentationStyle = self.modalPresentationStyle;
-            [self.hostViewController presentViewController:navigationController animated:YES completion:nil];
+            [self.hostViewController presentViewController:navigationController
+                                                  animated:[self transitionAnimationsEnabled]
+                                                completion:nil];
         }
     }];
 }
@@ -436,7 +454,11 @@ typedef NS_ENUM(NSUInteger, STPPaymentContextState) {
             self.state = STPPaymentContextStateShowingRequestedViewController;
 
             STPShippingAddressViewController *addressViewController = [[STPShippingAddressViewController alloc] initWithPaymentContext:self];
-            [navigationController pushViewController:addressViewController animated:YES];
+            if (@available(iOS 11, *)) {
+                addressViewController.navigationItem.largeTitleDisplayMode = self.largeTitleDisplayMode;
+            }
+            [navigationController pushViewController:addressViewController
+                                            animated:[self transitionAnimationsEnabled]];
         }
     }];
 }
@@ -478,9 +500,8 @@ typedef NS_ENUM(NSUInteger, STPPaymentContextState) {
     self.shippingAddressNeedsVerification = NO;
     self.selectedShippingMethod = method;
     [self.delegate paymentContextDidChange:self];
-    if ([self.apiAdapter isKindOfClass:[STPCustomerContext class]]) {
-        STPCustomerContext *customerContext = (STPCustomerContext *)self.apiAdapter;
-        [customerContext updateCustomerWithShippingAddress:self.shippingAddress completion:nil];
+    if ([self.apiAdapter respondsToSelector:@selector(updateCustomerWithShippingAddress:completion:)]) {
+        [self.apiAdapter updateCustomerWithShippingAddress:self.shippingAddress completion:nil];
     }
     [self appropriatelyDismissViewController:addressViewController completion:^{
         if (self.state == STPPaymentContextStateRequestingPayment) {
@@ -496,7 +517,8 @@ typedef NS_ENUM(NSUInteger, STPPaymentContextState) {
                                 completion:(STPVoidBlock)completion {
     if ([viewController stp_isAtRootOfNavigationController]) {
         // if we're the root of the navigation controller, we've been presented modally.
-        [viewController.presentingViewController dismissViewControllerAnimated:YES completion:^{
+        [viewController.presentingViewController dismissViewControllerAnimated:[self transitionAnimationsEnabled]
+                                                                    completion:^{
             if (completion) {
                 completion();
             }
@@ -508,7 +530,9 @@ typedef NS_ENUM(NSUInteger, STPPaymentContextState) {
         if ([self.hostViewController isKindOfClass:[UINavigationController class]]) {
             destinationViewController = self.originalTopViewController;
         }
-        [viewController.navigationController stp_popToViewController:destinationViewController animated:YES completion:^{
+        [viewController.navigationController stp_popToViewController:destinationViewController
+                                                            animated:[self transitionAnimationsEnabled]
+                                                          completion:^{
             if (completion) {
                 completion();
             }
@@ -519,15 +543,25 @@ typedef NS_ENUM(NSUInteger, STPPaymentContextState) {
 #pragma mark - Request Payment
 
 - (BOOL)requestPaymentShouldPresentShippingViewController {
-    BOOL shippingAddressRequired = self.configuration.requiredShippingAddressFields != STPBillingAddressFieldsNone;
+    BOOL shippingAddressRequired = self.configuration.requiredShippingAddressFields.count > 0;
     BOOL shippingAddressIncomplete = ![self.shippingAddress containsRequiredShippingAddressFields:self.configuration.requiredShippingAddressFields];
-    BOOL shippingMethodRequired = ([self.delegate respondsToSelector:@selector(paymentContext:didUpdateShippingAddress:completion:)] && !self.selectedShippingMethod);
+    BOOL shippingMethodRequired = (self.configuration.shippingType == STPShippingTypeShipping &&
+                                   [self.delegate respondsToSelector:@selector(paymentContext:didUpdateShippingAddress:completion:)] &&
+                                   !self.selectedShippingMethod);
     BOOL verificationRequired = self.configuration.verifyPrefilledShippingAddress && self.shippingAddressNeedsVerification;
-    return (shippingAddressRequired && (shippingAddressIncomplete || shippingMethodRequired || verificationRequired));
+    // true if STPShippingVC should be presented to collect or verify a shipping address
+    BOOL shouldPresentShippingAddress = (shippingAddressRequired && (shippingAddressIncomplete || verificationRequired));
+    // this handles a corner case where STPShippingVC should be presented because:
+    // - shipping address has been pre-filled
+    // - no verification is required, but the user still needs to enter a shipping method
+    BOOL shouldPresentShippingMethods = (shippingAddressRequired &&
+                                         !shippingAddressIncomplete &&
+                                         !verificationRequired &&
+                                         shippingMethodRequired);
+    return (shouldPresentShippingAddress || shouldPresentShippingMethods);
 }
 
 - (void)requestPayment {
-    FAUXPAS_IGNORED_IN_METHOD(APIAvailability);
     WEAK(self);
     [[[self.didAppearPromise voidFlatMap:^STPPromise * _Nonnull{
         STRONG(self);
@@ -548,9 +582,10 @@ typedef NS_ENUM(NSUInteger, STPPaymentContextState) {
         else if ([self requestPaymentShouldPresentShippingViewController]) {
             [self presentShippingViewControllerWithNewState:STPPaymentContextStateRequestingPayment];
         }
-        else if ([self.selectedPaymentMethod isKindOfClass:[STPCard class]]) {
+        else if ([self.selectedPaymentMethod isKindOfClass:[STPCard class]] ||
+                 [self.selectedPaymentMethod isKindOfClass:[STPSource class]]) {
             self.state = STPPaymentContextStateRequestingPayment;
-            STPPaymentResult *result = [[STPPaymentResult alloc] initWithSource:(STPCard *)self.selectedPaymentMethod];
+            STPPaymentResult *result = [[STPPaymentResult alloc] initWithSource:(id<STPSourceProtocol>)self.selectedPaymentMethod];
             [self.delegate paymentContext:self didCreatePaymentResult:result completion:^(NSError * _Nullable error) {
                 stpDispatchToMainThreadIfNecessary(^{
                     if (error) {
@@ -583,7 +618,7 @@ typedef NS_ENUM(NSUInteger, STPPaymentContextState) {
             };
             STPPaymentAuthorizationBlock paymentHandler = ^(PKPayment *payment) {
                 self.selectedShippingMethod = payment.shippingMethod;
-                self.shippingAddress = [[STPAddress alloc] initWithABRecord:payment.shippingAddress];
+                self.shippingAddress = [[STPAddress alloc] initWithPKContact:payment.shippingContact];
                 self.shippingAddressNeedsVerification = NO;
                 [self.delegate paymentContextDidChange:self];
                 if ([self.apiAdapter isKindOfClass:[STPCustomerContext class]]) {
@@ -591,19 +626,19 @@ typedef NS_ENUM(NSUInteger, STPPaymentContextState) {
                     [customerContext updateCustomerWithShippingAddress:self.shippingAddress completion:nil];
                 }
             };
-            STPApplePayTokenHandlerBlock applePayTokenHandler = ^(STPToken *token, STPErrorBlock tokenCompletion) {
-                [self.apiAdapter attachSourceToCustomer:token completion:^(NSError *tokenError) {
+            STPApplePaySourceHandlerBlock applePaySourceHandler = ^(id<STPSourceProtocol> source, STPErrorBlock completion) {
+                [self.apiAdapter attachSourceToCustomer:source completion:^(NSError *attachSourceError) {
                     stpDispatchToMainThreadIfNecessary(^{
-                        if (tokenError) {
-                            tokenCompletion(tokenError);
+                        if (attachSourceError) {
+                            completion(attachSourceError);
                         } else {
-                            STPPaymentResult *result = [[STPPaymentResult alloc] initWithSource:token.card];
+                            STPPaymentResult *result = [[STPPaymentResult alloc] initWithSource:source];
                             [self.delegate paymentContext:self didCreatePaymentResult:result completion:^(NSError * error) {
                                 // for Apple Pay, the didFinishWithStatus callback is fired later when Apple Pay VC finishes
                                 if (error) {
-                                    tokenCompletion(error);
+                                    completion(error);
                                 } else {
-                                    tokenCompletion(nil);
+                                    completion(nil);
                                 }
                             }];
                         }
@@ -614,18 +649,20 @@ typedef NS_ENUM(NSUInteger, STPPaymentContextState) {
             paymentAuthVC = [PKPaymentAuthorizationViewController
                              stp_controllerWithPaymentRequest:paymentRequest
                              apiClient:self.apiClient
+                             createSource:self.configuration.createCardSources
                              onShippingAddressSelection:shippingAddressHandler
                              onShippingMethodSelection:shippingMethodHandler
                              onPaymentAuthorization:paymentHandler
-                             onTokenCreation:applePayTokenHandler
+                             onTokenCreation:applePaySourceHandler
                              onFinish:^(STPPaymentStatus status, NSError * _Nullable error) {
-                                 [self.hostViewController dismissViewControllerAnimated:YES completion:^{
+                                 [self.hostViewController dismissViewControllerAnimated:[self transitionAnimationsEnabled]
+                                                                             completion:^{
                                      [self didFinishWithStatus:status
                                                          error:error];
                                  }];
                              }];
             [self.hostViewController presentViewController:paymentAuthVC
-                                                  animated:YES
+                                                  animated:[self transitionAnimationsEnabled]
                                                 completion:nil];
         }
     }] onFailure:^(NSError *error) {
@@ -643,7 +680,6 @@ typedef NS_ENUM(NSUInteger, STPPaymentContextState) {
 }
 
 - (PKPaymentRequest *)buildPaymentRequest {
-    FAUXPAS_IGNORED_IN_METHOD(APIAvailability);
     if (!self.configuration.appleMerchantIdentifier || !self.paymentAmount) {
         return nil;
     }
@@ -652,7 +688,17 @@ typedef NS_ENUM(NSUInteger, STPPaymentContextState) {
     NSArray<PKPaymentSummaryItem *> *summaryItems = self.paymentSummaryItems;
     paymentRequest.paymentSummaryItems = summaryItems;
     paymentRequest.requiredBillingAddressFields = [STPAddress applePayAddressFieldsFromBillingAddressFields:self.configuration.requiredBillingAddressFields];
-    paymentRequest.requiredShippingAddressFields = self.configuration.requiredShippingAddressFields;
+
+    if (@available(iOS 11, *)) {
+        NSSet<PKContactField> *requiredFields = [STPAddress pkContactFieldsFromStripeContactFields:self.configuration.requiredShippingAddressFields];
+        if (requiredFields) {
+            paymentRequest.requiredShippingContactFields = requiredFields;
+        }
+    }
+    else {
+        paymentRequest.requiredShippingAddressFields = [STPAddress pkAddressFieldsFromStripeContactFields:self.configuration.requiredShippingAddressFields];
+    }
+
     paymentRequest.currencyCode = self.paymentCurrency.uppercaseString;
     if (self.selectedShippingMethod != nil) {
         NSMutableArray<PKShippingMethod *>* orderedShippingMethods = [self.shippingMethods mutableCopy];
@@ -663,27 +709,16 @@ typedef NS_ENUM(NSUInteger, STPPaymentContextState) {
     else {
         paymentRequest.shippingMethods = self.shippingMethods;
     }
-    if ([paymentRequest respondsToSelector:@selector(shippingType)]) {
-        paymentRequest.shippingType = [[self class] pkShippingType:self.configuration.shippingType];;
-    }
+
+    paymentRequest.shippingType = [[self class] pkShippingType:self.configuration.shippingType];;
+
     if (self.shippingAddress != nil) {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated"
-        // Using shippingContact if available to work around an iOS10 bug:
-        // https://openradar.appspot.com/radar?id=5518219632705536
-        if ([paymentRequest respondsToSelector:@selector(shippingContact)]) {
-            paymentRequest.shippingContact = [self.shippingAddress PKContactValue];
-        }
-        else {
-            paymentRequest.shippingAddress = [self.shippingAddress ABRecordValue];
-        }
-#pragma clang diagnostic pop
+        paymentRequest.shippingContact = [self.shippingAddress PKContactValue];
     }
     return paymentRequest;
 }
 
 + (PKShippingType)pkShippingType:(STPShippingType)shippingType {
-    FAUXPAS_IGNORED_IN_METHOD(APIAvailability);
     switch (shippingType) {
         case STPShippingTypeShipping:
             return PKShippingTypeShipping;

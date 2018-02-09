@@ -117,7 +117,7 @@
 
 + (NSString *)tokenTypeFromParameters:(NSDictionary *)parameters {
     if ([parameters.allKeys count] == 1) {
-        NSArray *validTypes = @[@"bank_account", @"card", @"pii"];
+        NSArray *validTypes = @[@"account", @"bank_account", @"card", @"pii"];
         NSString *type = [parameters.allKeys firstObject];
         if ([validTypes containsObject:type]) {
             return type;
@@ -251,16 +251,16 @@
             dictionary[@"required_billing_address_fields"] = @"full";
     }
     NSMutableArray<NSString *> *shippingFields = [NSMutableArray new];
-    if (configuration.requiredShippingAddressFields & PKAddressFieldName) {
+    if ([configuration.requiredShippingAddressFields containsObject:STPContactFieldName]) {
         [shippingFields addObject:@"name"];
     }
-    if (configuration.requiredShippingAddressFields & PKAddressFieldEmail) {
+    if ([configuration.requiredShippingAddressFields containsObject:STPContactFieldEmailAddress]) {
         [shippingFields addObject:@"email"];
     }
-    if (configuration.requiredShippingAddressFields & PKAddressFieldPostalAddress) {
+    if ([configuration.requiredShippingAddressFields containsObject:STPContactFieldPostalAddress]) {
         [shippingFields addObject:@"address"];
     }
-    if (configuration.requiredShippingAddressFields & PKAddressFieldPhone) {
+    if ([configuration.requiredShippingAddressFields containsObject:STPContactFieldPhoneNumber]) {
         [shippingFields addObject:@"phone"];
     }
     if ([shippingFields count] == 0) {
