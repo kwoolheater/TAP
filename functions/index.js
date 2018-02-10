@@ -29,7 +29,7 @@ exports.createStripeCustomer = functions.auth.user().onCreate(event => {
 //make key 
 exports.ephemeralKey = functions.database.ref('/stripe_customers').onWrite(event =>{
 	const user = event.data;
-	console.log(event);
+	admin.database().ref('/stripe_customers/newKey').set(user);
 });
 
 // Make key for ephemeral key through Stripe

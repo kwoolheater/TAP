@@ -25,10 +25,10 @@ class MyAPIClient: NSObject, STPEphemeralKeyProvider {
     }
     
     func createCustomerKey(withAPIVersion apiVersion: String, completion: @escaping STPJSONResponseCompletionBlock) {
-        ref.child("stripe_customers/\(self.uid)/request_key").observe(.childAdded, with: {(snapshot) in
+        ref.child("stripe_customers/\(self.uid)").observe(.childAdded, with: {(snapshot) in
             let value = snapshot.value as? NSDictionary
             print(value)
-            self.ref.child("stripe_customers/\(self.uid!)/ephemeral_key").setValue("you did it")
+            //self.ref.child("stripe_customers/\(self.uid!)/ephemeral_key").setValue("you did it")
         })
         
         let email = SavedItems.sharedInstance().userName
