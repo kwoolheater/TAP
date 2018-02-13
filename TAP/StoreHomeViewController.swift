@@ -28,9 +28,11 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
     var storePictures = [#imageLiteral(resourceName: "Beer"), #imageLiteral(resourceName: "Wine"), #imageLiteral(resourceName: "Liquor"), #imageLiteral(resourceName: "Extras")]
     var liquorName: String?
     fileprivate var _authHandle: AuthStateDidChangeListenerHandle!
+    var ref: DatabaseReference!
     let reachability = Reachability()!
     var user: User?
     var displayName = "No name"
+    var uid: String?
     let location = CLLocationManager()
     var locValue: CLLocationCoordinate2D?
     
@@ -39,6 +41,7 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
         // Do any additional setup after loading the view, typically from a nib.
         setUpLocation()
         configureUI()
+        configureDatabase()
         configureAuth()
     }
     
@@ -86,7 +89,6 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         self.locValue = manager.location!.coordinate
         checkLocation()
-        print("locations = \(locValue?.latitude) \(locValue?.longitude)")
     }
     
     func configureAuth() {
@@ -100,12 +102,44 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
                     let name = user!.email!.components(separatedBy: "@")[0]
                     self.displayName = user!.email!
                     self.signedInStatus(isSignedIn: true)
+                    self.getCustomerId()
                 }
             } else {
                 // user must sign in
                 self.signedInStatus(isSignedIn: false)
             }
         }
+    }
+    
+    func configureDatabase() {
+        ref = Database.database().reference()
+    }
+    
+    func getCustomerId() {
+        ref.child("stripe_customers").observeSingleEvent(of: .value, with: { (snapshot) in
+            let valueDictionary = snapshot.value as? NSDictionary
+            for (id , user) in valueDictionary! {
+                let newUser = user as? NSDictionary
+                let uid = id as! String
+                    for (value, item) in newUser! {
+                        if value as! String == "email" {
+                            let newEmail = item as! String
+                            if newEmail == self.displayName {
+                                self.uid = uid
+                                for (id, user) in valueDictionary! {
+                                    if id as? String == self.uid {
+                                        for (value, item) in user as! NSDictionary {
+                                            if value as! String == "customer_id" {
+                                                SavedItems.sharedInstance().stripeCustomerId = item as? String
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+        })
     }
     
     func configureUI() {
@@ -164,7 +198,6 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
         let reachability = note.object as! Reachability
         
         if reachability.isReachable {
-            print("Reachable.")
         } else {
             let alertController = UIAlertController(title: "Error", message: "Check your internet connection.", preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: "Done", style: .destructive, handler: nil))
@@ -198,8 +231,6 @@ class StoreHomeViewController: UIViewController, UICollectionViewDelegate, UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // handle tap events
-        print("You selected cell \(indexPath.row)")
         // check if liquor is clicked and segue to liquor or straight to table view controller
         if indexPath.row == 2 {
             performSegue(withIdentifier: "liquorSegue", sender: self)

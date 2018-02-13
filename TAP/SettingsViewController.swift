@@ -6,7 +6,6 @@
 //  Copyright © 2017 Kiyoshi Woolheater. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import Stripe
 
@@ -14,7 +13,7 @@ struct Settings {
     let theme: STPTheme
     let additionalPaymentMethods: STPPaymentMethodType
     let requiredBillingAddressFields: STPBillingAddressFields
-    let requiredShippingAddressFields: PKAddressField
+    let requiredShippingAddressFields: Set<STPContactField>
     let shippingType: STPShippingType
 }
 
@@ -23,7 +22,7 @@ class SettingsViewController: UITableViewController {
         return Settings(theme: self.theme.stpTheme,
                         additionalPaymentMethods: self.applePay.enabled ? .all : STPPaymentMethodType(),
                         requiredBillingAddressFields: self.requiredBillingAddressFields.stpBillingAddressFields,
-                        requiredShippingAddressFields: self.requiredShippingAddressFields.pkAddressFields,
+                        requiredShippingAddressFields: self.requiredShippingAddressFields.stpContactFields,
                         shippingType: self.shippingType.stpShippingType)
     }
     
@@ -146,12 +145,12 @@ class SettingsViewController: UITableViewController {
             }
         }
         
-        var pkAddressFields: PKAddressField {
+        var stpContactFields: Set<STPContactField> {
             switch self {
             case .None: return []
-            case .Email: return .email
-            case .PostalAddressPhone: return [.postalAddress, .phone]
-            case .All: return .all
+            case .Email: return [.emailAddress]
+            case .PostalAddressPhone: return [.postalAddress, .phoneNumber]
+            case .All: return [.postalAddress, .phoneNumber, .emailAddress, .name]
             }
         }
     }
@@ -185,7 +184,7 @@ class SettingsViewController: UITableViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismiss as () -> Void))
     }
     
-    func dismiss() {
+    @objc func dismiss() {
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -260,3 +259,4 @@ class SettingsViewController: UITableViewController {
         tableView.reloadSections(IndexSet(integer: (indexPath as NSIndexPath).section), with: .automatic)
     }
 }
+

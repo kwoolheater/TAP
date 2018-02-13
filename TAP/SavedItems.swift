@@ -14,6 +14,7 @@ class SavedItems: NSObject {
     var userName: String?
     var isLoggedIn: Bool?
     var inRange: Bool?
+    var stripeCustomerId: String?
     
     // create a shared instance
     class func sharedInstance() -> SavedItems {

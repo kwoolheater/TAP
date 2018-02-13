@@ -144,7 +144,6 @@ class DrinkTableViewController: UIViewController {
         
         // if it isn't reachable present an alert controller
         if reachability.isReachable {
-            print("Reachable.")
         } else {
             let alertController = UIAlertController(title: "Error", message: "Check your internet connection.", preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: "Done", style: .destructive, handler: nil))
