@@ -65,7 +65,4 @@ class MyAPIClient: NSObject, STPEphemeralKeyProvider {
                 }
         }
     }
-    
-    
-    
 }
