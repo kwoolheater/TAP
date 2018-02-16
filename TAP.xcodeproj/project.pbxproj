@@ -35,6 +35,8 @@
 		41C570631F2FA8CC00B1D661 /* StoreCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C570621F2FA8CC00B1D661 /* StoreCollectionViewCell.swift */; };
 		41C570691F33A44900B1D661 /* LiquorStoreHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C570681F33A44900B1D661 /* LiquorStoreHomeViewController.swift */; };
 		41C5706D1F34E64100B1D661 /* DrinkTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C5706C1F34E64100B1D661 /* DrinkTableViewController.swift */; };
+		41C8F1D12036568700134711 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C8F1D02036568700134711 /* CreateAccountViewController.swift */; };
+		41C8F1D320365C2900134711 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C8F1D220365C2900134711 /* SignInViewController.swift */; };
 		8A8CDEA442811C79E75DC333 /* Pods_TAPUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00FC8ED2B84C07DC7CBC65BC /* Pods_TAPUITests.framework */; };
 		A220764E6EB874F56D913B27 /* Pods_TAPTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B489EE843FE23715F791A03 /* Pods_TAPTests.framework */; };
 /* End PBXBuildFile section */
@@ -96,6 +98,8 @@
 		41C570621F2FA8CC00B1D661 /* StoreCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreCollectionViewCell.swift; sourceTree = "<group>"; };
 		41C570681F33A44900B1D661 /* LiquorStoreHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiquorStoreHomeViewController.swift; sourceTree = "<group>"; };
 		41C5706C1F34E64100B1D661 /* DrinkTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrinkTableViewController.swift; sourceTree = "<group>"; };
+		41C8F1D02036568700134711 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
+		41C8F1D220365C2900134711 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		83F8561217423B58FCDE6C38 /* Pods-TAPTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TAPTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TAPTests/Pods-TAPTests.release.xcconfig"; sourceTree = "<group>"; };
 		8B558F7164F18F023E794516 /* Pods-TAPUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TAPUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TAPUITests/Pods-TAPUITests.release.xcconfig"; sourceTree = "<group>"; };
 		8C876B12CD236AA6150A6EA6 /* Pods_TAP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TAP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -133,12 +137,14 @@
 		417EA3831F579106006C756F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				41688AF71F55E990005F340C /* CoreDataViewController.swift */,
 				41678C291FBC93A500446E36 /* CheckoutViewController.swift */,
+				41688AF71F55E990005F340C /* CoreDataViewController.swift */,
+				41C8F1D02036568700134711 /* CreateAccountViewController.swift */,
 				416ED65F1F4511CE000C00ED /* DetailViewController.swift */,
 				41C5706C1F34E64100B1D661 /* DrinkTableViewController.swift */,
 				419858781F4F76D300124DA9 /* FavoritesTableViewControler.swift */,
 				41C570681F33A44900B1D661 /* LiquorStoreHomeViewController.swift */,
+				41C8F1D220365C2900134711 /* SignInViewController.swift */,
 				41C570341F2BAE7500B1D661 /* StoreHomeViewController.swift */,
 				41678C2F1FBC98E900446E36 /* SettingsViewController.swift */,
 			);
@@ -429,7 +435,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-TAP/Pods-TAP-resources.sh",
-				"$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseAuthUI.bundle",
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseAuthUI.bundle,
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -594,12 +600,14 @@
 				41C570691F33A44900B1D661 /* LiquorStoreHomeViewController.swift in Sources */,
 				41A3CEF51F3A1F3500063635 /* DownloadedDrink.swift in Sources */,
 				41678C2A1FBC93A500446E36 /* CheckoutViewController.swift in Sources */,
+				41C8F1D12036568700134711 /* CreateAccountViewController.swift in Sources */,
 				41ACF3B51F59DAFD009EFAEE /* Drink+CoreDataClass.swift in Sources */,
 				41ACF3B61F59DAFD009EFAEE /* Drink+CoreDataProperties.swift in Sources */,
 				41B740231F38D2E5002322A5 /* Constants.swift in Sources */,
 				41729EB320086A05001E570E /* MyAPIClient.swift in Sources */,
 				41678C2E1FBC978300446E36 /* Buttons.swift in Sources */,
 				4198587E1F548F6100124DA9 /* Model.xcdatamodeld in Sources */,
+				41C8F1D320365C2900134711 /* SignInViewController.swift in Sources */,
 				416ED6601F4511CE000C00ED /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
